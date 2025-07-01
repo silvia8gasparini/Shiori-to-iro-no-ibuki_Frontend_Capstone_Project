@@ -1,0 +1,21 @@
+# Dipendenze
+node_modules/
+
+# Build
+dist/
+build/
+
+# Log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Editor vari
+.DS_Store
+.vscode/
+.idea/
