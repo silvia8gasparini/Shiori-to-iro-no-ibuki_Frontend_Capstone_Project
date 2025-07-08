@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
+function getRandomCities(array, count = 2) {
+  const shuffled = [...array].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+
 const Welcome = () => {
   const [weatherData, setWeatherData] = useState([]);
 
@@ -34,12 +39,26 @@ const Welcome = () => {
     mist: "/public/img/weather-icons/mist.svg",
   };
 
+  const cities = [
+    "Kyoto",
+    "Okinawa",
+    "Kamakura",
+    "Sapporo",
+    "Hiroshima",
+    "Nagasaki",
+    "Nara",
+    "Takayama",
+    "Kurashiki",
+    "Ise",
+    "Karuizawa",
+  ];
+
   useEffect(() => {
-    const cities = ["Kyoto", "Okinawa"];
+    const selectedCities = getRandomCities(cities, 2);
     const apiKey = "1507cc7f5a41802bff4e537e298edc27";
 
     Promise.all(
-      cities.map((city) =>
+      selectedCities.map((city) =>
         fetch(
           `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
             city
@@ -75,16 +94,9 @@ const Welcome = () => {
 
         <Col xs={12} sm={4}>
           {weatherData.length > 0 ? (
-            <div className="d-flex justify-content-center gap-4 flex-wrap">
+            <div className="d-flex justify-content-center gap-2 flex-wrap">
               {weatherData.map((w, index) => (
-                <div
-                  key={index}
-                  className="text-center"
-                  style={{
-                    fontSize: "1.2rem",
-                    padding: "0.5em 1em",
-                  }}
-                >
+                <div key={index} className="weather text-center">
                   <div>
                     <strong>{w.city}</strong>
                   </div>

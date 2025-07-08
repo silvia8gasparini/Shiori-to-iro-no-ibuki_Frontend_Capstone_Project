@@ -27,9 +27,7 @@ export default function Homepage() {
       <CustomNavbar />
       <Container fluid className="flex-grow-1 px-4">
         <Welcome />
-        <h4 className="text-center my-3">
-          Select a city to see the weather forecast!
-        </h4>
+        <h4 className="text-center my-3">Giyu-saaaaaaann! </h4>
       </Container>
       <CustomFooter />
     </div>
