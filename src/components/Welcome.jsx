@@ -39,21 +39,21 @@ const Welcome = () => {
     mist: "/public/img/weather-icons/mist.svg",
   };
 
-  const cities = [
-    "Kyoto",
-    "Okinawa",
-    "Kamakura",
-    "Sapporo",
-    "Hiroshima",
-    "Nagasaki",
-    "Nara",
-    "Takayama",
-    "Kurashiki",
-    "Ise",
-    "Karuizawa",
-  ];
-
   useEffect(() => {
+    const cities = [
+      "Kyoto",
+      "Okinawa",
+      "Kamakura",
+      "Sapporo",
+      "Hiroshima",
+      "Nagasaki",
+      "Nara",
+      "Takayama",
+      "Kurashiki",
+      "Ise",
+      "Karuizawa",
+    ];
+
     const selectedCities = getRandomCities(cities, 2);
     const apiKey = "1507cc7f5a41802bff4e537e298edc27";
 
