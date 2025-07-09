@@ -84,15 +84,16 @@ html, body {
 
 .search-input {
   width: 100%;
-  max-width: 200px;
-  padding: 0.4rem 0.6rem;
+  max-width: 300px !important;
+  padding: 0.8rem 1.2rem !important;
   border-radius: 10px;
 }
 
 .search-button {
-  padding: 0.4rem 1rem;
+  padding: 0.8rem 1.6rem !important;
   border-radius: 10px;
   white-space: nowrap;
+  font-size: 0.6em;
 }
 
 .logo {

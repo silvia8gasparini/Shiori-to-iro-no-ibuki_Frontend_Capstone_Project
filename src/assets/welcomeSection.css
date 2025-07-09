@@ -10,7 +10,7 @@
 }
 
 .weather{
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   padding: 0.4em 0.8em;
 }
 
@@ -19,12 +19,12 @@
 }
 
 .season-title {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   padding-top: 0.4em;
 }
 
 p {
-   font-size: 1.2rem;
+   font-size: 1.4rem;
 }
 
 @media (max-width: 850px) {

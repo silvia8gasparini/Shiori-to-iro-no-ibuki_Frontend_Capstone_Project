@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchCurrentMicroSeason } from "../redux/currentMicroSeasonSlice";
 import { fetchNextMicroSeasons } from "../redux/nextMicroSeasonsSlice";
 import { fetchColorByMicroSeasonId } from "../redux/selectedColorSlice";
+import { fetchBooksByMicroSeasonId } from "../redux/booksSlice";
 import { Container, Row, Col } from "react-bootstrap";
 import "../assets/welcomeSection.css";
 
@@ -76,7 +77,6 @@ const Welcome = () => {
       "Ise",
       "Karuizawa",
     ];
-
     const selectedCities = getRandomCities(cities, 2);
     const apiKey = "1507cc7f5a41802bff4e537e298edc27";
 
@@ -86,9 +86,9 @@ const Welcome = () => {
           `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
             city
           )}&appid=${apiKey}&units=metric`
-        ).then((response) => {
-          if (!response.ok) throw new Error(`Errore per ${city}`);
-          return response.json();
+        ).then((res) => {
+          if (!res.ok) throw new Error(`Errore per ${city}`);
+          return res.json();
         })
       )
     )
@@ -101,14 +101,15 @@ const Welcome = () => {
         }));
         setWeatherData(formatted);
       })
-      .catch((error) => {
-        console.error("Errore meteo:", error);
+      .catch((err) => {
+        console.error("Errore meteo:", err);
       });
   }, [dispatch]);
 
   useEffect(() => {
     if (selectedSeason) {
       dispatch(fetchColorByMicroSeasonId(selectedSeason.id));
+      dispatch(fetchBooksByMicroSeasonId(selectedSeason.id));
     }
   }, [selectedSeason, dispatch]);
 

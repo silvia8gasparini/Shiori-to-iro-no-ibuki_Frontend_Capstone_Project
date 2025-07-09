@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import "../assets/colorSection.css";
 
 function isDark(rgbString) {
@@ -15,6 +15,8 @@ const ColorSection = () => {
   const { selectedColor, loading, error } = useSelector(
     (state) => state.selectedColor
   );
+
+  console.log("selectedColor:", selectedColor);
 
   if (loading) return <p>Caricamento colore...</p>;
   if (error) return <p>Errore: {error}</p>;
@@ -44,6 +46,17 @@ const ColorSection = () => {
         >
           <h1 className="kanji mb-2">{selectedColor.japaneseName}</h1>
           <h3 className="translation">{selectedColor.italianName}</h3>
+          <Button
+            style={{
+              color: textColor,
+              borderColor: textColor,
+            }}
+            variant="outline-dark"
+            type="submit"
+            className="color-button"
+          >
+            Dettagli
+          </Button>
         </Col>
       </Row>
     </Container>

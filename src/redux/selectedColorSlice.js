@@ -21,7 +21,6 @@ export const fetchColorByMicroSeasonId = createAsyncThunk(
   }
 );
 
-
 const colorSlice = createSlice({
   name: "color",
   initialState: {

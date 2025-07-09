@@ -37,5 +37,6 @@
 .color-text-col .translation {
     font-family: 'Caveat', cursive;
     font-size: 1.9rem;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
 }

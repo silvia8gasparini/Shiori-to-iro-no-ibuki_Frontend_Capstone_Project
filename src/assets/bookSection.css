@@ -1,0 +1,8 @@
+.book-card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  max-height: 300px;
+}

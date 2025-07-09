@@ -1,27 +1,30 @@
-// import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import { fetchColorByMicroSeasonId } from "../redux/selectedColorSlice";
+import { fetchBooksByMicroSeasonId } from "../redux/booksSlice";
+
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
 import Welcome from "../components/Welcome";
 import ColorSection from "../components/ColorSection";
+import BookSection from "../components/BookSection";
 
 export default function Homepage() {
-  /*  const [cardsPerSlide, setCardsPerSlide] = useState(6);
-  const navigate = useNavigate();
-/* 
+  const dispatch = useDispatch();
+
+  const microSeasonId = useSelector(
+    (state) => state.currentMicroSeason.microSeason?.id
+  );
+
   useEffect(() => {
-    const updateCardsPerSlide = () => {
-      const width = window.innerWidth;
-      if (width < 576) setCardsPerSlide(1);
-      else if (width < 768) setCardsPerSlide(2);
-      else setCardsPerSlide(6);
-    };
-    updateCardsPerSlide();
-    window.addEventListener("resize", updateCardsPerSlide);
-    return () => window.removeEventListener("resize", updateCardsPerSlide);
-  }, []); */
+    if (microSeasonId) {
+      dispatch(fetchColorByMicroSeasonId(microSeasonId));
+      dispatch(fetchBooksByMicroSeasonId(microSeasonId));
+    }
+  }, [dispatch, microSeasonId]);
 
   return (
     <div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
@@ -29,7 +32,7 @@ export default function Homepage() {
       <Container fluid className="flex-grow-1 px-4">
         <Welcome />
         <ColorSection />
-        <h4 className="text-center my-3">Giyu-saaaaaaann! </h4>
+        {microSeasonId && <BookSection microSeasonId={microSeasonId} />}
       </Container>
       <CustomFooter />
     </div>
