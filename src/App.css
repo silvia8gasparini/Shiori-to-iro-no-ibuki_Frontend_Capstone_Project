@@ -11,6 +11,12 @@ html, body {
   overflow: hidden !important;
 }
 
+#root {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .custom-navbar {
   width: 100%;
   font-family: 'Caveat';
@@ -32,94 +38,14 @@ html, body {
   filter: blur(1.8px);
 }
 
-.title{
-  font-size: 1.4em;
-}
-
-.title1{
-    font-size: 0.7em;
-}
-
-.custom-footer {
-  font-family: 'Caveat';
-  font-size: 1.4em;
-  background-color:  rgb(246,242,241);
-  position: relative;
-}
-
-.custom-footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0; 
-  width: 100%;
-  height: 1px;
-  background-color: transparent;
-  box-shadow: 0 -4px 0 0 black;
-  filter: blur(1.8px);
-}
-
-#root {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.logo {
-  height: 180px;
-  border-radius: 50%;
-}
-
-.welcome-section{
-  margin-top: 1em;
-}
-
-.paragraph{
-    font-family: 'Yuji Syuku';
-    font-size: 2em;
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-.dropdown-toggle::after {
-  display: none !important;
-}
-
-.App {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-.responsive-icon {
-  width: 37px;
-  height: auto;
-}
-
-.weather{
-  font-size: 1.2rem;
-  padding: 0.4em 0.8em;
-}
-
-.weather-icon {
-  height: 40px;
-}
-
-
 .custom-navbar .navbar-collapse {
-  padding: 1rem 0;
+  padding: 0;
 }
 
 .custom-navbar .nav-link,
 .custom-navbar .custom-dropdown,
 .custom-navbar form {
-  margin: 0.3rem 0;
+  margin: 0.2rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,6 +68,15 @@ html, body {
   border-radius: 8px;
 }
 
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.responsive-icon {
+  width: 37px;
+  height: auto;
+}
+
 .search-form {
   max-width: 100%;
 }
@@ -159,88 +94,163 @@ html, body {
   white-space: nowrap;
 }
 
+.logo {
+  height: 180px;
+  border-radius: 50%;
+}
+
 .logo-mobile {
   height: 40px;
   border-radius: 50%;
 }
 
-@media (max-width: 850px) {  
-  .custom-navbar {
+.title{
   font-size: 1.4em;
-  }
-
-  .responsive-icon {
-    width: 22px;
-  }
-
-  .paragraph {
-  font-size: 1.3em;
-  }
-
-  .weather {
-  font-size: 0.7em;
-  }
-
-  .weather-icon {
-      height: 25px;
-  }
-
-  .title {
-  font-size: 1em;
-  }
-
-  .custom-footer {
-    font-size: 1.2em;
-  }
-
-  .logo {
-    height: 120px;
-
-  }
-
-  .search-form {
-    max-width: 100%;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 1rem; 
-    margin-top: 0.5rem; 
-  }
-
-  .search-input {
-    margin-left: 0.6rem; 
-    width: 100%;
-    max-width: 80px;
-  }
-
-  .search-button {
-    width: 100%;
-    max-width: 70px;
-  }
 }
 
+.title1{
+  font-size: 0.9em;
+}
+
+.welcome-section{
+  margin-top: 1em;
+}
+
+.paragraph{
+  font-family: 'Yuji Syuku';
+  font-size: 2em;
+}
+
+.weather{
+  font-size: 1.2rem;
+  padding: 0.4em 0.8em;
+}
+
+.weather-icon {
+  height: 40px;
+}
+
+.season-title {
+  font-size: 1.4rem;
+  padding-top: 0.4em;
+}
+
+.card {
+  padding: 2em;
+}
+
+.custom-footer {
+  font-family: 'Caveat';
+  font-size: 1.4em;
+  background-color:  rgb(246,242,241);
+  position: relative;
+}
+
+.custom-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0; 
+  width: 100%;
+  height: 1px;
+  background-color: transparent;
+  box-shadow: 0 -4px 0 0 black;
+  filter: blur(1.8px);
+}
+
+@media (max-width: 850px) {  
+.custom-navbar {
+  font-size: 1.4em;
+}
+
+.responsive-icon {
+  width: 22px;
+}
+
+.paragraph {
+  font-size: 1.3em;
+}
+
+.weather {
+  font-size: 0.9em;
+   padding-top: 0.4em;
+}
+
+.weather-icon {
+  height: 25px;
+}
+
+.title {
+  font-size: 1em;
+}
+
+.custom-footer {
+  font-size: 1.2em;
+}
+
+.logo {
+  height: 120px;
+}
+
+.search-form {
+  max-width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem; 
+  margin-top: 0.5rem; 
+}
+
+.search-input {
+  margin-left: 0.6rem; 
+  width: 100%;
+  max-width: 80px;
+}
+
+.search-button {
+  width: 100%;
+  max-width: 70px;
+}
+
+ .season-title {
+  font-size: 1rem;
+  font-weight: bold;
+  padding-top: 0.4em;
+} 
+
+.season-title-jp {
+  font-size: 1rem;
+}
+
+.season-button {
+  font-size: 0.8em;
+width: 100px;
+}
+
+}
 
 @media (max-width: 576px) {
-  .responsive-icon {
-    width: 25px;
-  }
+.responsive-icon {
+  width: 25px;
+}
 
- .paragraph {
-  font-size: 1.2em;
-  }
+.paragraph {
+  font-size: 1.2em; 
+  margin-top: 1.5em;
+}
 
-  .weather {
+.weather {
   font-size: 1em;
-  }
+}
 
-  .custom-footer {
-    font-size: 1em;
-  }
+.custom-footer {
+  font-size: 1em;
+}
 
- .search-input,
-  .search-button {
-    width: 100%;
-    max-width: 70px;
-  }
+.search-input, .search-button {
+  width: 100%;
+  max-width: 70px;
+}
 
 }

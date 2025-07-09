@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCurrentMicroSeason } from "../redux/currentMicroSeasonSlice";
+import { fetchNextMicroSeasons } from "../redux/nextMicroSeasonsSlice";
 import { Container, Row, Col } from "react-bootstrap";
 
 function getRandomCities(array, count = 2) {
@@ -8,6 +11,15 @@ function getRandomCities(array, count = 2) {
 
 const Welcome = () => {
   const [weatherData, setWeatherData] = useState([]);
+  const [seasonIndex, setSeasonIndex] = useState(0);
+  const dispatch = useDispatch();
+
+  const { microSeason: currentMicroSeason } = useSelector(
+    (state) => state.currentMicroSeason
+  );
+  const { nextSeasons, loading, error } = useSelector(
+    (state) => state.nextMicroSeasons
+  );
 
   const iconMap = {
     "clear sky": "/img/weather-icons/clear.svg",
@@ -20,12 +32,12 @@ const Welcome = () => {
     "light rain": "/img/weather-icons/rain.svg",
     "moderate rain": "/img/weather-icons/rain.svg",
     "heavy intensity rain": "/img/weather-icons/shower.svg",
-    "very heavy rain": "/img//weather-icons/shower.svg",
-    "extreme rain": "/img//weather-icons/shower.svg",
-    "freezing rain": "/public/img/weather-icons/snow.svg",
-    "light intensity shower rain": "/img//weather-icons/shower.svg",
-    "heavy intensity shower rain": "/img//weather-icons/shower.svg",
-    "ragged shower rain": "/img//weather-icons/shower.svg",
+    "very heavy rain": "/img/weather-icons/shower.svg",
+    "extreme rain": "/img/weather-icons/shower.svg",
+    "freezing rain": "/img/weather-icons/snow.svg",
+    "light intensity shower rain": "/img/weather-icons/shower.svg",
+    "heavy intensity shower rain": "/img/weather-icons/shower.svg",
+    "ragged shower rain": "/img/weather-icons/shower.svg",
     thunderstorm: "/img/weather-icons/thunderstorm.svg",
     "thunderstorm with light rain": "/img/weather-icons/thunderstorm.svg",
     "thunderstorm with rain": "/img/weather-icons/thunderstorm.svg",
@@ -35,11 +47,14 @@ const Welcome = () => {
     "thunderstorm with light drizzle": "/img/weather-icons/thunderstorm.svg",
     "thunderstorm with drizzle": "/img/weather-icons/thunderstorm.svg",
     "thunderstorm with heavy drizzle": "/img/weather-icons/thunderstorm.svg",
-    snow: "/public/img/weather-icons/snow.svg",
-    mist: "/public/img/weather-icons/mist.svg",
+    snow: "/img/weather-icons/snow.svg",
+    mist: "/img/weather-icons/mist.svg",
   };
 
   useEffect(() => {
+    dispatch(fetchCurrentMicroSeason());
+    dispatch(fetchNextMicroSeasons(5));
+
     const cities = [
       "Kyoto",
       "Okinawa",
@@ -81,12 +96,53 @@ const Welcome = () => {
       .catch((error) => {
         console.error("Errore meteo:", error);
       });
-  }, []);
+  }, [dispatch]);
+
+  const allSeasons = currentMicroSeason
+    ? [currentMicroSeason, ...nextSeasons]
+    : [];
+
+  const selectedSeason = allSeasons[seasonIndex] || null;
+
+  const handleChangeSeason = () => {
+    if (allSeasons.length > 0) {
+      setSeasonIndex((prev) => (prev + 1) % allSeasons.length);
+    }
+  };
 
   return (
     <Container fluid className="welcome-section">
       <Row className="text-center">
-        <Col xs={12} sm={4}></Col>
+        <Col xs={12} sm={4}>
+          {loading && <p>Caricamento micro-stagione...</p>}
+          {error && <p>Errore: {error}</p>}
+          {selectedSeason && (
+            <>
+              <h5 className="season-title">{selectedSeason.italianName}</h5>
+              <h5 className="season-title-jp">{selectedSeason.japaneseName}</h5>
+              <p>
+                {new Date(selectedSeason.startDate).toLocaleDateString(
+                  "it-IT",
+                  {
+                    day: "numeric",
+                    month: "long",
+                  }
+                )}{" "}
+                →{" "}
+                {new Date(selectedSeason.endDate).toLocaleDateString("it-IT", {
+                  day: "numeric",
+                  month: "long",
+                })}
+              </p>
+            </>
+          )}
+          <button
+            className="season-button btn btn-outline-dark"
+            onClick={handleChangeSeason}
+          >
+            Cambia stagione
+          </button>
+        </Col>
 
         <Col xs={12} sm={4}>
           <p className="paragraph">いらっしゃいませ！ Benvenutə! </p>
