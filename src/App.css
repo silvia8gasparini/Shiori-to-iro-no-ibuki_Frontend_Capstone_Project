@@ -103,10 +103,66 @@ html, body {
 }
 
 .weather{
-  font-size: 1.4rem;
-  padding: 0.5em 1em;
+  font-size: 1.2rem;
+  padding: 0.4em 0.8em;
 }
 
+.weather-icon {
+  height: 40px;
+}
+
+
+.custom-navbar .navbar-collapse {
+  padding: 1rem 0;
+}
+
+.custom-navbar .nav-link,
+.custom-navbar .custom-dropdown,
+.custom-navbar form {
+  margin: 0.3rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-navbar form {
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-navbar form input {
+  max-width: 140px;
+  font-style: italic;
+  padding: 0.25rem 0.5rem;
+}
+
+.custom-navbar form button {
+  padding: 0.25rem 0.75rem;
+  margin-left: 0.5rem;
+  border-radius: 8px;
+}
+
+.search-form {
+  max-width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 200px;
+  padding: 0.4rem 0.6rem;
+  border-radius: 10px;
+}
+
+.search-button {
+  padding: 0.4rem 1rem;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.logo-mobile {
+  height: 40px;
+  border-radius: 50%;
+}
 
 @media (max-width: 850px) {  
   .custom-navbar {
@@ -118,11 +174,15 @@ html, body {
   }
 
   .paragraph {
-  font-size: 1.4em;
+  font-size: 1.3em;
   }
 
   .weather {
-  font-size: 0.8em;
+  font-size: 0.7em;
+  }
+
+  .weather-icon {
+      height: 25px;
   }
 
   .title {
@@ -137,7 +197,28 @@ html, body {
     height: 120px;
 
   }
+
+  .search-form {
+    max-width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem; 
+    margin-top: 0.5rem; 
+  }
+
+  .search-input {
+    margin-left: 0.6rem; 
+    width: 100%;
+    max-width: 80px;
+  }
+
+  .search-button {
+    width: 100%;
+    max-width: 70px;
+  }
 }
+
 
 @media (max-width: 576px) {
   .responsive-icon {
@@ -154,6 +235,12 @@ html, body {
 
   .custom-footer {
     font-size: 1em;
+  }
+
+ .search-input,
+  .search-button {
+    width: 100%;
+    max-width: 70px;
   }
 
 }

@@ -109,7 +109,7 @@ const Welcome = () => {
                       "/weather-icons/default.svg"
                     }
                     alt={w.description}
-                    style={{ width: "40px", height: "40px" }}
+                    className="weather-icon"
                   />
                 </div>
               ))}

@@ -1,14 +1,40 @@
-import { Container, Row, Col, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {
+  Container,
+  Row,
+  Col,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Form,
+  Button,
+} from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const CustomNavbar = () => {
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/details/${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+    }
+  };
+
   return (
     <Navbar expand="md" className="custom-navbar">
       <Container>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <p className="title1 mb-0 d-md-none">
-          Il respiro dei colori tra le pagine
-        </p>
+        <div className="d-flex align-items-center d-md-none mb-2 mobile-brand">
+          <img
+            src="/img/OfficialLogo1.png"
+            alt="logo"
+            className="logo-mobile me-2"
+          />
+          <p className="title1 mb-0">Il respiro dei colori tra le pagine</p>
+        </div>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Row className="w-100 align-items-center text-center">
             <Col
@@ -66,19 +92,36 @@ const CustomNavbar = () => {
             <Col
               xs={12}
               md={4}
-              className="d-flex flex-column flex-md-row justify-content-center gap-0 gap-md-3 gap-lg-4 flex-wrap"
+              className="d-flex flex-column flex-md-row justify-content-center gap-0 gap-md-0 gap-lg-4 flex-wrap"
             >
+              <Form className="search-form d-flex mx-5" onSubmit={handleSearch}>
+                <Form.Control
+                  type="search"
+                  placeholder="Search"
+                  className="search-input me-2"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <Button
+                  variant="outline-dark"
+                  type="submit"
+                  className="search-button"
+                >
+                  Search
+                </Button>
+              </Form>
+
               <Nav.Link
                 as={Link}
                 to="/"
-                className="d-flex align-items-center gap-2"
+                className="d-flex align-items-center gap-2 me-md-3"
               >
                 <img
                   src="/img/navbar-icons/key.png"
                   alt="key"
                   className="responsive-icon"
                 />
-                Login
+                Accedi
               </Nav.Link>
               <NavDropdown
                 title={
@@ -91,8 +134,7 @@ const CustomNavbar = () => {
                     Carrello
                   </span>
                 }
-                id="account-dropdown"
-                className="d-flex align-items-center"
+                className="custom-dropdown d-flex align-items-center"
               ></NavDropdown>
             </Col>
           </Row>
