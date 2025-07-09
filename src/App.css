@@ -8,7 +8,8 @@
 html, body {
   font-family: 'Caveat';
   background: radial-gradient(rgb(255, 255, 255),  rgb(245,242,241));
-  overflow: hidden !important;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #root {
@@ -112,38 +113,11 @@ html, body {
   font-size: 0.9em;
 }
 
-.welcome-section{
-  margin-top: 1em;
-}
-
-.paragraph{
-  font-family: 'Yuji Syuku';
-  font-size: 2em;
-}
-
-.weather{
-  font-size: 1.2rem;
-  padding: 0.4em 0.8em;
-}
-
-.weather-icon {
-  height: 40px;
-}
-
-.season-title {
-  font-size: 1.4rem;
-  padding-top: 0.4em;
-}
-
-.card {
-  padding: 2em;
-}
-
 .custom-footer {
-  font-family: 'Caveat';
-  font-size: 1.4em;
-  background-color:  rgb(246,242,241);
-  position: relative;
+    font-family: 'Caveat';
+    font-size: 1.4em;
+    background-color:  rgb(246,242,241);
+    position: relative;
 }
 
 .custom-footer::before {
@@ -166,19 +140,6 @@ html, body {
 
 .responsive-icon {
   width: 22px;
-}
-
-.paragraph {
-  font-size: 1.3em;
-}
-
-.weather {
-  font-size: 0.9em;
-   padding-top: 0.4em;
-}
-
-.weather-icon {
-  height: 25px;
 }
 
 .title {
@@ -213,44 +174,10 @@ html, body {
   max-width: 70px;
 }
 
- .season-title {
-  font-size: 1rem;
-  font-weight: bold;
-  padding-top: 0.4em;
-} 
-
-.season-title-jp {
-  font-size: 1rem;
-}
-
-.season-button {
-  font-size: 0.8em;
-width: 100px;
-}
-
 }
 
 @media (max-width: 576px) {
 .responsive-icon {
   width: 25px;
 }
-
-.paragraph {
-  font-size: 1.2em; 
-  margin-top: 1.5em;
-}
-
-.weather {
-  font-size: 1em;
-}
-
-.custom-footer {
-  font-size: 1em;
-}
-
-.search-input, .search-button {
-  width: 100%;
-  max-width: 70px;
-}
-
 }

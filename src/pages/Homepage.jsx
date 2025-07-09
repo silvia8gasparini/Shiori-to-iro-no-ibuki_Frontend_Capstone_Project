@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
 import Welcome from "../components/Welcome";
+import ColorSection from "../components/ColorSection";
 
 export default function Homepage() {
   /*  const [cardsPerSlide, setCardsPerSlide] = useState(6);
@@ -27,6 +28,7 @@ export default function Homepage() {
       <CustomNavbar />
       <Container fluid className="flex-grow-1 px-4">
         <Welcome />
+        <ColorSection />
         <h4 className="text-center my-3">Giyu-saaaaaaann! </h4>
       </Container>
       <CustomFooter />

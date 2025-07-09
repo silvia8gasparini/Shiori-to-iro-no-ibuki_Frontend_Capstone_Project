@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCurrentMicroSeason } from "../redux/currentMicroSeasonSlice";
 import { fetchNextMicroSeasons } from "../redux/nextMicroSeasonsSlice";
+import { fetchColorByMicroSeasonId } from "../redux/selectedColorSlice";
 import { Container, Row, Col } from "react-bootstrap";
+import "../assets/welcomeSection.css";
 
 function getRandomCities(array, count = 2) {
   const shuffled = [...array].sort(() => 0.5 - Math.random());
@@ -20,6 +22,12 @@ const Welcome = () => {
   const { nextSeasons, loading, error } = useSelector(
     (state) => state.nextMicroSeasons
   );
+
+  const allSeasons = currentMicroSeason
+    ? [currentMicroSeason, ...nextSeasons]
+    : [];
+
+  const selectedSeason = allSeasons[seasonIndex] || null;
 
   const iconMap = {
     "clear sky": "/img/weather-icons/clear.svg",
@@ -53,7 +61,7 @@ const Welcome = () => {
 
   useEffect(() => {
     dispatch(fetchCurrentMicroSeason());
-    dispatch(fetchNextMicroSeasons(5));
+    dispatch(fetchNextMicroSeasons(9));
 
     const cities = [
       "Kyoto",
@@ -98,11 +106,11 @@ const Welcome = () => {
       });
   }, [dispatch]);
 
-  const allSeasons = currentMicroSeason
-    ? [currentMicroSeason, ...nextSeasons]
-    : [];
-
-  const selectedSeason = allSeasons[seasonIndex] || null;
+  useEffect(() => {
+    if (selectedSeason) {
+      dispatch(fetchColorByMicroSeasonId(selectedSeason.id));
+    }
+  }, [selectedSeason, dispatch]);
 
   const handleChangeSeason = () => {
     if (allSeasons.length > 0) {
@@ -120,7 +128,7 @@ const Welcome = () => {
             <>
               <h5 className="season-title">{selectedSeason.italianName}</h5>
               <h5 className="season-title-jp">{selectedSeason.japaneseName}</h5>
-              <p>
+              <p id="season-p">
                 {new Date(selectedSeason.startDate).toLocaleDateString(
                   "it-IT",
                   {

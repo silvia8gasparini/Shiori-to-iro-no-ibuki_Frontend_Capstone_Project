@@ -1,0 +1,84 @@
+
+.welcome-section{
+  margin-top: 1em;
+}
+
+.paragraph{
+  font-family: 'Yuji Syuku';
+  font-size: 2em;
+  margin-top: 1em;
+}
+
+.weather{
+  font-size: 1.2rem;
+  padding: 0.4em 0.8em;
+}
+
+.weather-icon {
+  height: 40px;
+}
+
+.season-title {
+  font-size: 1.4rem;
+  padding-top: 0.4em;
+}
+
+p {
+   font-size: 1.2rem;
+}
+
+@media (max-width: 850px) {
+.paragraph {
+  font-size: 1.3em;
+}
+
+.weather {
+  font-size: 0.9em;
+   padding-top: 0.4em;
+}
+
+.weather-icon {
+  height: 25px;
+}
+
+.season-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding-top: 0.4em;
+} 
+
+.season-title-jp {
+  font-size: 1rem;
+}
+
+.season-button {
+  font-size: 0.8em;
+width: 100px;
+}
+
+p {
+   font-size: 0.9rem;
+}
+
+}
+
+@media (max-width: 576px) {
+.paragraph {
+  font-size: 1.2em; 
+  margin-top: 1.5em;
+}
+
+.weather {
+  font-size: 1em;
+}
+
+.custom-footer {
+  font-size: 1em;
+}
+
+.search-input, .search-button {
+  width: 100%;
+  max-width: 70px;
+}
+
+}
