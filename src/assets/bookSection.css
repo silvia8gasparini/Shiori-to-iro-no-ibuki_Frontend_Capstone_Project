@@ -7,13 +7,13 @@
 }
 
 .card-title {
-  font-size: 1.5em !important;
-  font-weight: normal;
-  text-align: center;
+    font-size: 1.5em !important;
+    font-weight: normal;
+    text-align: center;
 }
 
 .card-text {
-font-size: 1.2em;
+    font-size: 1.2em;
 } 
 
 .book-card img {
@@ -44,9 +44,8 @@ font-size: 1.2em;
 }
 
 .buy-button:hover, .details-button:hover {
-background-color: #fcf6f0 !important;
-  color: #4b3820 !important;
-
+    background-color: #fcf6f0 !important;
+    color: #4b3820 !important;
 }
 
 
