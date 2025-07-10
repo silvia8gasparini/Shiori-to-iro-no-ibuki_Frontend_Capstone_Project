@@ -8,7 +8,7 @@ const BookCard = ({ book, onBuyClick, onDetailsClick }) => {
     <Card className="book-card h-100 shadow-sm mt-2">
       <Card.Img variant="top" src={book.imageUrl} alt={book.title} />
       <Card.Body className="d-flex flex-column justify-content-center">
-        <Card.Title className="card-title">{book.title}</Card.Title>
+        <Card.Title>{book.title}</Card.Title>
         <Card.Text className="text-muted mb-1">{book.author}</Card.Text>
         <p className="book-price mt-2">{book.price.toFixed(2)} €</p>
 

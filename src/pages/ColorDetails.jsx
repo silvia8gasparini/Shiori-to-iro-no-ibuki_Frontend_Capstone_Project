@@ -81,7 +81,7 @@ export default function ColorDetails() {
               className="details-icon"
             />
           </div>
-          <p>{selectedColor.rgb}</p>
+          <p className="color-p">{selectedColor.rgb}</p>
         </div>
 
         <div className="description mb-4">
@@ -94,7 +94,7 @@ export default function ColorDetails() {
             />
           </div>
 
-          <p>
+          <p className="color-p">
             {selectedColor.description || "Nessuna descrizione disponibile."}
           </p>
         </div>
@@ -108,7 +108,7 @@ export default function ColorDetails() {
               className="details-icon"
             />
           </div>
-          <p>{selectedColor.details || "—"}</p>
+          <p className="color-p">{selectedColor.details || "—"}</p>
         </div>
       </Container>
 

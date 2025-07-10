@@ -1,19 +1,19 @@
 .book-card {
     max-width: 280px;
     background-color: rgb(245,242,241);
-    font-family: 'Caveat', cursive, serif;
+    font-family: 'Hina Mincho', cursive, serif;
     margin-left: auto;
-  margin-right: auto;
-    
+    margin-right: auto;
 }
 
 .card-title {
-    font-size: 1.6em;
-    font-weight: lighter;
+  font-size: 1.5em !important;
+  font-weight: normal;
+  text-align: center;
 }
 
 .card-text {
-font-size: 1.3em;
+font-size: 1.2em;
 } 
 
 .book-card img {
@@ -26,7 +26,7 @@ font-size: 1.3em;
 
 .b-details-btn, .b-buy-btn {
     padding: 0.6em 1em !important;
-    font-size: 1.3em !important;
+    font-size: 1.2em !important;
 }
 
 @media (max-width: 850px) {
