@@ -72,7 +72,7 @@ export default function ColorDetails() {
           />
         </div>
 
-        <div className="color-rgb mb-4">
+        <div className="color-rgb mb-4 fade-down-cascade fade-delay-1">
           <div className="d-flex gap-3 text-center">
             <strong>RGB</strong>
             <img
@@ -84,7 +84,7 @@ export default function ColorDetails() {
           <p className="color-p">{selectedColor.rgb}</p>
         </div>
 
-        <div className="description mb-4">
+        <div className="description mb-4 fade-down-cascade fade-delay-2">
           <div className="d-flex gap-3">
             <strong>Descrizione</strong>
             <img
@@ -99,7 +99,7 @@ export default function ColorDetails() {
           </p>
         </div>
 
-        <div className="story mb-3">
+        <div className="story mb-3 fade-down-cascade fade-delay-3">
           <div className="d-flex gap-3">
             <strong>Un po' di storia</strong>
             <img
