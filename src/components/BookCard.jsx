@@ -19,16 +19,11 @@ const BookCard = ({ book, onBuyClick }) => {
         <p className="book-price">{book.price.toFixed(2)} €</p>
 
         <div className="d-flex justify-content-center mt-2 gap-4">
-          <Button
-            className="b-buy-btn"
-            variant="outline-success"
-            onClick={() => onBuyClick(book.id)}
-          >
+          <Button className="buy-button" onClick={() => onBuyClick(book.id)}>
             Acquista
           </Button>
           <Button
-            className="b-details-btn"
-            variant="outline-dark"
+            className="details-button"
             onClick={() => navigate(`/books/${book.id}`)}
           >
             Dettagli

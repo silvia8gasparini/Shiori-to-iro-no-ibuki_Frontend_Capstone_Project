@@ -24,10 +24,31 @@ font-size: 1.2em;
     max-height: 300px;
 }
 
-.b-details-btn, .b-buy-btn {
+.details-button, .buy-button {
     padding: 0.6em 1em !important;
     font-size: 1.2em !important;
 }
+
+.buy-button {
+    color: #6c4e2a !important;
+    background-color: transparent !important;
+    border: 1px solid #826249 !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+.details-button {
+    color: #000000 !important;
+    background-color: transparent !important;
+    border: 1px solid #000000 !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+.buy-button:hover, .details-button:hover {
+background-color: #fcf6f0 !important;
+  color: #4b3820 !important;
+
+}
+
 
 @media (max-width: 850px) {
 .book-card {
