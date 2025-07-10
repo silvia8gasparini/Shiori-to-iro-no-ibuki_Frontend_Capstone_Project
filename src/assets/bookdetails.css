@@ -1,0 +1,33 @@
+.book-details {
+    text-align: start;
+    font-family: 'Hina Mincho', cursive, serif;
+}
+
+strong {
+    font-family: 'Caveat', cursive, serif;
+    font-size: 1.3em;
+    font-weight: lighter;
+}
+
+h3 {
+ font-family: 'Caveat', cursive, serif;
+}
+
+.book-details-image {
+  max-height: 700px;
+  object-fit: contain;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.details-button {
+  padding: 0.5em 1.5em;
+  font-size: 1.2em;
+}
+
+.book-icon {
+    height: 40px;
+    width: auto;
+    
+}
