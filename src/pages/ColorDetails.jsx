@@ -89,7 +89,7 @@ export default function ColorDetails() {
             <strong>Descrizione</strong>
             <img
               src="/img/colors-icons/pencil.png"
-              alt="wheel"
+              alt="paper"
               className="details-icon"
             />
           </div>

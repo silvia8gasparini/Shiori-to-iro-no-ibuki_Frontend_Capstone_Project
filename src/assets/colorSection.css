@@ -9,8 +9,8 @@
 
 .color-image-col,
 .color-text-col {
-    flex:1;
-    height: 100%;
+  flex:1;
+  height: 100%;
 }
 
 .color-image-col img {
@@ -30,19 +30,19 @@
 }
 
 .color-text-col .kanji {
-    font-family: 'Hina Mincho', serif;
-    font-size: 3.5rem;
+  font-family: 'Hina Mincho', serif;
+  font-size: 3.5rem;
 }
 
 .color-text-col .translation {
-    font-family: 'Caveat', cursive;
-    font-size: 1.9rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
+  font-family: 'Caveat', cursive;
+  font-size: 1.9rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .color-button {
-    font-size: 1.1rem !important;
+  font-size: 1.1rem !important;
 }
 
 .color-button.dark-hover:hover {
@@ -58,15 +58,15 @@
 }
 
 .theme-text {
-    font-size: 1.9rem;
+  font-size: 1.9rem;
 }
 
 .details-title {
-    font-size: 2.3em;
+  font-size: 2.3em;
 }
 
 .color-rgb, .description, .story {
-    font-size: 1.6em;
+  font-size: 1.6em;
 }
 
 .paint-icon {
@@ -76,22 +76,22 @@
 }
 
 .details-icon {
-height: 30px;
+  height: 30px;
   width: auto;
-   margin-top: 0.2em;
+  margin-top: 0.2em;
 }
 
 .color-p {
-    font-family:"Hina Mincho" ;
+  font-family:"Hina Mincho" ;
 }
 
 @media (max-width: 850px) {
 .color-text-col .kanji {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .color-text-col .translation {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .color-section {
@@ -107,11 +107,11 @@ height: 30px;
 
 @media (max-width: 576px) {
 .color-text-col .kanji {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .color-text-col .translation {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .color-section {
@@ -124,7 +124,7 @@ height: 30px;
 }
 
 .details-title {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 }
