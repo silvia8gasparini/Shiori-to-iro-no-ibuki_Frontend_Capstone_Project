@@ -54,7 +54,7 @@ const ColorSection = () => {
                 backgroundColor: "transparent",
               }}
               type="submit"
-              className={`color-button mt-3 ${
+              className={`color-button mt-2 ${
                 textColor === "white" ? "light-hover" : "dark-hover"
               }`}
               onClick={() => navigate("/color-details")}

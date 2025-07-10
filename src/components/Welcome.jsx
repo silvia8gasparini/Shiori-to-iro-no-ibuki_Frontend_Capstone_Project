@@ -4,7 +4,7 @@ import { fetchCurrentMicroSeason } from "../redux/currentMicroSeasonSlice";
 import { fetchNextMicroSeasons } from "../redux/nextMicroSeasonsSlice";
 import { fetchColorByMicroSeasonId } from "../redux/selectedColorSlice";
 import { fetchBooksByMicroSeasonId } from "../redux/booksSlice";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import "../assets/welcomeSection.css";
 
 function getRandomCities(array, count = 2) {
@@ -145,12 +145,13 @@ const Welcome = () => {
               </p>
             </>
           )}
-          <button
-            className="season-button btn btn-outline-dark"
+          <Button
+            className="season-button"
+            variant="outline-dark"
             onClick={handleChangeSeason}
           >
             Cambia stagione
-          </button>
+          </Button>
         </Col>
 
         <Col xs={12} sm={4}>

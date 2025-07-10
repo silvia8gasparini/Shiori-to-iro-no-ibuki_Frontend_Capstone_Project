@@ -41,6 +41,10 @@
     margin-bottom: 1rem;
 }
 
+.color-button {
+    font-size: 1.1rem !important;
+}
+
 .color-button.dark-hover:hover {
   background-color: rgba(0, 0, 0, 0.8);
   color: white !important;
