@@ -90,7 +90,7 @@ export default function BookDetails() {
                 Acquista
               </Button>
               <Button
-                className="details-button"
+                className="favorites-button"
                 variant={isFavorite ? "danger" : "outline-dark"}
                 onClick={handleFavoriteClick}
               >
