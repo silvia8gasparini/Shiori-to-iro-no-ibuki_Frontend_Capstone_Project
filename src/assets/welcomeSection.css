@@ -27,13 +27,17 @@ p {
    font-size: 1.4rem;
 }
 
+.season-button {
+    padding: 0.4em 0.8em; 
+}
+
 @media (max-width: 850px) {
 .paragraph {
   font-size: 1.3em;
 }
 
 .weather {
-  font-size: 0.9em;
+  font-size: 0.8em;
    padding-top: 0.4em;
 }
 
@@ -53,7 +57,7 @@ p {
 
 .season-button {
   font-size: 0.8em;
-width: 100px;
+  width: 100px;
 }
 
 p {
@@ -76,9 +80,26 @@ p {
   font-size: 1em;
 }
 
-.search-input, .search-button {
+.search-input {
   width: 100%;
   max-width: 70px;
 }
 
+.season-title {
+  font-size: 1.2rem;
+} 
+
+.season-title-jp {
+  font-size: 1rem;
+}
+
+p {
+   font-size: 1.1rem;
+}
+
+.season-button {
+  font-size: 1.1em;
+  width: 140px;
+  padding: 0.4em 0.5em; 
+}
 }

@@ -85,12 +85,12 @@ html, body {
 .search-input {
   width: 100%;
   max-width: 300px !important;
-  padding: 0.8rem 1.2rem !important;
+  padding: 0.7rem 1.2rem !important;
   border-radius: 10px;
 }
 
 .search-button {
-  padding: 0.8rem 1.6rem !important;
+  padding: 0.5rem 1.3rem !important;
   border-radius: 10px;
   white-space: nowrap;
   font-size: 0.6em;

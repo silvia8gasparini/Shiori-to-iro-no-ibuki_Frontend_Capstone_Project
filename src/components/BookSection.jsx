@@ -33,8 +33,8 @@ const BookSection = () => {
     return <p>Nessun libro disponibile.</p>;
 
   return (
-    <Container fluid className="mt-4">
-      <Row className="g-4 justify-content-center mx-5">
+    <Container fluid className="mt-2">
+      <Row className="g-4 d-flex justify-content-center my-4">
         {booksForSeason.map((book) => (
           <Col key={book.id} xs={12} sm={6} md={4} lg={3} xl={3}>
             <BookCard
