@@ -27,7 +27,7 @@ const ColorSection = () => {
   return (
     <>
       <Container fluid className="color-section px-0 mt-4">
-        <Row className="g-0 w-100 h-100">
+        <Row className="g-0 w-100 h-100 color-animate">
           <Col md={6} className="color-image-col d-flex justify-content-center">
             <img
               src={selectedColor.imageUrl}
