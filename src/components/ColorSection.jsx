@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import "../assets/colorSection.css";
 
 function isDark(rgbString) {
@@ -12,6 +13,7 @@ function isDark(rgbString) {
 }
 
 const ColorSection = () => {
+  const navigate = useNavigate();
   const { selectedColor, loading, error } = useSelector(
     (state) => state.selectedColor
   );
@@ -55,6 +57,7 @@ const ColorSection = () => {
               className={`color-button mt-3 ${
                 textColor === "white" ? "light-hover" : "dark-hover"
               }`}
+              onClick={() => navigate("/color-details")}
             >
               Dettagli
             </Button>

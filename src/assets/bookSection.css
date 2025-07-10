@@ -25,8 +25,8 @@ font-size: 1.3em;
 }
 
 .b-details-btn, .b-buy-btn {
-    padding: 0.6em 1em; 
-    font-size: 1.3em;
+    padding: 0.6em 1em !important;
+    font-size: 1.3em !important;
 }
 
 @media (max-width: 850px) {
@@ -50,8 +50,8 @@ font-size: 1.3em;
 }
 
 .b-details-btn, .b-buy-btn {
-    padding: 0.6em 0.7em; 
-    font-size: 1em;
+    padding: 0.6em 0.7em !important;
+    font-size: 1em !important;
 }
 
 }
@@ -77,7 +77,7 @@ font-size: 1.3em;
 }
 
 .b-details-btn, .b-buy-btn {
-    padding: 0.6em 0.7em; 
-    font-size: 1.2em;
+    padding: 0.6em 0.7em !important;
+    font-size: 1.2em !important;
 }
 }
