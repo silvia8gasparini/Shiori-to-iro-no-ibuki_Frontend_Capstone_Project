@@ -62,7 +62,7 @@ export default function ColorDetails() {
         </Row>
       </Container>
 
-      <Container className="mt-5 mb-5 text-start">
+      <Container className="mt-5 mb-5 text-start px-5">
         <div className="d-flex justify-content-center gap-3">
           <h3 className="details-title mb-4 text-center">Dettagli colore</h3>
           <img
@@ -73,7 +73,7 @@ export default function ColorDetails() {
         </div>
 
         <div className="color-rgb mb-4">
-          <div className="d-flex gap-3">
+          <div className="d-flex gap-3 text-center">
             <strong>RGB</strong>
             <img
               src="/img/colors-icons/wheel.png"
