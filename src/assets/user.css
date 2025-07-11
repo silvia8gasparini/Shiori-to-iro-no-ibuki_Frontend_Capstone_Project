@@ -20,5 +20,9 @@ font-size: 1.5rem;
 }
 
 .custom-dropdown .dropdown-menu strong {
-     font-family: "Hina Mincho";
+    font-family: "Hina Mincho";
+}
+
+.cart-badge {
+  font-family: "Hina Mincho", serif;
 }

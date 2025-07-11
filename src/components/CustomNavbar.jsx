@@ -17,6 +17,7 @@ import "../assets/user.css";
 
 const CustomNavbar = () => {
   const cartItems = useSelector((state) => state.cart.items);
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const user = useSelector((state) => state.user.user);
@@ -136,9 +137,9 @@ const CustomNavbar = () => {
                         alt="cart"
                         className="responsive-icon"
                       />
-                      {cartItems.length > 0 && (
+                      {totalItems > 0 && (
                         <span className="cart-badge badge rounded-pill bg-danger">
-                          {cartItems.length}
+                          {totalItems}
                         </span>
                       )}
                     </div>
@@ -158,12 +159,17 @@ const CustomNavbar = () => {
                       >
                         <div
                           className="me-2"
-                          style={{ maxWidth: "140px", overflow: "hidden" }}
+                          style={{ maxWidth: "180px", wordBreak: "break-word" }}
                         >
-                          <span>{item.title}</span>
+                          <span>
+                            {item.title}
+                            {item.quantity > 1 && ` ×${item.quantity}`}
+                          </span>
                         </div>
                         <div className="d-flex align-items-center gap-2">
-                          <span>{item.price.toFixed(2)} €</span>
+                          <span>
+                            {(item.price * item.quantity).toFixed(2)} €
+                          </span>
                           <button
                             onClick={() => dispatch(removeFromCart(item.id))}
                             className="btn btn-sm p-0 border-0 bg-transparent d-flex align-items-center"

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Table, Button } from "react-bootstrap";
+import "../assets/tearoom.css";
 
 const fasceOrarie = ["Mattina", "Pomeriggio", "Sera"];
 
@@ -34,7 +35,11 @@ const ReservationCalendar = ({ onPrenota }) => {
   };
 
   return (
-    <Table bordered className="text-center mt-4">
+    <Table
+      bordered
+      responsive
+      className="text-center mt-4 w-auto mx-auto reservation-calendar"
+    >
       <thead>
         <tr>
           <th></th>
@@ -56,7 +61,7 @@ const ReservationCalendar = ({ onPrenota }) => {
               return (
                 <td key={giorno.date + fascia}>
                   <Button
-                    variant={isSelected ? "success" : "outline-secondary"}
+                    variant={isSelected ? "success" : "outline-success"}
                     size="sm"
                     onClick={() => handleSelezione(giorno, fascia)}
                   >

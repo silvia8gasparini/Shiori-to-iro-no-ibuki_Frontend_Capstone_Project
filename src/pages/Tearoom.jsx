@@ -8,25 +8,25 @@ import "../assets/tearoom.css";
 const zone = [
   {
     id: 1,
-    name: "Zona Before Sunrise",
+    name: "Area Before Sunrise",
     icon: "/img/tearoom/sunset1.png",
     imageUrl: "/img/tearoom/beforesunrise.png",
   },
   {
     id: 2,
-    name: "Zona Tomodachi",
+    name: "Area Tomodachi",
     icon: "/img/tearoom/friends.png",
     imageUrl: "/img/tearoom/tomodachi.png",
   },
   {
     id: 3,
-    name: "Zona Giyu-san",
+    name: "Area Giyu-san",
     icon: "/img/tearoom/wave.png",
     imageUrl: "/img/tearoom/introvert.png",
   },
   {
     id: 4,
-    name: "Zona Komori",
+    name: "Area Komori",
     icon: "/img/tearoom/autumn.png",
     imageUrl: "/img/tearoom/komori.png",
   },
@@ -49,7 +49,7 @@ const Tearoom = () => {
       <CustomNavbar />
       <Container className="mt-5">
         <div className="d-flex justify-content-center gap-3">
-          <h2 className="mb-4 text-center">Prenota la tua zona!</h2>
+          <h2 className="mb-4 text-center">Scegli la tua area!</h2>
           <img src="/img/tearoom/tea.png" alt="tea" className="tea-icon" />
         </div>
 
@@ -94,7 +94,7 @@ const Tearoom = () => {
                 className="schedule-icon"
               />{" "}
               <h3 className="mt-3 text-center">
-                Seleziona giorno e fascia oraria
+                Prenota giorno e fascia oraria
               </h3>
             </div>
             <ReservationCalendar onPrenota={handlePrenotazione} />

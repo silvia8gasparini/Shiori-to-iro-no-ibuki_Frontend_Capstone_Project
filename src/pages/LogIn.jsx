@@ -2,13 +2,23 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/userSlice";
-import { Container, Form, Button, Row, Col, Card } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  Row,
+  Col,
+  Card,
+  Toast,
+  ToastContainer,
+} from "react-bootstrap";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showToast, setShowToast] = useState(false);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -45,8 +55,8 @@ export default function Login() {
           const userData = await userResponse.json();
           localStorage.setItem("userData", JSON.stringify(userData));
           dispatch(loginSuccess(userData));
-          alert("Login effettuato con successo!");
-          navigate("/");
+          setShowToast(true);
+          setTimeout(() => navigate("/"), 2500);
         } else {
           alert("Errore nel recupero del profilo utente.");
         }
@@ -104,6 +114,32 @@ export default function Login() {
           </Col>
         </Row>
       </Container>
+      <ToastContainer
+        className="position-fixed top-50 start-50 translate-middle p-3"
+        style={{ zIndex: 1055 }}
+      >
+        <Toast
+          onClose={() => setShowToast(false)}
+          show={showToast}
+          delay={2500}
+          autohide
+          bg="white"
+          className="text-center"
+        >
+          <Toast.Header closeButton={false}>
+            <div className="text-center fw-bold mx-2 fs-4">
+              Yatta! Login effettuato con successo!
+            </div>
+          </Toast.Header>
+          <Toast.Body>
+            <img
+              src="/public/img/fat-cat.png"
+              alt="fat-cat"
+              style={{ width: "320px" }}
+            />
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
       <CustomFooter />
     </div>
   );

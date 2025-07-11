@@ -28,8 +28,16 @@ const BookCard = ({ book }) => {
         <p className="book-price">{book.price.toFixed(2)} €</p>
 
         {showMessage && (
-          <Alert variant="success" className="py-1 px-2 mt-2 text-center">
-            Libro aggiunto al carrello!
+          <Alert variant="success" className="py-2 px-2 mt-2 text-center">
+            <div className="d-flex align-items-center justify-content-center gap-2">
+              Libro aggiunto al carrello!
+              <img
+                src="/public/img/books-icons/add-to-cart.png"
+                alt="check"
+                height="20"
+                style={{ marginTop: "0px", width: "20px" }}
+              />
+            </div>
           </Alert>
         )}
 
