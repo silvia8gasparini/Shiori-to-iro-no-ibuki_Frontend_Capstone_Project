@@ -56,37 +56,38 @@ h3 {
 
 .fade-down-cascade {
   opacity: 0;
-  animation: fadeSlideDown 1.6s ease-out forwards;
+  animation: fadeSlideDown 1.7s ease-out forwards;
+   animation-fill-mode: both;
 }
 
-.fade-delay-1 {
-  animation-delay: 0.4s;
+.fade-down-cascade.fade-delay-1 {
+  animation-delay: 0.5s;
 }
 
-.fade-delay-2 {
+.fade-down-cascade.fade-delay-2 {
   animation-delay: 0.8s;
 }
 
-.fade-delay-3 {
+.fade-down-cascade.fade-delay-3 {
   animation-delay: 1.2s;
 }
 
-.fade-delay-4 {
+.fade-down-cascade.fade-delay-4 {
   animation-delay: 1.6s;
 }
 
-.fade-delay-5 {
+.fade-down-cascade.fade-delay-5 {
   animation-delay: 2s;
 }
 
-.fade-delay-6 {
+.fade-down-cascade.fade-delay-6 {
   animation-delay: 2.4s;
 }
 
-.fade-delay-7 {
+.fade-down-cascade.fade-delay-7 {
   animation-delay: 2.8s;
 }
 
-.fade-delay-8 {
+.fade-down-cascade.fade-delay-8 {
   animation-delay: 3.2s;
 }

@@ -162,17 +162,20 @@ html, body {
   gap: 0.6rem;
   margin-bottom: 1rem; 
   margin-top: 0.5rem; 
+  padding: 0.2rem 0.4rem;
+
 }
 
 .search-input {
   margin-left: 0.6rem; 
   width: 100%;
-  max-width: 80px;
+  max-width: 90px;
+  font-size: 0.5em;
 }
 
 .search-button {
-  width: 100%;
-  max-width: 70px;
+  width: 80%;
+  max-width: 80px;
 }
 
 }

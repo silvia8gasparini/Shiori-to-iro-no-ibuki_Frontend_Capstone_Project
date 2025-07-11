@@ -1,0 +1,120 @@
+import React, { useState } from "react";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import ReservationCalendar from "../components/ReservationCalendar";
+import CustomNavbar from "../components/CustomNavbar";
+import CustomFooter from "../components/CustomFooter";
+import "../assets/tearoom.css";
+
+const zone = [
+  {
+    id: 1,
+    name: "Zona Before Sunrise",
+    icon: "/img/tearoom/sunset1.png",
+    imageUrl: "/img/tearoom/beforesunrise.png",
+  },
+  {
+    id: 2,
+    name: "Zona Tomodachi",
+    icon: "/img/tearoom/friends.png",
+    imageUrl: "/img/tearoom/tomodachi.png",
+  },
+  {
+    id: 3,
+    name: "Zona Giyu-san",
+    icon: "/img/tearoom/wave.png",
+    imageUrl: "/img/tearoom/introvert.png",
+  },
+  {
+    id: 4,
+    name: "Zona Komori",
+    icon: "/img/tearoom/autumn.png",
+    imageUrl: "/img/tearoom/komori.png",
+  },
+];
+
+const Tearoom = () => {
+  const [zonaSelezionata, setZonaSelezionata] = useState(null);
+  const [prenotazione, setPrenotazione] = useState(null);
+  const [showConferma, setShowConferma] = useState(false);
+
+  const handlePrenotazione = (slot) => {
+    setPrenotazione({ zona: zonaSelezionata, ...slot });
+    console.log("Prenotazione confermata:", zonaSelezionata, slot);
+    setShowConferma(true);
+    setTimeout(() => setShowConferma(false), 3000);
+  };
+
+  return (
+    <div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
+      <CustomNavbar />
+      <Container className="mt-5">
+        <div className="d-flex justify-content-center gap-3">
+          <h2 className="mb-4 text-center">Prenota la tua zona!</h2>
+          <img src="/img/tearoom/tea.png" alt="tea" className="tea-icon" />
+        </div>
+
+        <Row className="g-4 justify-content-center">
+          {zone.map((zona) => (
+            <Col key={zona.id} md={6} lg={3}>
+              <Card className="text-center shadow-sm h-100 fade-in">
+                <Card.Img variant="top" src={zona.imageUrl} />
+                <Card.Body>
+                  <Card.Title className="d-flex align-items-center justify-content-center gap-2 mt-1">
+                    <img
+                      src={zona.icon}
+                      alt="icona zona"
+                      style={{ height: "30px" }}
+                    />
+                    {zona.name}
+                  </Card.Title>
+                  <Button
+                    className="my-2"
+                    variant="outline-dark"
+                    style={{ padding: "10px 24px", fontSize: "1.4rem" }}
+                    onClick={() => setZonaSelezionata(zona.id)}
+                  >
+                    Seleziona
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+        <div className="d-flex justify-content-center mt-4 gap-3">
+          <h3 className="mb-4 text-center">Tutte le zone sono pet friendly!</h3>
+          <img src="/img/tearoom/pet.png" alt="pet" className="pet-icon" />
+        </div>
+
+        {zonaSelezionata && (
+          <>
+            <div className="d-flex justify-content-center mt-3 gap-2">
+              <img
+                src="/img/tearoom/schedule.png"
+                alt="schedule"
+                className="schedule-icon"
+              />{" "}
+              <h3 className="mt-3 text-center">
+                Seleziona giorno e fascia oraria
+              </h3>
+            </div>
+            <ReservationCalendar onPrenota={handlePrenotazione} />
+          </>
+        )}
+
+        {showConferma && prenotazione && (
+          <div className="alert alert-success text-center mt-4">
+            Prenotazione confermata per la zona{" "}
+            <strong>
+              {zone.find((z) => z.id === prenotazione.zona)?.name}
+            </strong>{" "}
+            il <strong>{prenotazione.date}</strong> nella fascia{" "}
+            <strong>{prenotazione.timeSlot.toLowerCase()}</strong>.
+          </div>
+        )}
+      </Container>
+      <CustomFooter />
+    </div>
+  );
+};
+
+export default Tearoom;
