@@ -68,7 +68,7 @@ const CustomNavbar = () => {
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to="/"
+                to="/signup"
                 className="d-flex align-items-center gap-2"
               >
                 <img
