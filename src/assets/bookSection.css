@@ -48,6 +48,11 @@
     color: #4b3820 !important;
 }
 
+.badge.bg-danger {
+  font-size: 0.75rem;
+  padding: 0.4em 0.6em;
+  vertical-align: top;
+}
 
 @media (max-width: 850px) {
 .book-card {

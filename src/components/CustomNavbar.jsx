@@ -145,7 +145,7 @@ const CustomNavbar = () => {
                   }
                   className="custom-dropdown"
                 >
-                  <NavDropdown.Item as={Link} to="/user/">
+                  <NavDropdown.Item as={Link} to="/user/page">
                     Pagina utente
                   </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/user/profile">

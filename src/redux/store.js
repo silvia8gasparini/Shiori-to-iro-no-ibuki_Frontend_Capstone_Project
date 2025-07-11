@@ -5,6 +5,7 @@ import selectedColorReducer from "./selectedColorSlice";
 import booksReducer from "./booksSlice";
 import favoritesReducer from "./favoritesSlice";
 import userReducer from "./userSlice";
+import cartReducer from "./cartSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     books: booksReducer, 
     favorites: favoritesReducer,
     user: userReducer,
+    cart: cartReducer,
   },
 });
 

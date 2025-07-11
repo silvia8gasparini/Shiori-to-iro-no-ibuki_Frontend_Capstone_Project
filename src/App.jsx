@@ -6,6 +6,7 @@ import BookDetails from "./pages/BookDetails";
 import Tearoom from "./pages/Tearoom";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/LogIn";
+import UserPage from "./pages/UserPage";
 import UserProfile from "./pages/UserProfile";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -35,6 +36,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/user/profile" element={<UserProfile />} />
+        <Route path="/user/page" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
   );
