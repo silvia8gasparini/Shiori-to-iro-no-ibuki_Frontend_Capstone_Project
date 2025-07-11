@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Card, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
@@ -8,9 +8,12 @@ import "../assets/bookSection.css";
 const BookCard = ({ book }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showMessage, setShowMessage] = useState(false);
 
   const handleBuyClick = () => {
     dispatch(addToCart(book));
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 2000);
   };
 
   return (
@@ -23,6 +26,12 @@ const BookCard = ({ book }) => {
           <span>{book.availability}</span>
         </p>
         <p className="book-price">{book.price.toFixed(2)} €</p>
+
+        {showMessage && (
+          <Alert variant="success" className="py-1 px-2 mt-2 text-center">
+            Libro aggiunto al carrello!
+          </Alert>
+        )}
 
         <div className="d-flex justify-content-center mt-2 gap-4">
           <Button className="buy-button" onClick={handleBuyClick}>

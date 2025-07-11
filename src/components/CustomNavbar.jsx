@@ -12,13 +12,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/userSlice";
+import { removeFromCart } from "../redux/cartSlice";
 import "../assets/user.css";
 
 const CustomNavbar = () => {
+  const cartItems = useSelector((state) => state.cart.items);
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
+
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -125,17 +129,72 @@ const CustomNavbar = () => {
 
               <NavDropdown
                 title={
-                  <span className="d-flex align-items-center gap-2">
-                    <img
-                      src="/img/navbar-icons/shoppingcart.png"
-                      alt="cart"
-                      className="responsive-icon"
-                    />
+                  <span className="d-flex align-items-center gap-2 position-relative">
+                    <div className="position-relative">
+                      <img
+                        src="/img/navbar-icons/shoppingcart.png"
+                        alt="cart"
+                        className="responsive-icon"
+                      />
+                      {cartItems.length > 0 && (
+                        <span className="cart-badge badge rounded-pill bg-danger">
+                          {cartItems.length}
+                        </span>
+                      )}
+                    </div>
                     Carrello
                   </span>
                 }
                 className="custom-dropdown d-flex align-items-center"
-              ></NavDropdown>
+              >
+                {cartItems.length === 0 ? (
+                  <NavDropdown.Item>Il carrello è vuoto</NavDropdown.Item>
+                ) : (
+                  <>
+                    {cartItems.map((item, index) => (
+                      <NavDropdown.Item
+                        key={index}
+                        className="d-flex justify-content-between align-items-center text-wrap"
+                      >
+                        <div
+                          className="me-2"
+                          style={{ maxWidth: "140px", overflow: "hidden" }}
+                        >
+                          <span>{item.title}</span>
+                        </div>
+                        <div className="d-flex align-items-center gap-2">
+                          <span>{item.price.toFixed(2)} €</span>
+                          <button
+                            onClick={() => dispatch(removeFromCart(item.id))}
+                            className="btn btn-sm p-0 border-0 bg-transparent d-flex align-items-center"
+                            title="Rimuovi dal carrello"
+                          >
+                            <img
+                              src="/img/navbar-icons/bin.png"
+                              alt="Rimuovi"
+                              width="16"
+                              height="16"
+                              style={{ filter: "grayscale(50%)" }}
+                            />
+                          </button>
+                        </div>
+                      </NavDropdown.Item>
+                    ))}
+                    <NavDropdown.Divider />
+                    <div className="px-3 py-2">
+                      <strong>Totale: {totalPrice.toFixed(2)} €</strong>
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="w-100 mt-2"
+                        onClick={() => navigate("/checkout")}
+                      >
+                        Accedi e paga
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </NavDropdown>
               {user ? (
                 <NavDropdown
                   title={

@@ -2,3 +2,23 @@
 font-size: 1.5rem;
 
 }
+
+.cart-badge {
+  position: absolute;
+  top: -7px;
+  right: -8px;
+  font-size: 0.8rem;
+  padding: 5px 5px;
+  z-index: 10;
+  color: white;
+}
+
+
+.custom-dropdown .dropdown-menu {
+  min-width: 300px !important;
+  font-family: "Hina Mincho";
+}
+
+.custom-dropdown .dropdown-menu strong {
+     font-family: "Hina Mincho";
+}
