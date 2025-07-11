@@ -53,35 +53,35 @@ export default function BookDetails() {
             <img
               src={book.imageUrl}
               alt={book.title}
-              className="img-fluid book-details-image"
+              className="img-fluid book-details-image fade-in"
             />
           </Col>
           <Col md={7}>
-            <p>
+            <p className="fade-down-cascade fade-delay-1">
               <strong>Titolo: </strong> {book.title}
             </p>
-            <p>
+            <p className="fade-down-cascade fade-delay-2">
               <strong>Autore: </strong> {book.author}
             </p>
-            <p>
+            <p className="fade-down-cascade fade-delay-3">
               <strong>Anno: </strong> {book.year}
             </p>
-            <p>
+            <p className="fade-down-cascade fade-delay-4">
               <strong>Editore: </strong> {book.publisher}
             </p>
-            <p>
+            <p className="fade-down-cascade fade-delay-5">
               <strong>ISBN: </strong> {book.isbn}
             </p>
-            <p>
+            <p className="fade-down-cascade fade-delay-6">
               <strong>Prezzo: </strong> {book.price.toFixed(2)} €
             </p>
-            <p className="mt-4">
+            <p className="mt-4 fade-down-cascade fade-delay-7">
               {" "}
               <strong>Descrizione: </strong>
               {book.description}
             </p>
 
-            <div className="d-flex gap-4 mt-5 justify-content-center">
+            <div className="d-flex gap-4 mt-5 justify-content-center fade-down-cascade fade-delay-8">
               <Button
                 className="details-button"
                 variant="success"
@@ -90,7 +90,7 @@ export default function BookDetails() {
                 Acquista
               </Button>
               <Button
-                className="details-button"
+                className="favorites-button"
                 variant={isFavorite ? "danger" : "outline-dark"}
                 onClick={handleFavoriteClick}
               >
