@@ -4,6 +4,7 @@ import nextMicroSeasonsReducer from "./nextMicroSeasonsSlice";
 import selectedColorReducer from "./selectedColorSlice";
 import booksReducer from "./booksSlice";
 import favoritesReducer from "./favoritesSlice";
+import userReducer from "./userSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     selectedColor: selectedColorReducer,
     books: booksReducer, 
     favorites: favoritesReducer,
+    user: userReducer,
   },
 });
 

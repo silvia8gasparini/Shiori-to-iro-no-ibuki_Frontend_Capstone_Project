@@ -10,10 +10,15 @@ import {
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/userSlice";
+import "../assets/user.css";
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -21,6 +26,13 @@ const CustomNavbar = () => {
       navigate(`/details/${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery("");
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwtToken");
+    localStorage.removeItem("userData");
+    dispatch(logout());
+    navigate("/");
   };
 
   return (
@@ -111,18 +123,6 @@ const CustomNavbar = () => {
                 </Button>
               </Form>
 
-              <Nav.Link
-                as={Link}
-                to="/login"
-                className="d-flex align-items-center gap-2 me-md-3"
-              >
-                <img
-                  src="/img/navbar-icons/key.png"
-                  alt="key"
-                  className="responsive-icon"
-                />
-                Accedi
-              </Nav.Link>
               <NavDropdown
                 title={
                   <span className="d-flex align-items-center gap-2">
@@ -136,6 +136,40 @@ const CustomNavbar = () => {
                 }
                 className="custom-dropdown d-flex align-items-center"
               ></NavDropdown>
+              {user ? (
+                <NavDropdown
+                  title={
+                    <span className="hello-user d-flex align-items-center gap-2">
+                      おはよう, {user.name}-san!
+                    </span>
+                  }
+                  className="custom-dropdown"
+                >
+                  <NavDropdown.Item as={Link} to="/user/">
+                    Pagina utente
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/user/profile">
+                    Modifica Profilo
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={handleLogout}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <Nav.Link
+                  as={Link}
+                  to="/login"
+                  className="d-flex align-items-center gap-2 me-md-3"
+                >
+                  <img
+                    src="/img/navbar-icons/key.png"
+                    alt="key"
+                    className="responsive-icon"
+                  />
+                  Accedi
+                </Nav.Link>
+              )}
             </Col>
           </Row>
         </Navbar.Collapse>

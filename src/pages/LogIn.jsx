@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../redux/userSlice";
 import { Container, Form, Button, Row, Col, Card } from "react-bootstrap";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
 
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -31,8 +34,22 @@ export default function Login() {
       if (response.ok) {
         const token = await response.text();
         localStorage.setItem("jwtToken", token);
-        alert("Login effettuato con successo!");
-        navigate("/"); // oppure /dashboard o /profile
+
+        const userResponse = await fetch("http://localhost:8080/user/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          localStorage.setItem("userData", JSON.stringify(userData));
+          dispatch(loginSuccess(userData));
+          alert("Login effettuato con successo!");
+          navigate("/");
+        } else {
+          alert("Errore nel recupero del profilo utente.");
+        }
       } else {
         const error = await response.text();
         alert("Errore: " + error);

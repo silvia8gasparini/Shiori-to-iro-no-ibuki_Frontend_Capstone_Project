@@ -6,6 +6,7 @@ import CustomFooter from "../components/CustomFooter";
 
 export default function SignUp() {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -14,7 +15,7 @@ export default function SignUp() {
     avatarUrl: "",
   });
 
-  const [imageFile, setImageFile] = useState(null);
+  const [imageFile, setImageFile] = useState(null); // serve questo!
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -31,27 +32,27 @@ export default function SignUp() {
   };
 
   const uploadImageToCloudinary = async (file) => {
-    const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", "sg_default");
+    const form = new FormData();
+    form.append("file", file);
+    form.append("upload_preset", "sg_default");
 
     const response = await fetch(
       "https://api.cloudinary.com/v1_1/dqyys0epr/image/upload",
       {
         method: "POST",
-        body: data,
+        body: form,
       }
     );
 
-    const result = await response.json();
-    return result.secure_url;
+    const data = await response.json();
+    return data.secure_url;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      let avatarUrl = formData.avatarUrl;
+      let avatarUrl = "";
 
       if (imageFile) {
         avatarUrl = await uploadImageToCloudinary(imageFile);
@@ -59,7 +60,7 @@ export default function SignUp() {
 
       const userData = {
         ...formData,
-        avatarUrl: avatarUrl,
+        avatarUrl, // aggiunge solo se presente
       };
 
       const response = await fetch("http://localhost:8080/auth/register", {
@@ -97,55 +98,51 @@ export default function SignUp() {
                   />
                 </div>
                 <Form onSubmit={handleSubmit} className="fs-5">
-                  <Form.Group className="mb-3" controlId="formName">
+                  <Form.Group className="mb-3">
                     <Form.Label>Nome</Form.Label>
                     <Form.Control
                       type="text"
                       name="name"
-                      placeholder="Inserisci il tuo nome"
                       value={formData.name}
                       onChange={handleChange}
                       required
                     />
                   </Form.Group>
 
-                  <Form.Group className="mb-3" controlId="formSurname">
+                  <Form.Group className="mb-3">
                     <Form.Label>Cognome</Form.Label>
                     <Form.Control
                       type="text"
                       name="surname"
-                      placeholder="Inserisci il tuo cognome"
                       value={formData.surname}
                       onChange={handleChange}
                       required
                     />
                   </Form.Group>
 
-                  <Form.Group className="mb-3" controlId="formEmail">
+                  <Form.Group className="mb-3">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                       type="email"
                       name="email"
-                      placeholder="Inserisci la tua email"
                       value={formData.email}
                       onChange={handleChange}
                       required
                     />
                   </Form.Group>
 
-                  <Form.Group className="mb-4" controlId="formPassword">
+                  <Form.Group className="mb-4">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                       type="password"
                       name="password"
-                      placeholder="Inserisci la password"
                       value={formData.password}
                       onChange={handleChange}
                       required
                     />
                   </Form.Group>
 
-                  <Form.Group className="mb-3" controlId="formAvatarUpload">
+                  <Form.Group className="mb-3">
                     <Form.Label>Carica avatar (opzionale)</Form.Label>
                     <Form.Control
                       type="file"

@@ -21,7 +21,7 @@ html, body {
 .custom-navbar {
   width: 100%;
   font-family: 'Caveat';
-  font-size: 2em;
+  font-size: 1.8em;
   background-color: rgb(245,242,241);
   position: relative;
 }
