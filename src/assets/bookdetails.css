@@ -56,7 +56,7 @@ h3 {
 
 .fade-down-cascade {
   opacity: 0;
-  animation: fadeSlideDown 1.7s ease-out forwards;
+  animation: fadeSlideDown 1.4s ease-out forwards;
    animation-fill-mode: both;
 }
 

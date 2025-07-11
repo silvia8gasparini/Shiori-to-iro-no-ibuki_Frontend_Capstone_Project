@@ -113,7 +113,7 @@ const CustomNavbar = () => {
 
               <Nav.Link
                 as={Link}
-                to="/"
+                to="/login"
                 className="d-flex align-items-center gap-2 me-md-3"
               >
                 <img

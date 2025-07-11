@@ -5,6 +5,7 @@ import ColorDetails from "./pages/ColorDetails";
 import BookDetails from "./pages/BookDetails";
 import Tearoom from "./pages/Tearoom";
 import SignUp from "./pages/SignUp";
+import Login from "./pages/LogIn";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/books/:id" element={<BookDetails />} />
         <Route path="/tea-room" element={<Tearoom />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
