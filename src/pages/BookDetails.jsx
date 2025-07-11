@@ -90,8 +90,8 @@ export default function BookDetails() {
                 Acquista
               </Button>
               <Button
-                className="favorites-button"
-                variant={isFavorite ? "danger" : "outline-dark"}
+                className="details-button"
+                variant={isFavorite ? "danger" : "outline-danger"}
                 onClick={handleFavoriteClick}
               >
                 {isFavorite ? <HeartFill /> : <Heart />} Preferiti
