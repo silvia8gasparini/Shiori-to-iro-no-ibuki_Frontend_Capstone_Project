@@ -1,12 +1,12 @@
 .book-details {
-    text-align: start;
-    font-family: 'Hina Mincho', cursive, serif;
+  text-align: start;
+  font-family: 'Hina Mincho', cursive, serif;
 }
 
 strong {
-    font-family: 'Caveat', cursive, serif;
-    font-size: 1.3em;
-    font-weight: lighter;
+  font-family: 'Caveat', cursive, serif;
+  font-size: 1.3em;
+  font-weight: lighter;
 }
 
 h3 {
@@ -14,7 +14,7 @@ h3 {
 }
 
 .book-details-image {
-  max-height: 700px;
+  max-height: 600px;
   object-fit: contain;
   width: 100%;
   display: block;
