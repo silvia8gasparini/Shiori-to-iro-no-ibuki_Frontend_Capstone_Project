@@ -38,7 +38,7 @@ const ReservationCalendar = ({ onPrenota }) => {
     <Table
       bordered
       responsive
-      className="text-center mt-4 w-auto mx-auto reservation-calendar"
+      className="reservation-calendar text-center mt-4 w-auto mx-auto"
     >
       <thead>
         <tr>

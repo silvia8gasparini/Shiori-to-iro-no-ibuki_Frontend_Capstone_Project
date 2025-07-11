@@ -20,7 +20,7 @@ const zone = [
   },
   {
     id: 3,
-    name: "Area Giyu-san",
+    name: "Area Giyu",
     icon: "/img/tearoom/wave.png",
     imageUrl: "/img/tearoom/introvert.png",
   },
@@ -63,7 +63,7 @@ const Tearoom = () => {
                     <img
                       src={zona.icon}
                       alt="icona zona"
-                      style={{ height: "30px" }}
+                      style={{ height: "35px" }}
                     />
                     {zona.name}
                   </Card.Title>

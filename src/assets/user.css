@@ -1,8 +1,3 @@
-.hello-user {
-font-size: 1.5rem;
-
-}
-
 .cart-badge {
   position: absolute;
   top: -7px;
@@ -13,16 +8,30 @@ font-size: 1.5rem;
   color: white;
 }
 
-
 .custom-dropdown .dropdown-menu {
   min-width: 300px !important;
   font-family: "Hina Mincho";
 }
 
 .custom-dropdown .dropdown-menu strong {
-    font-family: "Hina Mincho";
+  font-family: "Hina Mincho";
 }
 
 .cart-badge {
   font-family: "Hina Mincho", serif;
+}
+
+.form-label {
+  font-size: 1.6rem;
+}
+
+.custom-form input,
+.custom-form textarea,
+.custom-form select {
+  font-family: "Hina Mincho", serif;
+  font-size: 1.3rem; 
+}
+
+.card {
+   background-color: rgb(245,242,241) !important;
 }

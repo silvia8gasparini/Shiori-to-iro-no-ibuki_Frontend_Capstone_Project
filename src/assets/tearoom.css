@@ -1,19 +1,37 @@
 .container h2 {
-    font-size: 2.4em;
+  font-size: 2.4em;
+}
+
+.card {
+  background-color: rgb(245,242,241);
+}
+
+.user-card {
+  background-color: rgb(245,242,241);
+max-width: 300px;
+}
+
+.reservation-calendar {
+    border-color: rgb(103, 103, 103);
+}
+
+.reservation-calendar th,
+.reservation-calendar td {
+  background-color: rgb(245,242,241) !important;
 }
 
 .tea-icon {
-    height: 49px; 
-    margin-top: -0.4em;
+  height: 49px; 
+  margin-top: -0.4em;
 }
 
 .pet-icon {
-    height: 42px; 
+  height: 42px; 
 }
 
 .schedule-icon {
-    height: 42px; 
-    margin-top: 0.7em;
+  height: 42px; 
+  margin-top: 0.7em;
 }
 
 .reservation-calendar {
@@ -34,7 +52,6 @@
   font-size: 0.9rem;
   padding: 0.4rem;
 }
-
 
 .fade-in {
   opacity: 0;

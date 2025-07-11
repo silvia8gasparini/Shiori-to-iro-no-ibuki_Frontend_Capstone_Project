@@ -37,7 +37,7 @@ export default function ColorDetails() {
     <div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
       <CustomNavbar />
 
-      <Container fluid className="color-section px-0 mt-4">
+      <Container fluid className="color-section px-0 mt-1">
         <Row className="g-0 w-100 h-100">
           <Col md={6} className="color-image-col d-flex justify-content-center">
             <img

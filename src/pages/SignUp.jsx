@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, Row, Col, Card } from "react-bootstrap";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
+import "../assets/user.css";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -12,10 +13,7 @@ export default function SignUp() {
     surname: "",
     email: "",
     password: "",
-    avatarUrl: "",
   });
-
-  const [imageFile, setImageFile] = useState(null); // serve questo!
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -24,43 +22,12 @@ export default function SignUp() {
     }));
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImageFile(file);
-    }
-  };
-
-  const uploadImageToCloudinary = async (file) => {
-    const form = new FormData();
-    form.append("file", file);
-    form.append("upload_preset", "sg_default");
-
-    const response = await fetch(
-      "https://api.cloudinary.com/v1_1/dqyys0epr/image/upload",
-      {
-        method: "POST",
-        body: form,
-      }
-    );
-
-    const data = await response.json();
-    return data.secure_url;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      let avatarUrl = "";
-
-      if (imageFile) {
-        avatarUrl = await uploadImageToCloudinary(imageFile);
-      }
-
       const userData = {
         ...formData,
-        avatarUrl, // aggiunge solo se presente
       };
 
       const response = await fetch("http://localhost:8080/auth/register", {
@@ -90,14 +57,14 @@ export default function SignUp() {
             <Card className="shadow">
               <Card.Body>
                 <div className="d-flex justify-content-center gap-3">
-                  <h3 className="mb-4 text-center">Registrazione</h3>
+                  <h3 className="mb-4 text-center fs-2">Registrazione</h3>
                   <img
                     src="/img/user-icons/writing.png"
                     alt="writing"
                     style={{ height: "36px" }}
                   />
                 </div>
-                <Form onSubmit={handleSubmit} className="fs-5">
+                <Form onSubmit={handleSubmit} className="custom-form fs-5">
                   <Form.Group className="mb-3">
                     <Form.Label>Nome</Form.Label>
                     <Form.Control
@@ -142,28 +109,12 @@ export default function SignUp() {
                     />
                   </Form.Group>
 
-                  <Form.Group className="mb-3">
-                    <Form.Label>Carica avatar (opzionale)</Form.Label>
-                    <Form.Control
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileChange}
-                    />
-                  </Form.Group>
-
-                  {imageFile && (
-                    <div className="text-center mb-3">
-                      <img
-                        src={URL.createObjectURL(imageFile)}
-                        alt="Anteprima avatar"
-                        className="rounded-circle"
-                        width={100}
-                      />
-                    </div>
-                  )}
-
                   <div className="d-grid">
-                    <Button variant="outline-dark" type="submit">
+                    <Button
+                      className="custom-button fs-5"
+                      variant="outline-dark"
+                      type="submit"
+                    >
                       Registrati
                     </Button>
                   </div>

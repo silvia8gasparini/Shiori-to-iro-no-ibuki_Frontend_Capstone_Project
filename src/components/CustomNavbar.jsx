@@ -204,9 +204,17 @@ const CustomNavbar = () => {
               {user ? (
                 <NavDropdown
                   title={
-                    <span className="hello-user d-flex align-items-center gap-2">
-                      おはよう, {user.name}-san!
-                    </span>
+                    <div className="d-flex align-items-center justify-content-center gap-2">
+                      <span className="hello-user d-flex align-items-center gap-2">
+                        Ciao, {user.name}!
+                      </span>
+                      <img
+                        src="/public/img/navbar-icons/bamboo.png"
+                        alt="bamboo"
+                        height="35"
+                        style={{ filter: "grayscale(50%)" }}
+                      />
+                    </div>
                   }
                   className="custom-dropdown"
                 >
