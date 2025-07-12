@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../redux/userSlice";
 import {
   Container,
   Form,
@@ -12,6 +11,8 @@ import {
   Toast,
   ToastContainer,
 } from "react-bootstrap";
+import { loginSuccess, setCartItems } from "../redux/userSlice";
+import { syncCartToBackend } from "../redux/cartActions";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
 
@@ -55,6 +56,16 @@ export default function Login() {
           const userData = await userResponse.json();
           localStorage.setItem("userData", JSON.stringify(userData));
           dispatch(loginSuccess(userData));
+
+          // 🔄 Ripristina articoli del carrello dal localStorage (non loggato)
+          const storedCart = localStorage.getItem("cartItems");
+          if (storedCart) {
+            dispatch(setCartItems(JSON.parse(storedCart)));
+          }
+
+          // 🔄 Sincronizza il carrello con il backend
+          dispatch(syncCartToBackend());
+
           setShowToast(true);
           setTimeout(() => navigate("/"), 2500);
         } else {
@@ -125,6 +136,7 @@ export default function Login() {
           </Col>
         </Row>
       </Container>
+
       <ToastContainer
         className="position-fixed top-50 start-50 translate-middle p-3"
         style={{ zIndex: 1055 }}
@@ -151,6 +163,7 @@ export default function Login() {
           </Toast.Body>
         </Toast>
       </ToastContainer>
+
       <CustomFooter />
     </div>
   );

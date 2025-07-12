@@ -3,20 +3,29 @@ import currentMicroSeasonReducer from "./currentMicroSeasonSlice";
 import nextMicroSeasonsReducer from "./nextMicroSeasonsSlice";
 import selectedColorReducer from "./selectedColorSlice";
 import booksReducer from "./booksSlice";
-import favoritesReducer from "./favoritesSlice";
 import userReducer from "./userSlice";
-import cartReducer from "./cartSlice";
+import cartReducer from "./Cartslice";
+import { loadCartState, saveCartState } from "./cartStorage";
+
+const persistedCart = loadCartState();
 
 const store = configureStore({
   reducer: {
     currentMicroSeason: currentMicroSeasonReducer,
     nextMicroSeasons: nextMicroSeasonsReducer,
     selectedColor: selectedColorReducer,
-    books: booksReducer, 
-    favorites: favoritesReducer,
-    user: userReducer,
+    books: booksReducer,
+    user: userReducer,     
     cart: cartReducer,
   },
+  preloadedState: {
+    cart: persistedCart || { items: [] },
+  },
+});
+
+store.subscribe(() => {
+  const state = store.getState();
+  saveCartState(state.cart);
 });
 
 export default store;

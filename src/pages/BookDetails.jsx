@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookById } from "../redux/booksSlice";
-import { toggleFavorite } from "../redux/favoritesSlice";
+import { toggleFavorite } from "../redux/userActions";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Heart, HeartFill } from "react-bootstrap-icons";
 import CustomNavbar from "../components/CustomNavbar";
@@ -12,24 +12,26 @@ import "../assets/bookdetails.css";
 export default function BookDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
+
   const {
     data: book,
     loading,
     error,
   } = useSelector((state) => state.books.bookDetails);
-  const favorites = useSelector((state) => state.favorites.items);
-  const isFavorite = book && favorites.includes(book.id);
+  const favorites = useSelector((state) => state.user.favorites);
 
   useEffect(() => {
     dispatch(fetchBookById(id));
   }, [dispatch, id]);
 
-  const handleBuy = () => {
-    console.log("Acquisto libro:", book.title);
-  };
+  const isFavorite = book ? favorites.some((fav) => fav.id === book.id) : false;
 
   const handleFavoriteClick = () => {
-    dispatch(toggleFavorite(book.id));
+    if (book) {
+      dispatch(
+        toggleFavorite({ id: book.id, title: book.title, author: book.author })
+      );
+    }
   };
 
   if (loading) return <p>Caricamento in corso…</p>;
@@ -85,7 +87,7 @@ export default function BookDetails() {
               <Button
                 className="details-button"
                 variant="success"
-                onClick={handleBuy}
+                onClick={() => console.log("Acquisto libro:", book.title)}
               >
                 Acquista
               </Button>
@@ -94,7 +96,8 @@ export default function BookDetails() {
                 variant={isFavorite ? "danger" : "outline-danger"}
                 onClick={handleFavoriteClick}
               >
-                {isFavorite ? <HeartFill /> : <Heart />} Preferiti
+                {isFavorite ? <HeartFill /> : <Heart />}{" "}
+                {isFavorite ? "Rimuovi preferiti" : "Aggiungi preferiti"}
               </Button>
             </div>
           </Col>

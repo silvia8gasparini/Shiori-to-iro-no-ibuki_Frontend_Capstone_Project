@@ -10,7 +10,7 @@ import UserPage from "./pages/UserPage";
 import UserProfile from "./pages/UserProfile";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "./redux/userSlice";
+import { loginSuccess, setFavorites, setCartItems } from "./redux/userSlice";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -20,9 +20,17 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
     const storedUser = localStorage.getItem("userData");
+    const storedFavorites = localStorage.getItem("favorites");
+    const storedCartItems = localStorage.getItem("cartItems");
 
     if (token && storedUser) {
       dispatch(loginSuccess(JSON.parse(storedUser)));
+    }
+    if (storedFavorites) {
+      dispatch(setFavorites(JSON.parse(storedFavorites)));
+    }
+    if (storedCartItems) {
+      dispatch(setCartItems(JSON.parse(storedCartItems)));
     }
   }, []);
 

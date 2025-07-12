@@ -9,6 +9,10 @@ export default defineConfig({
       '/colors': 'http://localhost:8080',
       '/books': 'http://localhost:8080',
       '/microseasons': 'http://localhost:8080',
+      '/cart-items': "http://localhost:8080",
+      '/digital-cards': "http://localhost:8080",
+      '/reservations': "http://localhost:8080",
+      '/favorites': "http://localhost:8080",
     }
   }
 })

@@ -14,7 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/userSlice";
-import { removeFromCart } from "../redux/cartSlice";
+import { removeFromCart } from "../redux/Cartslice";
 import "../assets/user.css";
 
 const CustomNavbar = () => {
@@ -194,14 +194,25 @@ const CustomNavbar = () => {
                     <NavDropdown.Divider />
                     <div className="px-3 py-2">
                       <strong>Totale: {totalPrice.toFixed(2)} €</strong>
-                      <Button
-                        variant="outline-dark"
-                        size="sm"
-                        className="w-100 mt-2"
-                        onClick={() => navigate("/checkout")}
-                      >
-                        Accedi e paga
-                      </Button>
+                      {user ? (
+                        <Button
+                          variant="outline-dark"
+                          size="sm"
+                          className="w-100 mt-2"
+                          onClick={() => navigate("/checkout")}
+                        >
+                          Paga
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="outline-dark"
+                          size="sm"
+                          className="w-100 mt-2"
+                          onClick={() => navigate("/login")}
+                        >
+                          Accedi e paga
+                        </Button>
+                      )}
                     </div>
                   </>
                 )}
