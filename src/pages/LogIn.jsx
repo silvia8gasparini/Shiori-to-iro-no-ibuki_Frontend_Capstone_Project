@@ -74,11 +74,18 @@ export default function Login() {
       <CustomNavbar />
       <Container className="mt-5">
         <Row className="justify-content-center">
-          <Col md={6}>
+          <Col md={5}>
             <Card className="shadow">
               <Card.Body>
-                <h3 className="text-center mb-4">Login</h3>
-                <Form onSubmit={handleLogin} className="fs-5">
+                <div className="d-flex justify-content-center gap-2">
+                  <h3 className="text-center mb-4 fs-2">Login</h3>
+                  <img
+                    src="/img/user-icons/login.png"
+                    alt="login"
+                    style={{ height: "38px" }}
+                  />
+                </div>
+                <Form onSubmit={handleLogin} className="login-form fs-5">
                   <Form.Group className="mb-3">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
@@ -104,7 +111,11 @@ export default function Login() {
                   </Form.Group>
 
                   <div className="d-grid">
-                    <Button type="submit" variant="outline-dark">
+                    <Button
+                      className="fs-4"
+                      type="submit"
+                      variant="outline-dark"
+                    >
                       Accedi
                     </Button>
                   </div>

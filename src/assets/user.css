@@ -35,3 +35,7 @@
 .card {
    background-color: rgb(245,242,241) !important;
 }
+
+.login-form input {
+  font-family:  "Hina Mincho", serif;
+}

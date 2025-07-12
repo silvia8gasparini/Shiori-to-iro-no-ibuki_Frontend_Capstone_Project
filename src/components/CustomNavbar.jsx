@@ -7,6 +7,8 @@ import {
   NavDropdown,
   Form,
   Button,
+  Toast,
+  ToastContainer,
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -16,14 +18,14 @@ import { removeFromCart } from "../redux/cartSlice";
 import "../assets/user.css";
 
 const CustomNavbar = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const user = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
-
   const totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0);
+  const [showToast, setShowToast] = useState(false);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -37,7 +39,10 @@ const CustomNavbar = () => {
     localStorage.removeItem("jwtToken");
     localStorage.removeItem("userData");
     dispatch(logout());
-    navigate("/");
+    setShowToast(true);
+    setTimeout(() => {
+      navigate("/");
+    }, 2500);
   };
 
   return (
@@ -247,6 +252,30 @@ const CustomNavbar = () => {
           </Row>
         </Navbar.Collapse>
       </Container>
+      <ToastContainer
+        className="position-fixed top-50 start-50 translate-middle p-3"
+        style={{ zIndex: 1055 }}
+      >
+        <Toast
+          onClose={() => setShowToast(false)}
+          show={showToast}
+          delay={2500}
+          autohide
+          bg="white"
+          className="text-center"
+        >
+          <Toast.Header closeButton={false}>
+            <div className="text-center fw-bold mx-2 fs-3">Sayōnara!</div>
+          </Toast.Header>
+          <Toast.Body>
+            <img
+              src="/public/img/neko-thor1.png"
+              alt="fat-cat"
+              style={{ width: "320px" }}
+            />
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
     </Navbar>
   );
 };
