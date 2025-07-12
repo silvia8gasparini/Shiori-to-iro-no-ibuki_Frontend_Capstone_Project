@@ -2,7 +2,9 @@ import {
   setCartItems,
   setReservations,
   setFavorites,
+  logout
 } from "./userSlice";
+import { clearCart } from "./Cartslice";
 
 const authFetch = (url, options = {}) => {
   const token = localStorage.getItem("jwtToken");
@@ -16,10 +18,9 @@ const authFetch = (url, options = {}) => {
   });
 };
 
-// Tessera digitale
-export const fetchDigitalCard = (userId) => async (dispatch) => {
+export const fetchDigitalCard = () => async (dispatch) => {
   try {
-    const res = await authFetch(`http://localhost:8080/digital-cards/by-user/${userId}`);
+    const res = await authFetch(`http://localhost:8080/digital-cards/me`);
     if (!res.ok) throw new Error("Errore nel recupero tessera digitale");
     const data = await res.json();
     dispatch({ type: "SET_DIGITAL_CARD", payload: data });
@@ -28,46 +29,71 @@ export const fetchDigitalCard = (userId) => async (dispatch) => {
   }
 };
 
-// Prenotazioni
-export const fetchReservations = (userId) => async (dispatch) => {
+export const fetchReservations = () => async (dispatch, getState) => {
+  const userId = getState().user.user?.id;
   try {
-    const res = await authFetch(`http://localhost:8080/reservations/user/${userId}`);
+    const res = await authFetch(`http://localhost:8080/reservations/me`);
     if (!res.ok) throw new Error("Errore nel recupero delle prenotazioni");
     const data = await res.json();
-    dispatch(setReservations(data));
+    dispatch(setReservations(data.content));
+
+    if (userId) {
+      localStorage.setItem(`reservations_${userId}`, JSON.stringify(data.content));
+    }
   } catch (error) {
     console.error("Reservations fetch error:", error);
+
+    if (userId) {
+      const localData = localStorage.getItem(`reservations_${userId}`);
+      if (localData) {
+        dispatch(setReservations(JSON.parse(localData)));
+      }
+    }
   }
 };
 
-// Preferiti da backend
-export const fetchFavorites = (userId) => async (dispatch) => {
+
+export const fetchFavorites = () => async (dispatch, getState) => {
+  const userId = getState().user.user?.id;
   try {
-    const res = await authFetch(`http://localhost:8080/user/${userId}/favorites`);
+    const res = await authFetch(`http://localhost:8080/favorites/me`);
     if (!res.ok) throw new Error("Errore nel recupero dei preferiti");
     const data = await res.json();
     dispatch(setFavorites(data));
-    localStorage.setItem("favorites", JSON.stringify(data));
+    if (userId) {
+      localStorage.setItem(`favorites_${userId}`, JSON.stringify(data));
+    }
   } catch (error) {
     console.error("Favorites fetch error:", error);
+    if (userId) {
+      const localData = localStorage.getItem(`favorites_${userId}`);
+      if (localData) {
+        dispatch(setFavorites(JSON.parse(localData)));
+      } else {
+        dispatch(setFavorites([]));
+      }
+    } else {
+      dispatch(setFavorites([]));
+    }
   }
 };
 
-// Toggle preferiti in localStorage
+
 export const toggleFavorite = (book) => (dispatch, getState) => {
+  const { user, favorites } = getState().user;
+  if (!user) return;
+
   const { id, title, author } = book;
-  const currentFavorites = getState().user.favorites || [];
-  const exists = currentFavorites.find((b) => b.id === id);
+  const exists = favorites.find((b) => b.id === id);
+  const updated = exists
+    ? favorites.filter((b) => b.id !== id)
+    : [...favorites, { id, title, author }];
 
-  const updatedFavorites = exists
-    ? currentFavorites.filter((b) => b.id !== id)
-    : [...currentFavorites, { id, title, author }];
-
-  dispatch(setFavorites(updatedFavorites));
-  localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  dispatch(setFavorites(updated));
+  localStorage.setItem(`favorites_${user.id}`, JSON.stringify(updated));
 };
 
-// Aggiungi al carrello
+
 export const addToCart = (bookId, quantity, priceAtSelection) => async () => {
   try {
     const res = await authFetch(`http://localhost:8080/cart-items/book/${bookId}`, {
@@ -82,22 +108,26 @@ export const addToCart = (bookId, quantity, priceAtSelection) => async () => {
   }
 };
 
-// Recupera articoli del carrello
-export const fetchCartItems = () => async (dispatch) => {
+export const fetchCartItems = () => async (dispatch, getState) => {
+  const userId = getState().user.user?.id;
+  if (!userId) return;
+
   try {
     const res = await authFetch("http://localhost:8080/cart-items/me");
-    const text = await res.text();
     if (!res.ok) throw new Error("Errore nel recupero degli articoli del carrello");
-
-    const data = JSON.parse(text);
+    const data = await res.json();
     dispatch(setCartItems(data.content));
-    localStorage.setItem("cartItems", JSON.stringify(data.content));
+    localStorage.setItem(`cartItems_${userId}`, JSON.stringify(data.content));
   } catch (error) {
     console.error("Fetch cart items error:", error);
+
+    const localData = localStorage.getItem(`cartItems_${userId}`);
+    if (localData) {
+      dispatch(setCartItems(JSON.parse(localData)));
+    }
   }
 };
 
-// Aggiorna un cartItem
 export const updateCartItem = (id, quantity, priceAtSelection) => async () => {
   try {
     const res = await authFetch(`http://localhost:8080/cart-items/${id}`, {
@@ -112,7 +142,6 @@ export const updateCartItem = (id, quantity, priceAtSelection) => async () => {
   }
 };
 
-// Rimuovi un cartItem
 export const deleteCartItem = (id) => async () => {
   try {
     const res = await authFetch(`http://localhost:8080/cart-items/${id}`, {
@@ -123,4 +152,10 @@ export const deleteCartItem = (id) => async () => {
   } catch (error) {
     console.error("Delete cart item error:", error);
   }
+};
+
+
+export const performLogout = () => (dispatch) => {
+   dispatch(clearCart());
+  dispatch(logout());
 };

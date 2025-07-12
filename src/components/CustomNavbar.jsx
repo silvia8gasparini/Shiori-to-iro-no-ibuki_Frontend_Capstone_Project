@@ -13,7 +13,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../redux/userSlice";
+import { performLogout } from "../redux/userActions";
 import { removeFromCart } from "../redux/Cartslice";
 import "../assets/user.css";
 
@@ -36,9 +36,7 @@ const CustomNavbar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("jwtToken");
-    localStorage.removeItem("userData");
-    dispatch(logout());
+    dispatch(performLogout());
     setShowToast(true);
     setTimeout(() => {
       navigate("/");
@@ -235,7 +233,7 @@ const CustomNavbar = () => {
                   className="custom-dropdown-user"
                 >
                   <NavDropdown.Item as={Link} to="/user/page">
-                    Pagina utente
+                    Spazio Personale
                   </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/user/profile">
                     Modifica Profilo

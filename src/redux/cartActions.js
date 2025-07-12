@@ -28,6 +28,12 @@ export const syncCartToBackend = () => async (dispatch, getState) => {
 
     dispatch(setCartItems(data.content));
     dispatch(clearCart());
+localStorage.removeItem("cartItems");
+const userId = user?.user?.id;
+if (userId) {
+  localStorage.removeItem(`cartItems_${userId}`);
+}
+
   } catch (error) {
     console.error("Errore durante la sincronizzazione del carrello:", error);
   }

@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem("userData")) || null,
   cart: [],
-  cartItems: [],
+  cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
   reservations: [],
-  favorites: [],
+  favorites: JSON.parse(localStorage.getItem("favorites")) || [],
 };
 
 const userSlice = createSlice({
@@ -16,26 +16,48 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     logout: (state) => {
+      const userId = state.user?.id;
+
       state.user = null;
       state.cart = [];
+      state.cartItems = [];
       state.reservations = [];
       state.favorites = [];
+
+      if (userId) {
+        localStorage.removeItem(`cartItems_${userId}`);
+        localStorage.removeItem(`favorites_${userId}`);
+        localStorage.removeItem(`reservations_${userId}`);
+      }
+
+      localStorage.removeItem("jwtToken");
+      localStorage.removeItem("userData");
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("cart");
     },
     setCart: (state, action) => {
       state.cart = action.payload;
-       localStorage.setItem("cart", JSON.stringify(action.payload));
     },
     setCartItems: (state, action) => {
       state.cartItems = action.payload;
-      localStorage.setItem("cartItems", JSON.stringify(action.payload));
+      const userId = state.user?.id;
+      if (userId) {
+        localStorage.setItem(`cartItems_${userId}`, JSON.stringify(action.payload));
+      }
     },
     setReservations: (state, action) => {
       state.reservations = action.payload;
-      localStorage.setItem("reservations", JSON.stringify(action.payload));
+      const userId = state.user?.id;
+      if (userId) {
+        localStorage.setItem(`reservations_${userId}`, JSON.stringify(action.payload));
+      }
     },
     setFavorites: (state, action) => {
       state.favorites = action.payload;
-      localStorage.setItem("favorites", JSON.stringify(action.payload));
+      const userId = state.user?.id;
+      if (userId) {
+        localStorage.setItem(`favorites_${userId}`, JSON.stringify(action.payload));
+      }
     },
   },
 });

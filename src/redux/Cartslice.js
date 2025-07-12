@@ -23,7 +23,9 @@ const cartSlice = createSlice({
         });
       }
 
-      localStorage.setItem("cartItems", JSON.stringify(state.items));
+      const user = JSON.parse(localStorage.getItem("userData"));
+const key = user ? `cartItems_${user.id}` : "cartItems";
+localStorage.setItem(key, JSON.stringify(state.items));
     },
 
     removeFromCart: (state, action) => {
@@ -38,7 +40,9 @@ const cartSlice = createSlice({
         }
       }
 
-      localStorage.setItem("cartItems", JSON.stringify(state.items));
+      const user = JSON.parse(localStorage.getItem("userData"));
+const key = user ? `cartItems_${user.id}` : "cartItems";
+localStorage.setItem(key, JSON.stringify(state.items));
     },
 
     clearCart: (state) => {

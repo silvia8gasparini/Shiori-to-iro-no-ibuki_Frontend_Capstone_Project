@@ -56,12 +56,24 @@
 }
 
 .list-group strong {
- font-family:  "Hina Mincho", serif;
-  font-size: 1.1rem;
+  font-family:  "Hina Mincho", serif;
+  font-size: 1rem;
   font-weight: bold;
 }
 
 .bin-icon {
   margin-top: -0.3rem;
+  cursor: pointer;
 }
 
+.total {
+ font-family:  "Hina Mincho", serif;
+}
+
+.total button {
+  font-size: 1.3rem;
+}
+
+.item-title {
+  font-weight: bold;
+}
