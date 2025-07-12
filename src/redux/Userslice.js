@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: JSON.parse(localStorage.getItem("userData")) || null,
+  user: null,
   cart: [],
-  cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
+  cartItems: [],
   reservations: [],
-  favorites: JSON.parse(localStorage.getItem("favorites")) || [],
+  favorites: [],
 };
 
 const userSlice = createSlice({
@@ -16,19 +16,13 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     logout: (state) => {
-      const userId = state.user?.id;
+     
 
       state.user = null;
       state.cart = [];
       state.cartItems = [];
       state.reservations = [];
       state.favorites = [];
-
-      if (userId) {
-        localStorage.removeItem(`cartItems_${userId}`);
-        localStorage.removeItem(`favorites_${userId}`);
-        localStorage.removeItem(`reservations_${userId}`);
-      }
 
       localStorage.removeItem("jwtToken");
       localStorage.removeItem("userData");

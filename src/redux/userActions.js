@@ -52,16 +52,25 @@ export const fetchReservations = () => async (dispatch, getState) => {
   }
 };
 
-
 export const fetchFavorites = () => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
   try {
     const res = await authFetch(`http://localhost:8080/favorites/me`);
     if (!res.ok) throw new Error("Errore nel recupero dei preferiti");
     const data = await res.json();
-    dispatch(setFavorites(data));
-    if (userId) {
-      localStorage.setItem(`favorites_${userId}`, JSON.stringify(data));
+
+    if (Array.isArray(data) && data.length > 0) {
+      dispatch(setFavorites(data));
+      if (userId) {
+        localStorage.setItem(`favorites_${userId}`, JSON.stringify(data));
+      }
+    } else {
+      const localData = localStorage.getItem(`favorites_${userId}`);
+      if (localData) {
+        dispatch(setFavorites(JSON.parse(localData)));
+      } else {
+        dispatch(setFavorites([]));
+      }
     }
   } catch (error) {
     console.error("Favorites fetch error:", error);
@@ -77,6 +86,7 @@ export const fetchFavorites = () => async (dispatch, getState) => {
     }
   }
 };
+
 
 
 export const toggleFavorite = (book) => (dispatch, getState) => {

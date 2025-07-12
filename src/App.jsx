@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import Homepage from "./pages/Homepage";
 import ColorDetails from "./pages/ColorDetails";
 import BookDetails from "./pages/BookDetails";
@@ -9,8 +11,6 @@ import Login from "./pages/LogIn";
 import UserPage from "./pages/UserPage";
 import UserProfile from "./pages/UserProfile";
 
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { loginSuccess, setFavorites, setCartItems } from "./redux/userSlice";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -21,19 +21,29 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
     const storedUser = localStorage.getItem("userData");
-    const storedFavorites = localStorage.getItem("favorites");
-    const storedCartItems = localStorage.getItem("cartItems");
 
     if (token && storedUser) {
-      dispatch(loginSuccess(JSON.parse(storedUser)));
+      const parsedUser = JSON.parse(storedUser);
+      dispatch(loginSuccess(parsedUser));
+
+      const storedFavorites = localStorage.getItem(
+        `favorites_${parsedUser.id}`
+      );
+      if (storedFavorites) {
+        dispatch(setFavorites(JSON.parse(storedFavorites)));
+      }
+
+      const storedCartItems = localStorage.getItem(
+        `cartItems_${parsedUser.id}`
+      );
+      if (storedCartItems) {
+        dispatch(setCartItems(JSON.parse(storedCartItems)));
+      }
+
+      localStorage.removeItem("favorites");
+      localStorage.removeItem("cartItems");
     }
-    if (storedFavorites) {
-      dispatch(setFavorites(JSON.parse(storedFavorites)));
-    }
-    if (storedCartItems) {
-      dispatch(setCartItems(JSON.parse(storedCartItems)));
-    }
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
