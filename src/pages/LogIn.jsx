@@ -57,13 +57,11 @@ export default function Login() {
           localStorage.setItem("userData", JSON.stringify(userData));
           dispatch(loginSuccess(userData));
 
-          // 🔄 Ripristina articoli del carrello dal localStorage (non loggato)
           const storedCart = localStorage.getItem("cartItems");
           if (storedCart) {
             dispatch(setCartItems(JSON.parse(storedCart)));
           }
 
-          // 🔄 Sincronizza il carrello con il backend
           dispatch(syncCartToBackend());
 
           setShowToast(true);
@@ -150,7 +148,7 @@ export default function Login() {
           className="text-center"
         >
           <Toast.Header closeButton={false}>
-            <div className="text-center fw-bold mx-2 fs-4">
+            <div className="text-dark text-center fw-bold mx-2 fs-4">
               Yatta! Login effettuato con successo!
             </div>
           </Toast.Header>

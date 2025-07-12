@@ -17,6 +17,15 @@
   font-family: "Hina Mincho";
 }
 
+.custom-dropdown-user .dropdown-menu {
+  min-width: 50px !important;
+  font-family: "Hina Mincho";
+}
+
+.custom-dropdown-user {
+  margin-top: 0.2rem;
+}
+
 .cart-badge {
   font-family: "Hina Mincho", serif;
 }
@@ -39,3 +48,20 @@
 .login-form input {
   font-family:  "Hina Mincho", serif;
 }
+
+.list-group, .list-group-item {
+  font-family:  "Hina Mincho", serif;
+  font-size: 1rem;
+  background-color:  rgb(249, 244, 242) !important;
+}
+
+.list-group strong {
+ font-family:  "Hina Mincho", serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.bin-icon {
+  margin-top: -0.3rem;
+}
+

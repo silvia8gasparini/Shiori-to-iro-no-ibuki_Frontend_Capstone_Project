@@ -1,18 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   fetchReservations,
   fetchFavorites,
   toggleFavorite,
 } from "../redux/userActions";
-import { Container, Row, Col, Card, ListGroup, Badge } from "react-bootstrap";
+import { Container, Row, Col, Card, ListGroup, Button } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
 import { removeFromCart } from "../redux/Cartslice";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
+import "../assets/user.css";
 
 const UserPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const cartItems = useSelector((state) => state.cart.items);
   const reservations = useSelector((state) => state.user.reservations);
@@ -48,7 +51,7 @@ const UserPage = () => {
                   {cartItems.length === 0 ? (
                     <p className="text-muted">Il carrello è vuoto</p>
                   ) : (
-                    <ListGroup variant="flush">
+                    <ListGroup>
                       {cartItems.map((item) => (
                         <ListGroup.Item
                           key={item.id}
@@ -77,9 +80,8 @@ const UserPage = () => {
                               <img
                                 src="/img/navbar-icons/bin.png"
                                 alt="Rimuovi"
-                                width="16"
-                                height="16"
-                                style={{ filter: "grayscale(50%)" }}
+                                height="20"
+                                className="ms-2"
                               />
                             </button>
                           </div>
@@ -87,6 +89,24 @@ const UserPage = () => {
                       ))}
                     </ListGroup>
                   )}
+                  <div className="px-3 py-2">
+                    Totale:{" "}
+                    {cartItems
+                      .reduce(
+                        (sum, item) => sum + item.price * item.quantity,
+                        0
+                      )
+                      .toFixed(2)}{" "}
+                    €
+                    <Button
+                      variant="outline-dark"
+                      size="sm"
+                      className="w-100 mt-2 fs-5"
+                      onClick={() => navigate("/checkout")}
+                    >
+                      Paga
+                    </Button>
+                  </div>
                 </Card.Body>
               </Card>
             </Col>
@@ -99,7 +119,7 @@ const UserPage = () => {
                   {reservations.length === 0 ? (
                     <p className="text-muted">Nessuna prenotazione attiva</p>
                   ) : (
-                    <ListGroup variant="flush">
+                    <ListGroup>
                       {reservations.map((res) => (
                         <ListGroup.Item key={res.id}>
                           Zona: <strong>{res.zone.name}</strong> – {res.date} (
@@ -115,27 +135,30 @@ const UserPage = () => {
             {/* Preferiti */}
             <Col xs={12} md={4} lg={4}>
               <Card className="user-card">
-                <Card.Img variant="top" src="/public/img/user/favorites.png" />
+                <Card.Img variant="top" src="/public/img/user/fav.png" />
                 <Card.Body>
                   {favorites.length === 0 ? (
                     <p className="text-muted">Nessun preferito</p>
                   ) : (
-                    <ListGroup variant="flush">
+                    <ListGroup>
                       {favorites.map((book) => (
                         <ListGroup.Item
                           key={book.id}
                           className="d-flex justify-content-between align-items-center"
                         >
-                          <div>
-                            <strong>{book.title}</strong>{" "}
-                            <span className="text-muted">— {book.author}</span>
+                          <div className="d-flex align-items-center justify-content-between w-100">
+                            <div>
+                              <strong>{book.title}</strong>{" "}
+                              <span>- {book.author}</span>
+                              <img
+                                src="/img/navbar-icons/bin.png"
+                                alt="Rimuovi"
+                                height="22"
+                                className="bin-icon ms-2"
+                                onClick={() => dispatch(toggleFavorite(book))}
+                              />
+                            </div>
                           </div>
-                          <Trash
-                            role="button"
-                            size={18}
-                            color="red"
-                            onClick={() => dispatch(toggleFavorite(book))}
-                          />
                         </ListGroup.Item>
                       ))}
                     </ListGroup>

@@ -232,7 +232,7 @@ const CustomNavbar = () => {
                       />
                     </div>
                   }
-                  className="custom-dropdown"
+                  className="custom-dropdown-user"
                 >
                   <NavDropdown.Item as={Link} to="/user/page">
                     Pagina utente
@@ -281,7 +281,7 @@ const CustomNavbar = () => {
           <Toast.Body>
             <img
               src="/public/img/neko-thor1.png"
-              alt="fat-cat"
+              alt="neko-thor"
               style={{ width: "320px" }}
             />
           </Toast.Body>
