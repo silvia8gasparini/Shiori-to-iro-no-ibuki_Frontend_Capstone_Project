@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookById } from "../redux/booksSlice";
-import { toggleFavorite } from "../redux/userActions";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Heart, HeartFill } from "react-bootstrap-icons";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
+import { addToCart } from "../redux/Cartslice";
+import { fetchUserCart } from "../redux/cartActions";
+import { addFavorite, removeFavorite } from "../redux/userActions";
 import "../assets/bookdetails.css";
 
 export default function BookDetails() {
@@ -27,10 +29,11 @@ export default function BookDetails() {
   const isFavorite = book ? favorites.some((fav) => fav.id === book.id) : false;
 
   const handleFavoriteClick = () => {
-    if (book) {
-      dispatch(
-        toggleFavorite({ id: book.id, title: book.title, author: book.author })
-      );
+    if (!book) return;
+    if (isFavorite) {
+      dispatch(removeFavorite(book.id));
+    } else {
+      dispatch(addFavorite(book));
     }
   };
 
@@ -87,17 +90,49 @@ export default function BookDetails() {
               <Button
                 className="details-button"
                 variant="success"
-                onClick={() => console.log("Acquisto libro:", book.title)}
+                onClick={async () => {
+                  const user = JSON.parse(localStorage.getItem("userData"));
+                  const token = localStorage.getItem("jwtToken");
+
+                  if (user && token) {
+                    try {
+                      const res = await fetch(
+                        `http://localhost:8080/cart-items/book/${book.id}`,
+                        {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                          },
+                          body: JSON.stringify({
+                            quantity: 1,
+                            priceAtSelection: book.price,
+                          }),
+                        }
+                      );
+
+                      if (!res.ok)
+                        throw new Error("Errore nell'aggiunta al carrello");
+
+                      dispatch(fetchUserCart());
+                    } catch (err) {
+                      console.error("Errore:", err);
+                    }
+                  } else {
+                    dispatch(addToCart(book));
+                  }
+                }}
               >
                 Acquista
               </Button>
+
               <Button
-                className="favorites-button"
+                key={isFavorite ? "fav-yes" : "fav-no"}
                 variant={isFavorite ? "danger" : "outline-danger"}
                 onClick={handleFavoriteClick}
               >
                 {isFavorite ? <HeartFill /> : <Heart />}{" "}
-                {isFavorite ? "Rimuovi preferiti" : "Aggiungi preferiti"}
+                {isFavorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
               </Button>
             </div>
           </Col>

@@ -47,16 +47,47 @@ export const fetchFavorites = () => async (dispatch, getState) => {
   }
 };
 
-export const toggleFavorite = (book) => (dispatch, getState) => {
+export const addFavorite = (book) => async (dispatch, getState) => {
   const { user, favorites } = getState().user;
   if (!user) return;
-  const exists = favorites.find((b) => b.id === book.id);
-  const updated = exists
-    ? favorites.filter((b) => b.id !== book.id)
-    : [...favorites, book];
-  dispatch(setFavorites(updated));
-  localStorage.setItem(`favorites_${user.id}`, JSON.stringify(updated));
+
+  try {
+    const res = await authFetch(`http://localhost:8080/favorites/add/${book.id}`, {
+      method: "POST",
+    });
+    if (!res.ok) throw new Error("Errore nell'aggiunta ai preferiti");
+
+    const updated = [...favorites, book];
+    dispatch(setFavorites(updated));
+    localStorage.setItem(`favorites_${user.id}`, JSON.stringify(updated));
+  } catch (error) {
+    console.error("Errore addFavorite:", error);
+  }
 };
+
+export const removeFavorite = (bookId) => async (dispatch, getState) => {
+  const { user, favorites } = getState().user;
+  if (!user || !bookId) return;
+
+  try {
+    const res = await authFetch(`http://localhost:8080/favorites/remove/${bookId}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) throw new Error("Errore nella rimozione dai preferiti");
+
+    const updated = favorites
+      .filter((b) => b.bookId !== bookId)
+      .map((fav) => ({ ...fav }));
+
+    console.log("Nuovi preferiti dopo rimozione:", updated);
+
+    dispatch(setFavorites(updated));
+    localStorage.setItem(`favorites_${user.id}`, JSON.stringify(updated));
+  } catch (error) {
+    console.error("Errore removeFavorite:", error);
+  }
+};
+
 
 export const fetchCartItems = () => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
@@ -65,37 +96,29 @@ export const fetchCartItems = () => async (dispatch, getState) => {
     const res = await authFetch("http://localhost:8080/cart-items/me");
     if (!res.ok) throw new Error("Errore nel recupero del carrello");
     const data = await res.json();
-    dispatch(setCartItems(data.content));
-    localStorage.setItem(`cartItems_${userId}`, JSON.stringify(data.content));
+
+    const normalized = data.content.map((item) => ({
+      id: item.id,
+      title: item.bookTitle,
+      author: item.bookAuthor,
+      price: item.priceAtSelection,
+      quantity: item.quantity,
+    }));
+
+    dispatch(setCartItems(normalized));
+    localStorage.setItem(`cartItems_${userId}`, JSON.stringify(normalized));
   } catch (error) {
     console.error("Cart fetch error:", error);
     const fallback = localStorage.getItem(`cartItems_${userId}`);
-    if (fallback) dispatch(setCartItems(JSON.parse(fallback)));
-  }
-};
-
-export const syncCartToBackend = () => async (_dispatch, getState) => {
-  const state = getState();
-  const userId = state.user.user?.id;
-  const cartItems = state.user.cartItems;
-  if (!userId || !cartItems?.length) return;
-
-  for (const item of cartItems) {
-    try {
-      const res = await fetch(`http://localhost:8080/cart-items/book/${item.id}`, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,
-  },
-  body: JSON.stringify({
-    quantity: item.quantity,
-    priceAtSelection: item.price,
-  }),
-});
-      if (!res.ok) throw new Error(`Errore per ${item.title}`);
-    } catch (err) {
-      console.error("Errore sincronizzazione carrello:", err);
+    if (fallback) {
+      const parsed = JSON.parse(fallback).map((item) => ({
+        id: item.id,
+        title: item.bookTitle || item.title,
+        author: item.bookAuthor || item.author,
+        price: item.priceAtSelection || item.price,
+        quantity: item.quantity,
+      }));
+      dispatch(setCartItems(parsed));
     }
   }
 };

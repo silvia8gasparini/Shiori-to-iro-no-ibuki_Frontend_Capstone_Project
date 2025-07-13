@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   fetchReservations,
   fetchFavorites,
-  toggleFavorite,
+  removeFavorite,
 } from "../redux/userActions";
 import { Container, Row, Col, Card, ListGroup, Button } from "react-bootstrap";
 import { fetchUserCart } from "../redux/cartActions";
@@ -26,7 +26,7 @@ const UserPage = () => {
       dispatch(fetchFavorites());
     }
   }, [dispatch, user]);
-
+  console.log("Tutti i preferiti:", favorites);
   return (
     <div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
       <CustomNavbar />
@@ -168,7 +168,7 @@ const UserPage = () => {
                     <ListGroup>
                       {favorites.map((book) => (
                         <ListGroup.Item
-                          key={book.id}
+                          key={book.bookId}
                           className="d-flex justify-content-between align-items-center"
                         >
                           <div className="d-flex align-items-center justify-content-between w-100">
@@ -180,7 +180,10 @@ const UserPage = () => {
                                 alt="Rimuovi"
                                 height="20"
                                 className="bin-icon ms-2"
-                                onClick={() => dispatch(toggleFavorite(book))}
+                                onClick={() => {
+                                  console.log("CLICK SU:", book);
+                                  dispatch(removeFavorite(book.bookId));
+                                }}
                               />
                             </div>
                           </div>
