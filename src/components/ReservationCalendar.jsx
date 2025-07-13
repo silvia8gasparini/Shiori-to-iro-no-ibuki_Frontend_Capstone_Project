@@ -21,14 +21,20 @@ const getGiorni = () => {
   return giorni;
 };
 
-const ReservationCalendar = ({ onPrenota }) => {
+const ReservationCalendar = ({ onPrenota, prenotazioni = [] }) => {
   const giorniSettimana = getGiorni();
   const [slotSelezionato, setSlotSelezionato] = useState(null);
+
+  const isSlotOccupato = (date, timeSlot) => {
+    return prenotazioni.some(
+      (r) => r.date === date && r.timeSlot === timeSlot.toUpperCase()
+    );
+  };
 
   const handleSelezione = (giorno, fascia) => {
     const slot = {
       date: giorno.date,
-      timeSlot: fascia.toUpperCase(), // pronto per il BE
+      timeSlot: fascia.toUpperCase(),
     };
     setSlotSelezionato(slot);
     onPrenota(slot);
@@ -58,14 +64,23 @@ const ReservationCalendar = ({ onPrenota }) => {
                 slotSelezionato.date === giorno.date &&
                 slotSelezionato.timeSlot === fascia.toUpperCase();
 
+              const isOccupied = isSlotOccupato(giorno.date, fascia);
+
               return (
                 <td key={giorno.date + fascia}>
                   <Button
-                    variant={isSelected ? "success" : "outline-success"}
+                    variant={
+                      isOccupied
+                        ? "secondary"
+                        : isSelected
+                        ? "success"
+                        : "outline-success"
+                    }
                     size="sm"
+                    disabled={isOccupied}
                     onClick={() => handleSelezione(giorno, fascia)}
                   >
-                    {isSelected ? "✓" : "Libero"}
+                    {isOccupied ? "Occupato" : isSelected ? "✓" : "Libero"}
                   </Button>
                 </td>
               );

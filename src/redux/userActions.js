@@ -1,12 +1,15 @@
 import {
   setReservations,
   setFavorites,
-  logout
+  logout,
+  addReservation,
 } from "./Userslice";
 import { setCartItems } from "./Cartslice";
 
+// Utility per fetch autenticato
 const authFetch = (url, options = {}) => {
   const token = localStorage.getItem("jwtToken");
+   console.log("TOKEN USATO:", token);
   return fetch(url, {
     ...options,
     headers: {
@@ -17,21 +20,78 @@ const authFetch = (url, options = {}) => {
   });
 };
 
+// FETCH prenotazioni utente
 export const fetchReservations = () => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
   try {
     const res = await authFetch(`http://localhost:8080/reservations/me`);
-    if (!res.ok) throw new Error("Errore nel recupero delle prenotazioni");
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("Errore HTTP:", res.status, errorText);
+      throw new Error("Errore nel recupero delle prenotazioni");
+    }
+
     const data = await res.json();
+    if (!data.content) throw new Error("Formato risposta inatteso");
+
     dispatch(setReservations(data.content));
     localStorage.setItem(`reservations_${userId}`, JSON.stringify(data.content));
   } catch (error) {
     console.error("Reservations fetch error:", error);
     const fallback = localStorage.getItem(`reservations_${userId}`);
-    if (fallback) dispatch(setReservations(JSON.parse(fallback)));
+    if (fallback) {
+      dispatch(setReservations(JSON.parse(fallback)));
+    }
   }
 };
 
+// CREA nuova prenotazione
+export const createReservation = (slot, zoneId) => async (dispatch, getState) => {
+  const { user } = getState().user;
+
+  console.log("User al momento della prenotazione:", user);
+
+  if (!user || !user.digitalCard) {
+    console.error("DigitalCard mancante! Impossibile prenotare.");
+    return;
+  }
+
+  const payload = {
+    date: slot.date,
+    timeSlot: slot.timeSlot,
+    userId: user.id,
+    digitalCard: user.digitalCard.cardNumber,
+    digitalCardId: user.digitalCard.id
+  };
+
+  console.log("Payload inviato per prenotazione:", payload);
+  console.log("ID tessera usato:", user.digitalCard.id);
+
+  try {
+    const res = await authFetch(
+      `http://localhost:8080/reservations?zoneId=${zoneId}`,
+      {
+        method: "POST",
+        body: JSON.stringify(payload),
+      }
+    );
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`Errore backend: ${res.status} - ${errText}`);
+    }
+
+    const newReservation = await res.json();
+    dispatch(addReservation(newReservation));
+    console.log("Prenotazione salvata con successo:", newReservation);
+  } catch (error) {
+    console.error("Errore creazione prenotazione:", error);
+  }
+};
+
+
+// FETCH preferiti
 export const fetchFavorites = () => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
   try {
@@ -47,6 +107,7 @@ export const fetchFavorites = () => async (dispatch, getState) => {
   }
 };
 
+// AGGIUNGI preferito
 export const addFavorite = (book) => async (dispatch, getState) => {
   const { user, favorites } = getState().user;
   if (!user) return;
@@ -65,6 +126,7 @@ export const addFavorite = (book) => async (dispatch, getState) => {
   }
 };
 
+// RIMUOVI preferito
 export const removeFavorite = (bookId) => async (dispatch, getState) => {
   const { user, favorites } = getState().user;
   if (!user || !bookId) return;
@@ -88,7 +150,7 @@ export const removeFavorite = (bookId) => async (dispatch, getState) => {
   }
 };
 
-
+// FETCH carrello
 export const fetchCartItems = () => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
   if (!userId) return;
@@ -123,6 +185,7 @@ export const fetchCartItems = () => async (dispatch, getState) => {
   }
 };
 
+// LOGOUT
 export const performLogout = () => (dispatch, getState) => {
   const userId = getState().user.user?.id;
   dispatch(logout());

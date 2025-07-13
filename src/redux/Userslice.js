@@ -43,6 +43,16 @@ const userSlice = createSlice({
         localStorage.setItem(`reservations_${userId}`, JSON.stringify(action.payload));
       }
     },
+    addReservation: (state, action) => {
+  state.reservations.push(action.payload);
+  const userId = state.user?.id;
+  if (userId) {
+    localStorage.setItem(
+      `reservations_${userId}`,
+      JSON.stringify(state.reservations)
+    );
+  }
+},
     setFavorites: (state, action) => {
       state.favorites = action.payload;
       const userId = state.user?.id;
@@ -50,6 +60,10 @@ const userSlice = createSlice({
         localStorage.setItem(`favorites_${userId}`, JSON.stringify(action.payload));
       }
     },
+setUser: (state, action) => {
+  state.user = action.payload;
+}
+
   },
 });
 
@@ -60,6 +74,8 @@ export const {
   setCartItems,
   setReservations,
   setFavorites,
+  addReservation,
+  setUser,
 } = userSlice.actions;
 
 export default userSlice.reducer;

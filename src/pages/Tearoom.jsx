@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import ReservationCalendar from "../components/ReservationCalendar";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
+import { createReservation } from "../redux/userActions";
 import "../assets/tearoom.css";
 
 const zone = [
@@ -33,13 +35,40 @@ const zone = [
 ];
 
 const Tearoom = () => {
+  const dispatch = useDispatch();
   const [zonaSelezionata, setZonaSelezionata] = useState(null);
+  const [prenotazioniZona, setPrenotazioniZona] = useState([]);
   const [prenotazione, setPrenotazione] = useState(null);
   const [showConferma, setShowConferma] = useState(false);
 
+  useEffect(() => {
+    if (zonaSelezionata) {
+      const token = localStorage.getItem("jwtToken");
+      fetch(`http://localhost:8080/reservations/by-zone/${zonaSelezionata}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPrenotazioniZona(data);
+        })
+        .catch((err) =>
+          console.error("Errore nel caricamento prenotazioni:", err)
+        );
+    }
+  }, [zonaSelezionata]);
+
   const handlePrenotazione = (slot) => {
     setPrenotazione({ zona: zonaSelezionata, ...slot });
-    console.log("Prenotazione confermata:", zonaSelezionata, slot);
+    dispatch(createReservation(slot, zonaSelezionata)); // ✅ invia al backend
+
+    // aggiorna localmente per bloccare subito lo slot
+    setPrenotazioniZona((prev) => [
+      ...prev,
+      { ...slot, timeSlot: slot.timeSlot.toUpperCase() },
+    ]);
+
     setShowConferma(true);
     setTimeout(() => setShowConferma(false), 3000);
   };
@@ -80,6 +109,7 @@ const Tearoom = () => {
             </Col>
           ))}
         </Row>
+
         <div className="d-flex justify-content-center mt-4 gap-3">
           <h3 className="mb-4 text-center">Tutte le zone sono pet friendly!</h3>
           <img src="/img/tearoom/pet.png" alt="pet" className="pet-icon" />
@@ -92,12 +122,15 @@ const Tearoom = () => {
                 src="/img/tearoom/schedule.png"
                 alt="schedule"
                 className="schedule-icon"
-              />{" "}
+              />
               <h3 className="mt-3 text-center">
                 Prenota giorno e fascia oraria
               </h3>
             </div>
-            <ReservationCalendar onPrenota={handlePrenotazione} />
+            <ReservationCalendar
+              onPrenota={handlePrenotazione}
+              prenotazioni={prenotazioniZona}
+            />
           </>
         )}
 

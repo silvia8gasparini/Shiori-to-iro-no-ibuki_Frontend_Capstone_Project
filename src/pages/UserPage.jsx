@@ -146,7 +146,8 @@ const UserPage = () => {
                 <Card.Body>
                   {user && user.digitalCard && (
                     <p className="digital-card text-muted mb-3">
-                      Tessera digitale n° <strong>{user.digitalCard}</strong>
+                      Tessera digitale n°{" "}
+                      <strong>{user.digitalCard.cardNumber}</strong>
                     </p>
                   )}
                   {reservations.length === 0 ? (
@@ -155,8 +156,8 @@ const UserPage = () => {
                     <ListGroup>
                       {reservations.map((res) => (
                         <ListGroup.Item key={res.id}>
-                          Zona: <strong>{res.zone.name}</strong> – {res.date} (
-                          {res.timeSlot})
+                          <strong>{res.tearoomZone?.name}</strong> – {res.date}{" "}
+                          ({res.timeSlot.toLowerCase()})
                         </ListGroup.Item>
                       ))}
                     </ListGroup>
