@@ -7,7 +7,7 @@ import {
   toggleFavorite,
 } from "../redux/userActions";
 import { Container, Row, Col, Card, ListGroup, Button } from "react-bootstrap";
-import { removeFromCart } from "../redux/Cartslice";
+import { fetchUserCart } from "../redux/cartActions";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
 import "../assets/user.css";
@@ -32,7 +32,7 @@ const UserPage = () => {
       <CustomNavbar />
       <Container className="py-5">
         <header className="d-flex align-items-center justify-content-center gap-3 mb-5">
-          <h2>Benvenutə nel tuo spazio personale, {user.name}!</h2>
+          {user && <h2>Benvenutə nel tuo spazio personale, {user.name}!</h2>}{" "}
           <img
             src="/public/img/navbar-icons/kitsune.png"
             alt="kitsune"
@@ -64,7 +64,9 @@ const UserPage = () => {
                               }}
                             >
                               <span>
-                                <b>{item.title}</b>
+                                <b>
+                                  {item.title} - {item.author}
+                                </b>
                                 {item.quantity > 1 && ` ×${item.quantity}`}
                               </span>
                             </div>
@@ -73,9 +75,29 @@ const UserPage = () => {
                                 {(item.price * item.quantity).toFixed(2)} €
                               </span>
                               <button
-                                onClick={() =>
-                                  dispatch(removeFromCart(item.id))
-                                }
+                                onClick={() => {
+                                  const token =
+                                    localStorage.getItem("jwtToken");
+                                  fetch(
+                                    `http://localhost:8080/cart-items/${item.id}`,
+                                    {
+                                      method: "DELETE",
+                                      headers: {
+                                        Authorization: `Bearer ${token}`,
+                                      },
+                                    }
+                                  )
+                                    .then((res) => {
+                                      if (!res.ok)
+                                        throw new Error(
+                                          "Errore nella rimozione"
+                                        );
+                                      dispatch(fetchUserCart());
+                                    })
+                                    .catch((err) =>
+                                      console.error("Errore:", err)
+                                    );
+                                }}
                                 className="btn btn-sm p-0 border-0 bg-transparent d-flex align-items-center"
                                 title="Rimuovi dal carrello"
                               >

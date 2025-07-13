@@ -16,8 +16,6 @@ const userSlice = createSlice({
       state.user = action.payload;
     },
     logout: (state) => {
-     
-
       state.user = null;
       state.cart = [];
       state.cartItems = [];
@@ -27,7 +25,6 @@ const userSlice = createSlice({
       localStorage.removeItem("jwtToken");
       localStorage.removeItem("userData");
       localStorage.removeItem("cartItems");
-      localStorage.removeItem("cart");
     },
     setCart: (state, action) => {
       state.cart = action.payload;

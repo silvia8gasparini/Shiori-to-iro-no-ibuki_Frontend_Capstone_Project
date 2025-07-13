@@ -3,7 +3,7 @@ import currentMicroSeasonReducer from "./currentMicroSeasonSlice";
 import nextMicroSeasonsReducer from "./nextMicroSeasonsSlice";
 import selectedColorReducer from "./selectedColorSlice";
 import booksReducer from "./booksSlice";
-import userReducer from "./userSlice";
+import userReducer from "./Userslice";
 import cartReducer from "./Cartslice";
 import { loadCartState, saveCartState } from "./cartStorage";
 

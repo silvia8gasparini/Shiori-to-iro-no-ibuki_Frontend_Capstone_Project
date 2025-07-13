@@ -11,7 +11,7 @@ import {
   Toast,
   ToastContainer,
 } from "react-bootstrap";
-import { loginSuccess, setCartItems } from "../redux/userSlice";
+import { loginSuccess, setCartItems } from "../redux/Userslice";
 import { syncCartToBackend } from "../redux/cartActions";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
@@ -83,7 +83,7 @@ export default function Login() {
       <CustomNavbar />
       <Container className="mt-5">
         <Row className="justify-content-center">
-          <Col md={5}>
+          <Col md={4}>
             <Card className="shadow">
               <Card.Body>
                 <div className="d-flex justify-content-center gap-2">
@@ -149,7 +149,7 @@ export default function Login() {
         >
           <Toast.Header closeButton={false}>
             <div className="text-dark text-center fw-bold mx-2 fs-4">
-              Yatta! Login effettuato con successo!
+              Konnichiwa!
             </div>
           </Toast.Header>
           <Toast.Body>

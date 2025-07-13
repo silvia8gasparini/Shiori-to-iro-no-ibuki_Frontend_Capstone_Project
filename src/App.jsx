@@ -10,8 +10,13 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/LogIn";
 import UserPage from "./pages/UserPage";
 import UserProfile from "./pages/UserProfile";
-
-import { loginSuccess, setFavorites, setCartItems } from "./redux/userSlice";
+import {
+  fetchCartItems,
+  fetchFavorites,
+  fetchReservations,
+} from "./redux/userActions";
+import { loginSuccess } from "./redux/Userslice";
+import { setCartItems } from "./redux/Cartslice";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -25,23 +30,15 @@ function App() {
     if (token && storedUser) {
       const parsedUser = JSON.parse(storedUser);
       dispatch(loginSuccess(parsedUser));
-
-      const storedFavorites = localStorage.getItem(
-        `favorites_${parsedUser.id}`
-      );
-      if (storedFavorites) {
-        dispatch(setFavorites(JSON.parse(storedFavorites)));
+      dispatch(fetchCartItems());
+      dispatch(fetchFavorites());
+      dispatch(fetchReservations());
+    } else {
+      // GUEST
+      const guestCart = localStorage.getItem("cartItems");
+      if (guestCart) {
+        dispatch(setCartItems(JSON.parse(guestCart)));
       }
-
-      const storedCartItems = localStorage.getItem(
-        `cartItems_${parsedUser.id}`
-      );
-      if (storedCartItems) {
-        dispatch(setCartItems(JSON.parse(storedCartItems)));
-      }
-
-      localStorage.removeItem("favorites");
-      localStorage.removeItem("cartItems");
     }
   }, [dispatch]);
 

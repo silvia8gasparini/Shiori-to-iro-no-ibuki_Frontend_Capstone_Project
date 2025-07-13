@@ -38,7 +38,7 @@
 .custom-form textarea,
 .custom-form select {
   font-family: "Hina Mincho", serif;
-  font-size: 1.3rem; 
+  font-size: 1.1rem; 
 }
 
 .card {
@@ -47,6 +47,7 @@
 
 .login-form input {
   font-family:  "Hina Mincho", serif;
+  font-size: 1.1rem;
 }
 
 .list-group, .list-group-item {

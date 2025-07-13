@@ -1,12 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Form, Button, Row, Col, Card } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  Row,
+  Col,
+  Card,
+  Toast,
+  ToastContainer,
+} from "react-bootstrap";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
 import "../assets/user.css";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [showToast, setShowToast] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -37,8 +47,8 @@ export default function SignUp() {
       });
 
       if (response.ok) {
-        alert("Registrazione completata! Ora puoi fare il login.");
-        navigate("/login");
+        setShowToast(true);
+        setTimeout(() => navigate("/login"), 2500);
       } else {
         const error = await response.text();
         alert("Errore: " + error);
@@ -53,7 +63,7 @@ export default function SignUp() {
       <CustomNavbar />
       <Container className="mt-5">
         <Row className="justify-content-center">
-          <Col md={6}>
+          <Col md={5}>
             <Card className="shadow">
               <Card.Body>
                 <div className="d-flex justify-content-center gap-3">
@@ -64,12 +74,13 @@ export default function SignUp() {
                     style={{ height: "36px" }}
                   />
                 </div>
-                <Form onSubmit={handleSubmit} className="custom-form fs-5">
+                <Form onSubmit={handleSubmit} className="custom-form">
                   <Form.Group className="mb-3">
                     <Form.Label>Nome</Form.Label>
                     <Form.Control
                       type="text"
                       name="name"
+                      placeholder="Inserisci il tuo nome"
                       value={formData.name}
                       onChange={handleChange}
                       required
@@ -81,6 +92,7 @@ export default function SignUp() {
                     <Form.Control
                       type="text"
                       name="surname"
+                      placeholder="Inserisci il tuo cognome"
                       value={formData.surname}
                       onChange={handleChange}
                       required
@@ -92,6 +104,7 @@ export default function SignUp() {
                     <Form.Control
                       type="email"
                       name="email"
+                      placeholder="Inserisci la tua email"
                       value={formData.email}
                       onChange={handleChange}
                       required
@@ -103,6 +116,7 @@ export default function SignUp() {
                     <Form.Control
                       type="password"
                       name="password"
+                      placeholder="Inserisci la tua password"
                       value={formData.password}
                       onChange={handleChange}
                       required
@@ -124,6 +138,33 @@ export default function SignUp() {
           </Col>
         </Row>
       </Container>
+
+      <ToastContainer
+        className="position-fixed top-50 start-50 translate-middle p-3"
+        style={{ zIndex: 1055 }}
+      >
+        <Toast
+          onClose={() => setShowToast(false)}
+          show={showToast}
+          delay={2500}
+          autohide
+          bg="white"
+          className="text-center"
+        >
+          <Toast.Header closeButton={false}>
+            <div className="text-dark text-center fw-bold mx-2 fs-4">
+              Yatta! Ora puoi effettuare il login!
+            </div>
+          </Toast.Header>
+          <Toast.Body>
+            <img
+              src="/public/img/neko-thor.png"
+              alt="fat-cat"
+              style={{ width: "320px" }}
+            />
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
       <CustomFooter />
     </div>
   );

@@ -3,6 +3,7 @@ import { Card, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/Cartslice";
+import { fetchUserCart } from "../redux/cartActions";
 import "../assets/bookSection.css";
 
 const BookCard = ({ book }) => {
@@ -11,9 +12,40 @@ const BookCard = ({ book }) => {
   const [showMessage, setShowMessage] = useState(false);
 
   const handleBuyClick = () => {
-    dispatch(addToCart(book));
-    setShowMessage(true);
-    setTimeout(() => setShowMessage(false), 2000);
+    const token = localStorage.getItem("jwtToken");
+    const userData = localStorage.getItem("userData");
+
+    if (token && userData) {
+      fetch(`http://localhost:8080/cart-items/book/${book.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          bookId: book.id,
+          quantity: 1,
+          priceAtSelection: book.price,
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Errore nell'aggiunta al carrello");
+          return res.json();
+        })
+        .then(() => {
+          dispatch(fetchUserCart());
+          setShowMessage(true);
+          setTimeout(() => setShowMessage(false), 2000);
+        })
+        .catch((err) => {
+          console.error("Errore:", err);
+        });
+    } else {
+      // Guest → Redux/localStorage
+      dispatch(addToCart(book));
+      setShowMessage(true);
+      setTimeout(() => setShowMessage(false), 2000);
+    }
   };
 
   return (
@@ -30,7 +62,7 @@ const BookCard = ({ book }) => {
         {showMessage && (
           <Alert variant="success" className="py-2 px-2 mt-2 text-center">
             <div className="d-flex align-items-center justify-content-center gap-2">
-              Libro aggiunto al carrello!
+              Aggiunto al carrello!
               <img
                 src="/public/img/books-icons/add-to-cart.png"
                 alt="check"

@@ -14,18 +14,29 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { performLogout } from "../redux/userActions";
+import { deleteCartItem } from "../redux/cartActions";
 import { removeFromCart } from "../redux/Cartslice";
 import "../assets/user.css";
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const [showToast, setShowToast] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const user = useSelector((state) => state.user.user);
-  const totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0);
-  const [showToast, setShowToast] = useState(false);
+  const cartItemsFromRedux = useSelector((state) => state.cart.items);
+
+  const isLoggedIn = Boolean(user);
+  const guestCart = localStorage.getItem("cartItems");
+  const guestCartItems = guestCart ? JSON.parse(guestCart) : [];
+
+  const cartItems = isLoggedIn ? cartItemsFromRedux : guestCartItems;
+
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  const totalPrice = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -152,7 +163,7 @@ const CustomNavbar = () => {
                 className="custom-dropdown d-flex align-items-center"
               >
                 {cartItems.length === 0 ? (
-                  <NavDropdown.Item>Il carrello è vuoto</NavDropdown.Item>
+                  <NavDropdown.Item>Il tuo carrello è vuoto</NavDropdown.Item>
                 ) : (
                   <>
                     {cartItems.map((item, index) => (
@@ -166,6 +177,7 @@ const CustomNavbar = () => {
                         >
                           <span>
                             {item.title}
+                            {item.author && ` - ${item.author}`}
                             {item.quantity > 1 && ` ×${item.quantity}`}
                           </span>
                         </div>
@@ -174,7 +186,13 @@ const CustomNavbar = () => {
                             {(item.price * item.quantity).toFixed(2)} €
                           </span>
                           <button
-                            onClick={() => dispatch(removeFromCart(item.id))}
+                            onClick={() => {
+                              if (isLoggedIn) {
+                                dispatch(deleteCartItem(item.id));
+                              } else {
+                                dispatch(removeFromCart(item.id));
+                              }
+                            }}
                             className="btn btn-sm p-0 border-0 bg-transparent d-flex align-items-center"
                             title="Rimuovi dal carrello"
                           >
@@ -192,29 +210,21 @@ const CustomNavbar = () => {
                     <NavDropdown.Divider />
                     <div className="px-3 py-2">
                       <strong>Totale: {totalPrice.toFixed(2)} €</strong>
-                      {user ? (
-                        <Button
-                          variant="outline-dark"
-                          size="sm"
-                          className="w-100 mt-2"
-                          onClick={() => navigate("/checkout")}
-                        >
-                          Paga
-                        </Button>
-                      ) : (
-                        <Button
-                          variant="outline-dark"
-                          size="sm"
-                          className="w-100 mt-2"
-                          onClick={() => navigate("/login")}
-                        >
-                          Accedi e paga
-                        </Button>
-                      )}
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="w-100 mt-2"
+                        onClick={() =>
+                          navigate(isLoggedIn ? "/checkout" : "/login")
+                        }
+                      >
+                        {isLoggedIn ? "Paga" : "Accedi e paga"}
+                      </Button>
                     </div>
                   </>
                 )}
               </NavDropdown>
+
               {user ? (
                 <NavDropdown
                   title={
