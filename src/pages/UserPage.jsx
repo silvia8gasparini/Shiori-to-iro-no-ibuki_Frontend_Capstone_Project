@@ -55,7 +55,7 @@ const UserPage = () => {
                         {cartItems.map((item) => (
                           <ListGroup.Item
                             key={item.id}
-                            className="d-flex justify-content-between align-items-center text-wrap"
+                            className="d-flex justify-content-between align-items-center text-start text-wrap"
                           >
                             <div
                               style={{
@@ -64,14 +64,17 @@ const UserPage = () => {
                               }}
                             >
                               <span>
-                                <b>
-                                  {item.title} - {item.author}
-                                </b>
+                                <b>{item.title}</b> - {item.author}
                                 {item.quantity > 1 && ` ×${item.quantity}`}
                               </span>
                             </div>
-                            <div className="d-flex align-items-center gap-2">
-                              <span>
+                            <div className="d-flex align-items-center gap-1">
+                              <span
+                                style={{
+                                  whiteSpace: "nowrap",
+                                  fontSize: "1rem",
+                                }}
+                              >
                                 {(item.price * item.quantity).toFixed(2)} €
                               </span>
                               <button
@@ -104,7 +107,7 @@ const UserPage = () => {
                                 <img
                                   src="/img/navbar-icons/bin.png"
                                   alt="Rimuovi"
-                                  height="20"
+                                  height="17"
                                   className="ms-2"
                                 />
                               </button>
@@ -141,6 +144,11 @@ const UserPage = () => {
               <Card className="user-card">
                 <Card.Img variant="top" src="/public/img/user/card.png" />
                 <Card.Body>
+                  {user && user.digitalCard && (
+                    <p className="digital-card text-muted mb-3">
+                      Tessera digitale n° <strong>{user.digitalCard}</strong>
+                    </p>
+                  )}
                   {reservations.length === 0 ? (
                     <p className="text-muted">Nessuna prenotazione attiva</p>
                   ) : (

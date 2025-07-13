@@ -41,7 +41,6 @@ const BookCard = ({ book }) => {
           console.error("Errore:", err);
         });
     } else {
-      // Guest → Redux/localStorage
       dispatch(addToCart(book));
       setShowMessage(true);
       setTimeout(() => setShowMessage(false), 2000);

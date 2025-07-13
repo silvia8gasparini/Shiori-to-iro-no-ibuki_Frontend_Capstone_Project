@@ -28,8 +28,11 @@ h3 {
 
 .book-icon {
     height: 40px;
-    width: auto;
-    
+    width: auto;   
+}
+
+.price {
+  font-size: 1rem;
 }
 
 .fade-in {

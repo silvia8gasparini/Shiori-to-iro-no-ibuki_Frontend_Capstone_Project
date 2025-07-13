@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookById } from "../redux/booksSlice";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Alert } from "react-bootstrap";
 import { Heart, HeartFill } from "react-bootstrap-icons";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
@@ -14,6 +14,7 @@ import "../assets/bookdetails.css";
 export default function BookDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [showMessage, setShowMessage] = useState(false);
 
   const {
     data: book,
@@ -34,6 +35,44 @@ export default function BookDetails() {
       dispatch(removeFavorite(book.id));
     } else {
       dispatch(addFavorite(book));
+    }
+  };
+
+  const handleBuyClick = () => {
+    if (!book) return;
+
+    const token = localStorage.getItem("jwtToken");
+    const userData = localStorage.getItem("userData");
+
+    if (token && userData) {
+      fetch(`http://localhost:8080/cart-items/book/${book.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          bookId: book.id,
+          quantity: 1,
+          priceAtSelection: book.price,
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Errore nell'aggiunta al carrello");
+          return res.json();
+        })
+        .then(() => {
+          dispatch(fetchUserCart());
+          setShowMessage(true);
+          setTimeout(() => setShowMessage(false), 2000);
+        })
+        .catch((err) => {
+          console.error("Errore:", err);
+        });
+    } else {
+      dispatch(addToCart(book));
+      setShowMessage(true);
+      setTimeout(() => setShowMessage(false), 2000);
     }
   };
 
@@ -81,47 +120,28 @@ export default function BookDetails() {
               <strong>Prezzo: </strong> {book.price.toFixed(2)} €
             </p>
             <p className="mt-4 fade-down-cascade fade-delay-7">
-              {" "}
-              <strong>Descrizione: </strong>
-              {book.description}
+              <strong>Descrizione: </strong> {book.description}
             </p>
 
             <div className="d-flex gap-4 mt-5 justify-content-center fade-down-cascade fade-delay-8">
+              {showMessage && (
+                <Alert variant="success" className="py-2 px-2 mt-2 text-center">
+                  <div className="d-flex align-items-center justify-content-center gap-2">
+                    Aggiunto al carrello!
+                    <img
+                      src="/public/img/books-icons/add-to-cart.png"
+                      alt="check"
+                      height="20"
+                      style={{ marginTop: "0px", width: "20px" }}
+                    />
+                  </div>
+                </Alert>
+              )}
+
               <Button
                 className="details-button"
                 variant="success"
-                onClick={async () => {
-                  const user = JSON.parse(localStorage.getItem("userData"));
-                  const token = localStorage.getItem("jwtToken");
-
-                  if (user && token) {
-                    try {
-                      const res = await fetch(
-                        `http://localhost:8080/cart-items/book/${book.id}`,
-                        {
-                          method: "POST",
-                          headers: {
-                            "Content-Type": "application/json",
-                            Authorization: `Bearer ${token}`,
-                          },
-                          body: JSON.stringify({
-                            quantity: 1,
-                            priceAtSelection: book.price,
-                          }),
-                        }
-                      );
-
-                      if (!res.ok)
-                        throw new Error("Errore nell'aggiunta al carrello");
-
-                      dispatch(fetchUserCart());
-                    } catch (err) {
-                      console.error("Errore:", err);
-                    }
-                  } else {
-                    dispatch(addToCart(book));
-                  }
-                }}
+                onClick={handleBuyClick}
               >
                 Acquista
               </Button>
