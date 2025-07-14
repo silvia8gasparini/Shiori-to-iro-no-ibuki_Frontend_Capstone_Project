@@ -5,7 +5,7 @@ import CustomFooter from "../components/CustomFooter";
 import BookAdminPanel from "../components/BookAdminPanel";
 import ReservationAdminPanel from "../components/ReservationAdminPanel";
 import "../assets/backoffice.css";
-// import UserAdminPanel from "./UserAdminPanel"; // opzionale
+import UserAdminPanel from "../components/PurchaseAdminPanel";
 
 export default function Backoffice() {
   const [activeSection, setActiveSection] = useState("books");
@@ -34,19 +34,21 @@ export default function Backoffice() {
           >
             Gestione Prenotazioni
           </button>
-          {/* <button
-            className={`btn ${activeSection === "users" ? "btn-primary" : "btn-outline-primary"}`}
+          <button
+            className={`btn ${
+              activeSection === "users" ? "btn-dark" : "btn-outline-dark"
+            }`}
             onClick={() => setActiveSection("users")}
           >
             Gestione Utenti
-          </button> */}
+          </button>
         </div>
 
         {/* Area contenuto */}
         <div className="section-wrapper">
           {activeSection === "books" && <BookAdminPanel />}
           {activeSection === "reservations" && <ReservationAdminPanel />}
-          {/* {activeSection === "users" && <UserAdminPanel />} */}
+          {activeSection === "users" && <UserAdminPanel />}
         </div>
       </Container>
 
