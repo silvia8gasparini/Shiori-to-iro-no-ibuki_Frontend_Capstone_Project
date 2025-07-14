@@ -133,17 +133,19 @@ const Tearoom = () => {
             />
           </>
         )}
-
-        {showConferma && prenotazione && (
-          <div className="alert alert-success text-center mt-4">
-            Prenotazione confermata per la zona{" "}
-            <strong>
-              {zone.find((z) => z.id === prenotazione.zona)?.name}
-            </strong>{" "}
-            il <strong>{prenotazione.date}</strong> nella fascia{" "}
-            <strong>{prenotazione.timeSlot.toLowerCase()}</strong>.
-          </div>
-        )}
+        <Row>
+          <Col md={12}>
+            {showConferma && prenotazione && (
+              <div className="prenotation alert alert-success text-center mt-4">
+                Prenotazione confermata!
+                <p>
+                  {zone.find((z) => z.id === prenotazione.zona)?.name}{" "}
+                  {prenotazione.date} {prenotazione.timeSlot.toLowerCase()}
+                </p>
+              </div>
+            )}
+          </Col>
+        </Row>
       </Container>
       <CustomFooter />
     </div>

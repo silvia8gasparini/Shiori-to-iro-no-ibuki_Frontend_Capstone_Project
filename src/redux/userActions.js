@@ -90,6 +90,28 @@ export const createReservation = (slot, zoneId) => async (dispatch, getState) =>
   }
 };
 
+// RIMUOVI prenotazione
+export const removeReservation = (id) => async (dispatch, getState) => {
+  const token = localStorage.getItem("jwtToken");
+  const userId = getState().user.user?.id;
+
+  try {
+    const res = await fetch(`http://localhost:8080/reservations/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Errore nella cancellazione della prenotazione");
+
+    const updated = getState().user.reservations.filter((r) => r.id !== id);
+    dispatch(setReservations(updated));
+    localStorage.setItem(`reservations_${userId}`, JSON.stringify(updated));
+  } catch (err) {
+    console.error("Errore deleteReservation:", err);
+  }
+};
 
 // FETCH preferiti
 export const fetchFavorites = () => async (dispatch, getState) => {

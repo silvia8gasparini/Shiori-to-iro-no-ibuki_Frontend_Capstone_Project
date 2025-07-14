@@ -58,6 +58,15 @@ max-width: 300px;
   animation: fadeIn 1.2s ease-in forwards;
 }
 
+
+.prenotation {
+  max-width: 500px;
+margin: 0 auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 @keyframes fadeIn {
   to {
     opacity: 1;
