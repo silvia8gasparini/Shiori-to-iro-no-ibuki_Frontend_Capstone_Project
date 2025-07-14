@@ -8,13 +8,14 @@ import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
 import { addToCart } from "../redux/Cartslice";
 import { fetchUserCart } from "../redux/cartActions";
-import { addFavorite, removeFavorite } from "../redux/userActions";
+import { addFavorite } from "../redux/userActions";
 import "../assets/bookdetails.css";
 
 export default function BookDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [showMessage, setShowMessage] = useState(false);
+  const [addedToFavorites, setAddedToFavorites] = useState(false);
 
   const {
     data: book,
@@ -27,15 +28,15 @@ export default function BookDetails() {
     dispatch(fetchBookById(id));
   }, [dispatch, id]);
 
-  const isFavorite = book ? favorites.some((fav) => fav.id === book.id) : false;
+  const isFavorite =
+    (book && favorites.some((fav) => fav.bookId === book.id)) ||
+    addedToFavorites;
 
   const handleFavoriteClick = () => {
-    if (!book) return;
-    if (isFavorite) {
-      dispatch(removeFavorite(book.id));
-    } else {
-      dispatch(addFavorite(book));
-    }
+    if (!book || isFavorite) return;
+
+    dispatch(addFavorite(book));
+    setAddedToFavorites(true);
   };
 
   const handleBuyClick = () => {
@@ -148,11 +149,19 @@ export default function BookDetails() {
 
               <Button
                 key={isFavorite ? "fav-yes" : "fav-no"}
-                variant={isFavorite ? "danger" : "outline-danger"}
+                variant={isFavorite ? "success" : "outline-danger"}
                 onClick={handleFavoriteClick}
+                disabled={isFavorite}
               >
-                {isFavorite ? <HeartFill /> : <Heart />}{" "}
-                {isFavorite ? "Rimuovi dai preferiti" : "Aggiungi ai preferiti"}
+                {isFavorite ? (
+                  <>
+                    <HeartFill className="me-1" /> Aggiunto ai preferiti
+                  </>
+                ) : (
+                  <>
+                    <Heart className="me-1" /> Aggiungi ai preferiti
+                  </>
+                )}
               </Button>
             </div>
           </Col>
