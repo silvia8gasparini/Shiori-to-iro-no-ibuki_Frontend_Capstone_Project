@@ -25,10 +25,10 @@ const booksSlice = createSlice({
     booksForSeason: [],
     loading: false,
     error: null,
-     bookDetails: {
-      data: null,
-      loading: false,
-      error: null,
+    bookDetails: {
+    data: null,
+    loading: false,
+    error: null,
     },
   },
     reducers: {},
@@ -45,7 +45,6 @@ const booksSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
-
        .addCase(fetchBookById.pending, (state) => {
         state.bookDetails.loading = true;
         state.bookDetails.error = null;
