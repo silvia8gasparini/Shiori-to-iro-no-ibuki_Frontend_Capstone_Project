@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/LogIn";
 import UserPage from "./pages/UserPage";
 import UserProfile from "./pages/UserProfile";
+import Backoffice from "./pages/Backoffice";
 
 import {
   fetchCartItems,
@@ -65,6 +66,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/user/profile" element={<UserProfile />} />
         <Route path="/user/page" element={<UserPage />} />
+        <Route path="/backoffice" element={<Backoffice />} />
       </Routes>
     </BrowserRouter>
   );

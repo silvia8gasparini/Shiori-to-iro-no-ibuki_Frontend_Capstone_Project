@@ -1,12 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   fetchReservations,
   fetchFavorites,
   removeFavorite,
+  removeReservation,
 } from "../redux/userActions";
-import { Container, Row, Col, Card, ListGroup, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  ListGroup,
+  Button,
+  Toast,
+  ToastContainer,
+} from "react-bootstrap";
 import { fetchUserCart } from "../redux/cartActions";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
@@ -19,6 +29,8 @@ const UserPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const reservations = useSelector((state) => state.user.reservations);
   const favorites = useSelector((state) => state.user.favorites);
+  const [showConfirmToast, setShowConfirmToast] = useState(false);
+  const [reservationToDelete, setReservationToDelete] = useState(null);
 
   useEffect(() => {
     if (user) {
@@ -158,6 +170,16 @@ const UserPage = () => {
                         <ListGroup.Item key={res.id}>
                           <strong>{res.tearoomZone?.name}</strong> – {res.date}{" "}
                           ({res.timeSlot.toLowerCase()})
+                          <img
+                            src="/img/navbar-icons/bin.png"
+                            alt="Rimuovi"
+                            height="20"
+                            className="bin-icon ms-2"
+                            onClick={() => {
+                              setReservationToDelete(res.id);
+                              setShowConfirmToast(true);
+                            }}
+                          />
                         </ListGroup.Item>
                       ))}
                     </ListGroup>
@@ -206,6 +228,51 @@ const UserPage = () => {
           </Row>
         </div>
       </Container>
+
+      <ToastContainer
+        className="position-fixed top-50 start-50 translate-middle p-3"
+        style={{ zIndex: 1055 }}
+      >
+        <Toast
+          onClose={() => setShowConfirmToast(false)}
+          show={showConfirmToast}
+          delay={null}
+          autohide={false}
+          bg="light"
+          className="text-center"
+        >
+          <Toast.Header closeButton={false}>
+            <strong className="me-auto text-dark fs-4">
+              Sei sicurə di voler cancellare la prenotazione?
+            </strong>
+          </Toast.Header>
+          <Toast.Body>
+            <img
+              src="/public/img/neko-thor2.png"
+              alt="fat-cat"
+              style={{ width: "320px" }}
+            />
+            <Button
+              variant="outline-danger"
+              className="me-4 mt-3 fs-5"
+              onClick={() => {
+                dispatch(removeReservation(reservationToDelete));
+                setShowConfirmToast(false);
+                setReservationToDelete(null);
+              }}
+            >
+              Sì, cancella
+            </Button>
+            <Button
+              className="mt-3 fs-5"
+              variant="outline-secondary"
+              onClick={() => setShowConfirmToast(false)}
+            >
+              Annulla
+            </Button>
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
       <CustomFooter />
     </div>
   );

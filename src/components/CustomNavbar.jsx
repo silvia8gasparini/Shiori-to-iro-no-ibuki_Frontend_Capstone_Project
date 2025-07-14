@@ -242,9 +242,16 @@ const CustomNavbar = () => {
                   }
                   className="custom-dropdown-user"
                 >
-                  <NavDropdown.Item as={Link} to="/user/page">
-                    Spazio Personale
-                  </NavDropdown.Item>
+                  {user.role === "ADMIN" ? (
+                    <NavDropdown.Item as={Link} to="/backoffice">
+                      Back-office
+                    </NavDropdown.Item>
+                  ) : (
+                    <NavDropdown.Item as={Link} to="/user/page">
+                      Spazio Personale
+                    </NavDropdown.Item>
+                  )}
+
                   <NavDropdown.Item as={Link} to="/user/profile">
                     Modifica Profilo
                   </NavDropdown.Item>
