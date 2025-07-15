@@ -11,13 +11,13 @@ import Login from "./pages/LogIn";
 import UserPage from "./pages/UserPage";
 import UserProfile from "./pages/UserProfile";
 import Backoffice from "./pages/Backoffice";
+import Checkout from "./pages/Checkout";
 
 import {
   fetchCartItems,
   fetchFavorites,
   fetchReservations,
 } from "./redux/userActions";
-
 import { syncCartToBackend } from "./redux/cartActions";
 import { loginSuccess } from "./redux/Userslice";
 import { setCartItems } from "./redux/Cartslice";
@@ -67,6 +67,7 @@ function App() {
         <Route path="/user/profile" element={<UserProfile />} />
         <Route path="/user/page" element={<UserPage />} />
         <Route path="/backoffice" element={<Backoffice />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   );
