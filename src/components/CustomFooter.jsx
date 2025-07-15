@@ -9,8 +9,8 @@ const CustomFooter = () => (
       <TwitterX className="mb-3 me-2" color="#dark" />
       <Youtube className="mb-3 me-2" color="#dark" />
       <p>
-        &copy; {new Date().getFullYear()} しおりと色の息吹 - Il respiro dei
-        colori tra le pagine. All rights reserved.
+        &copy; {new Date().getFullYear()} <strong>しおりと色の息吹 </strong>- Il
+        respiro dei colori tra le pagine. All rights reserved.
       </p>
     </Container>
   </footer>

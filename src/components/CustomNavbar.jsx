@@ -41,7 +41,7 @@ const CustomNavbar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/details/${encodeURIComponent(searchQuery.trim())}`);
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setSearchQuery("");
     }
   };
@@ -144,7 +144,7 @@ const CustomNavbar = () => {
 
               <NavDropdown
                 title={
-                  <span className="d-flex align-items-center gap-2 position-relative">
+                  <span className="d-flex align-items-center gap-2 position-relative ms-3">
                     <div className="position-relative">
                       <img
                         src="/img/navbar-icons/shoppingcart.png"

@@ -12,6 +12,7 @@ import UserPage from "./pages/UserPage";
 import UserProfile from "./pages/UserProfile";
 import Backoffice from "./pages/Backoffice";
 import Checkout from "./pages/Checkout";
+import SearchResults from "./pages/SearchResults";
 
 import {
   fetchCartItems,
@@ -68,6 +69,7 @@ function App() {
         <Route path="/user/page" element={<UserPage />} />
         <Route path="/backoffice" element={<Backoffice />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/search" element={<SearchResults />} />
       </Routes>
     </BrowserRouter>
   );

@@ -23,6 +23,11 @@
   padding-top: 0.4em;
 }
 
+.season-title-jp {
+  font-family: 'Klee One', serif;
+  font-size: 1.5rem;
+}
+
 p {
    font-size: 1.4rem;
 }
