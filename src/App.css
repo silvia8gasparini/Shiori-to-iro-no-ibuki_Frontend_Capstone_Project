@@ -4,6 +4,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Reenie+Beanie&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Klee+One&display=swap');
 
 html, body {
   font-family: 'Caveat';
@@ -85,8 +87,9 @@ html, body {
 .search-input {
   width: 100%;
   max-width: 300px !important;
-  padding: 0.7rem 1.2rem !important;
+  padding: 0.5rem 1.2rem !important;
   border-radius: 10px;
+  font-size: 1.2rem;
 }
 
 .search-button {

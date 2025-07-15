@@ -76,6 +76,15 @@ const Welcome = () => {
       "Kurashiki",
       "Ise",
       "Karuizawa",
+      "Tokyo",
+      "Osaka",
+      "Kanazawa",
+      "Kumamoto",
+      "Niigata",
+      "Kobe",
+      "Sendai",
+      "Himeji",
+      "Okayama",
     ];
     const selectedCities = getRandomCities(cities, 2);
     const apiKey = "1507cc7f5a41802bff4e537e298edc27";

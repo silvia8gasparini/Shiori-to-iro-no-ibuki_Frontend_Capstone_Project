@@ -135,7 +135,7 @@ const Tearoom = () => {
         <Row>
           <Col md={12}>
             {showConferma && prenotazione && (
-              <div className="prenotation alert alert-success text-center mt-4">
+              <div className="prenotation alert alert-success text-center mt-4 fs-4">
                 Prenotazione confermata!
                 <p>
                   {zone.find((z) => z.id === prenotazione.zona)?.name}{" "}
