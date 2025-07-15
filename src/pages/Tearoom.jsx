@@ -61,9 +61,8 @@ const Tearoom = () => {
 
   const handlePrenotazione = (slot) => {
     setPrenotazione({ zona: zonaSelezionata, ...slot });
-    dispatch(createReservation(slot, zonaSelezionata)); // ✅ invia al backend
+    dispatch(createReservation(slot, zonaSelezionata));
 
-    // aggiorna localmente per bloccare subito lo slot
     setPrenotazioniZona((prev) => [
       ...prev,
       { ...slot, timeSlot: slot.timeSlot.toUpperCase() },

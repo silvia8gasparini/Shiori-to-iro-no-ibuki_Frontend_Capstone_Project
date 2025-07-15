@@ -13,6 +13,7 @@ export default defineConfig({
       '/digital-cards': "http://localhost:8080",
       '/reservations': "http://localhost:8080",
       '/favorites': "http://localhost:8080",
+      '/paypal': "http://localhost:8080",
     }
   }
 })

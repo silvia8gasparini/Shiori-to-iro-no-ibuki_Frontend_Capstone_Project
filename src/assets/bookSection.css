@@ -74,7 +74,10 @@
     max-height: 250px;
 }
 
-.b-details-btn, .b-buy-btn {
+
+
+
+.b-details-btn, .b-buy-btn, .details-button, .buy-button {
     padding: 0.6em 0.7em !important;
     font-size: 1em !important;
 }
