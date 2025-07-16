@@ -8,29 +8,38 @@ import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
 import { addToCart } from "../redux/Cartslice";
 import { fetchUserCart } from "../redux/cartActions";
-import { addFavorite } from "../redux/userActions";
+import { addFavorite, addBorrow, fetchBorrows } from "../redux/userActions";
 import "../assets/bookdetails.css";
 
 export default function BookDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [showMessage, setShowMessage] = useState(false);
+  const [showCartMessage, setShowCartMessage] = useState(false);
+  const [showBorrowMessage, setShowBorrowMessage] = useState(false);
   const [addedToFavorites, setAddedToFavorites] = useState(false);
+  const [justBorrowed, setJustBorrowed] = useState(false);
 
-  const {
-    data: book,
-    loading,
-    error,
-  } = useSelector((state) => state.books.bookDetails);
+  const bookDetails = useSelector((state) => state.books.bookDetails);
   const favorites = useSelector((state) => state.user.favorites);
+  const borrows = useSelector((state) => state.user.borrows);
+  const userData = JSON.parse(localStorage.getItem("userData"));
+
+  const { data: book, loading, error } = bookDetails;
 
   useEffect(() => {
     dispatch(fetchBookById(id));
+    dispatch(fetchBorrows());
   }, [dispatch, id]);
 
   const isFavorite =
     (book && favorites.some((fav) => fav.bookId === book.id)) ||
     addedToFavorites;
+
+  const isCurrentlyBorrowed =
+    justBorrowed ||
+    (book &&
+      Array.isArray(borrows) &&
+      borrows.some((b) => b.book?.id === book.id && !b.returned));
 
   const handleFavoriteClick = () => {
     if (!book || isFavorite) return;
@@ -43,7 +52,6 @@ export default function BookDetails() {
     if (!book) return;
 
     const token = localStorage.getItem("jwtToken");
-    const userData = localStorage.getItem("userData");
 
     if (token && userData) {
       fetch(`http://localhost:8080/cart-items/book/${book.id}`, {
@@ -64,17 +72,39 @@ export default function BookDetails() {
         })
         .then(() => {
           dispatch(fetchUserCart());
-          setShowMessage(true);
-          setTimeout(() => setShowMessage(false), 2000);
+          setShowCartMessage(true);
+          setTimeout(() => setShowCartMessage(false), 2000);
         })
         .catch((err) => {
           console.error("Errore:", err);
         });
     } else {
       dispatch(addToCart(book));
-      setShowMessage(true);
-      setTimeout(() => setShowMessage(false), 2000);
+      setShowCartMessage(true);
+      setTimeout(() => setShowCartMessage(false), 2000);
     }
+  };
+
+  const handleBorrowClick = () => {
+    if (!userData || !userData.digitalCard?.id || !book) return;
+
+    const today = new Date();
+    const dueDate = new Date(today);
+    dueDate.setDate(today.getDate() + 14);
+
+    const borrowData = {
+      startDate: today.toISOString().split("T")[0],
+      dueDate: dueDate.toISOString().split("T")[0],
+      bookId: book.id,
+      digitalCardId: userData.digitalCard.id,
+    };
+
+    dispatch(addBorrow(borrowData)).then(() => {
+      setJustBorrowed(true);
+      dispatch(fetchBorrows());
+      setShowBorrowMessage(true);
+      setTimeout(() => setShowBorrowMessage(false), 2000);
+    });
   };
 
   if (loading) return <p>Caricamento in corso…</p>;
@@ -124,45 +154,80 @@ export default function BookDetails() {
               <strong>Descrizione: </strong> {book.description}
             </p>
 
-            <div className="d-flex gap-4 mt-5 justify-content-center fade-down-cascade fade-delay-8">
-              {showMessage && (
-                <Alert variant="success" className="py-2 px-2 mt-2 text-center">
+            <div className="fade-down-cascade fade-delay-8 mt-5 text-center">
+              {showCartMessage && (
+                <Alert
+                  variant="success"
+                  className="py-2 px-2 mb-3 mx-auto"
+                  style={{ maxWidth: "250px" }}
+                >
                   <div className="d-flex align-items-center justify-content-center gap-2">
                     Aggiunto al carrello!
                     <img
                       src="/public/img/books-icons/add-to-cart.png"
                       alt="check"
                       height="20"
-                      style={{ marginTop: "0px", width: "20px" }}
+                      style={{ width: "20px" }}
                     />
                   </div>
                 </Alert>
               )}
 
-              <Button
-                className="details-button"
-                variant="success"
-                onClick={handleBuyClick}
-              >
-                Acquista
-              </Button>
+              {showBorrowMessage && (
+                <Alert
+                  variant="info"
+                  className="py-2 px-2 mb-3 mx-auto"
+                  style={{ maxWidth: "280px" }}
+                >
+                  <div className="d-flex align-items-center justify-content-center gap-2">
+                    Libro preso in prestito!
+                    <img
+                      src="/public/img/books-icons/borrow.png"
+                      alt="borrow"
+                      height="20"
+                      style={{ width: "20px" }}
+                    />
+                  </div>
+                </Alert>
+              )}
 
-              <Button
-                key={isFavorite ? "fav-yes" : "fav-no"}
-                variant={isFavorite ? "success" : "outline-danger"}
-                onClick={handleFavoriteClick}
-                disabled={isFavorite}
-              >
-                {isFavorite ? (
-                  <>
-                    <HeartFill className="me-1" /> Aggiunto ai preferiti
-                  </>
-                ) : (
-                  <>
-                    <Heart className="me-1" /> Aggiungi ai preferiti
-                  </>
+              <div className="d-flex gap-4 justify-content-center flex-wrap">
+                <Button
+                  className="details-button"
+                  variant="success"
+                  onClick={handleBuyClick}
+                >
+                  Acquista
+                </Button>
+
+                {userData && (
+                  <Button
+                    className="details-button"
+                    variant={isCurrentlyBorrowed ? "secondary" : "outline-dark"}
+                    onClick={handleBorrowClick}
+                    disabled={isCurrentlyBorrowed}
+                  >
+                    {isCurrentlyBorrowed ? "In prestito" : "Prendi in prestito"}
+                  </Button>
                 )}
-              </Button>
+
+                <Button
+                  key={isFavorite ? "fav-yes" : "fav-no"}
+                  variant={isFavorite ? "success" : "outline-danger"}
+                  onClick={handleFavoriteClick}
+                  disabled={isFavorite}
+                >
+                  {isFavorite ? (
+                    <>
+                      <HeartFill className="me-1" /> Aggiunto ai preferiti
+                    </>
+                  ) : (
+                    <>
+                      <Heart className="me-1" /> Aggiungi ai preferiti
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           </Col>
         </Row>

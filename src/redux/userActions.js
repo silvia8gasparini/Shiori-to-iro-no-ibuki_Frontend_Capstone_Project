@@ -3,13 +3,13 @@ import {
   setFavorites,
   logout,
   addReservation,
+  setBorrows
 } from "./Userslice";
 import { setCartItems } from "./Cartslice";
 
 // Utility per fetch autenticato
 const authFetch = (url, options = {}) => {
   const token = localStorage.getItem("jwtToken");
-   console.log("TOKEN USATO:", token);
   return fetch(url, {
     ...options,
     headers: {
@@ -204,6 +204,81 @@ export const fetchCartItems = () => async (dispatch, getState) => {
       }));
       dispatch(setCartItems(parsed));
     }
+  }
+};
+
+// FETCH prestiti
+export const fetchBorrows = () => async (dispatch, getState) => {
+  const user = getState().user.user;
+  const userId = user?.id;
+  const cardId = user?.digitalCard?.id;
+
+  if (!cardId) return;
+
+  try {
+    const res = await authFetch(`http://localhost:8080/borrows/card/${cardId}`);
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("Errore HTTP:", res.status, errorText);
+      throw new Error("Errore nel recupero dei prestiti");
+    }
+
+    const data = await res.json();
+    if (!data.content) throw new Error("Formato risposta inatteso");
+
+    dispatch(setBorrows(data.content));
+    localStorage.setItem(`borrows_${userId}`, JSON.stringify(data.content));
+  } catch (error) {
+    console.error("Borrows fetch error:", error);
+    const fallback = localStorage.getItem(`borrows_${userId}`);
+    if (fallback) {
+      dispatch(setBorrows(JSON.parse(fallback)));
+    }
+  }
+};
+
+// AGGIUNGI prestito
+export const addBorrow = (borrowData) => async (dispatch, getState) => {
+  const { user, borrows } = getState().user;
+  if (!user) return;
+
+  try {
+    const res = await authFetch(`http://localhost:8080/borrows`, {
+      method: "POST",
+      body: JSON.stringify(borrowData),
+    });
+
+    if (!res.ok) throw new Error("Errore nell'aggiunta del prestito");
+
+    const newBorrow = await res.json();
+    const updated = [...borrows, newBorrow];
+
+    dispatch(setBorrows(updated));
+    localStorage.setItem(`borrows_${user.id}`, JSON.stringify(updated));
+  } catch (error) {
+    console.error("Errore addBorrow:", error);
+  }
+};
+
+// RIMUOVI prestito
+export const removeBorrow = (borrowId) => async (dispatch, getState) => {
+  const { user, borrows } = getState().user;
+  if (!user || !borrowId) return;
+
+  try {
+    const res = await authFetch(`http://localhost:8080/borrows/${borrowId}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) throw new Error("Errore nella rimozione del prestito");
+
+    const updated = borrows.filter((b) => b.id !== borrowId);
+
+    dispatch(setBorrows(updated));
+    localStorage.setItem(`borrows_${user.id}`, JSON.stringify(updated));
+  } catch (error) {
+    console.error("Errore removeBorrow:", error);
   }
 };
 
