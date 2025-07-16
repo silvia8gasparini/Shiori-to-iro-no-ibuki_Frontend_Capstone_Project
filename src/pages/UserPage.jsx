@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   fetchReservations,
   fetchFavorites,
+  fetchBorrows,
   removeFavorite,
   removeReservation,
 } from "../redux/userActions";
@@ -31,14 +32,16 @@ const UserPage = () => {
   const favorites = useSelector((state) => state.user.favorites);
   const [showConfirmToast, setShowConfirmToast] = useState(false);
   const [reservationToDelete, setReservationToDelete] = useState(null);
+  const borrows = useSelector((state) => state.user.borrows);
 
   useEffect(() => {
     if (user) {
       dispatch(fetchReservations());
       dispatch(fetchFavorites());
+      dispatch(fetchBorrows());
     }
   }, [dispatch, user]);
-  console.log("Tutti i preferiti:", favorites);
+
   return (
     <div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
       <CustomNavbar />
@@ -156,18 +159,30 @@ const UserPage = () => {
               <Card className="user-card">
                 <Card.Img variant="top" src="/public/img/user/card.png" />
                 <Card.Body>
-                  {user && user.digitalCard && (
-                    <p className="digital-card text-muted mb-3">
+                  {user?.digitalCard && (
+                    <p className="digital-card mb-3">
                       Tessera digitale n°{" "}
                       <strong>{user.digitalCard.cardNumber}</strong>
                     </p>
                   )}
+
+                  {/* Sezione Prenotazioni */}
+                  <p className="mb-2 mt-3 d-flex align-items-center justify-content-center gap-2">
+                    <img
+                      src="/img/tearoom/herbal-tea.png"
+                      alt="tea"
+                      height="25"
+                    />
+                    Prenotazioni
+                  </p>
                   {reservations.length === 0 ? (
-                    <p className="text-muted">Nessuna prenotazione attiva</p>
+                    <p className="text-muted text-center">
+                      Nessuna prenotazione attiva
+                    </p>
                   ) : (
-                    <ListGroup>
+                    <ListGroup className="mb-3">
                       {reservations.map((res) => (
-                        <ListGroup.Item key={res.id}>
+                        <ListGroup.Item key={`res-${res.id}`}>
                           <strong>{res.tearoomZone?.name}</strong> – {res.date}{" "}
                           ({res.timeSlot.toLowerCase()})
                           <img
@@ -180,6 +195,47 @@ const UserPage = () => {
                               setShowConfirmToast(true);
                             }}
                           />
+                        </ListGroup.Item>
+                      ))}
+                    </ListGroup>
+                  )}
+
+                  {/* Sezione Prestiti */}
+                  <p className="mb-2 mt-4 d-flex align-items-center justify-content-center gap-2">
+                    <img
+                      src="/img/books-icons/books.png"
+                      alt="books"
+                      height="25"
+                    />
+                    Prestiti
+                  </p>
+                  {borrows.length === 0 ? (
+                    <p className="text-muted text-center">
+                      Nessun prestito attivo
+                    </p>
+                  ) : (
+                    <ListGroup>
+                      {borrows.map((b) => (
+                        <ListGroup.Item key={`borrow-${b.id}`}>
+                          <div className="d-flex justify-content-between align-items-start gap-4">
+                            <div>
+                              <strong>{b.bookTitle}</strong> –{" "}
+                              <span className="text-muted">
+                                Scadenza: {b.dueDate}
+                                {b.returned && (
+                                  <span className="text-success ms-2">
+                                    (restituito)
+                                  </span>
+                                )}
+                                {!b.returned &&
+                                  new Date(b.dueDate) < new Date() && (
+                                    <span className="text-danger ms-2">
+                                      (in ritardo)
+                                    </span>
+                                  )}
+                              </span>
+                            </div>
+                          </div>
                         </ListGroup.Item>
                       ))}
                     </ListGroup>
@@ -204,6 +260,16 @@ const UserPage = () => {
                         >
                           <div className="d-flex align-items-center justify-content-between w-100">
                             <div>
+                              <img
+                                src="/img/user-icons/heart.png"
+                                alt="Rimuovi"
+                                height="20"
+                                className="bin-icon me-2"
+                                onClick={() => {
+                                  console.log("CLICK SU:", book);
+                                  dispatch(removeFavorite(book.bookId));
+                                }}
+                              />
                               <strong>{book.title}</strong>{" "}
                               <span>- {book.author}</span>
                               <img

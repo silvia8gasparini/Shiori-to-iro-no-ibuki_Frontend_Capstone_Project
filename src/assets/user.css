@@ -83,6 +83,16 @@
   font-size: 1rem;
 }
 
-.digital-card, .digital-card strong {
+.digital-card {
+   font-family:  "Caveat", serif;
+   font-size: 1.7rem;
+}
+
+.digital-card strong {
    font-family:  "Hina Mincho", serif;
+   font-size: 1.6rem;
+}
+
+.user-card p {
+  font-size: 1.5rem;
 }

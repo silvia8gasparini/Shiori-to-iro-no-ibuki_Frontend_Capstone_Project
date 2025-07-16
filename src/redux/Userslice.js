@@ -6,6 +6,7 @@ const initialState = {
   cartItems: [],
   reservations: [],
   favorites: [],
+  borrows: [],
 };
 
 const userSlice = createSlice({
@@ -21,6 +22,7 @@ const userSlice = createSlice({
       state.cartItems = [];
       state.reservations = [];
       state.favorites = [];
+      state.borrows = [];
 
       localStorage.removeItem("jwtToken");
       localStorage.removeItem("userData");
@@ -60,9 +62,18 @@ const userSlice = createSlice({
         localStorage.setItem(`favorites_${userId}`, JSON.stringify(action.payload));
       }
     },
-setUser: (state, action) => {
-  state.user = action.payload;
-}
+
+    setBorrows: (state, action) => {
+      state.borrows = action.payload;
+      const userId = state.user?.id;
+      if (userId) {
+        localStorage.setItem(`borrows_${userId}`, JSON.stringify(action.payload));
+      }
+    },
+
+    setUser: (state, action) => {
+      state.user = action.payload;
+    }
 
   },
 });
@@ -74,7 +85,8 @@ export const {
   setCartItems,
   setReservations,
   setFavorites,
-  addReservation,
+  addReservation,  
+  setBorrows,
   setUser,
 } = userSlice.actions;
 
