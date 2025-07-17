@@ -25,11 +25,10 @@ const currentMicroSeasonSlice = createSlice({
 export const { setMicroSeason, setLoading, setError } = currentMicroSeasonSlice.actions;
 
 export const fetchCurrentMicroSeason = () => async (dispatch) => {
+  const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, "");
   try {
     dispatch(setLoading(true));
-    const res = await fetch(`${
-          import.meta.env.VITE_API_BASE_URL
-        }microseasons/current`);
+   const res = await fetch(`${baseUrl}/microseasons/current`);;
 
     if (!res.ok) throw new Error("Errore nella richiesta");
 
