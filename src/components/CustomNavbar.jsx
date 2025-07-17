@@ -123,7 +123,7 @@ const CustomNavbar = () => {
             <Col
               xs={12}
               md={4}
-              className="d-flex flex-column flex-md-row justify-content-center gap-0 gap-md-0 gap-lg-3 flex-wrap"
+              className="d-flex flex-column flex-md-row justify-content-center gap-0 gap-md-0 gap-lg-4 flex-wrap"
             >
               <Form className="search-form d-flex mx-5" onSubmit={handleSearch}>
                 <Form.Control
