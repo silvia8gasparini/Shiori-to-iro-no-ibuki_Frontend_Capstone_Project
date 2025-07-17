@@ -14,7 +14,7 @@ export default function ReservationAdminPanel() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}reservations?page=0&size=1000`,
+        `${import.meta.env.VITE_API_BASE_URL}/reservations?page=0&size=1000`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
