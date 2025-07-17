@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchColorByMicroSeasonId = createAsyncThunk(
-  "colors/fetchByMicroSeasonId",
+  `${import.meta.env.VITE_API_BASE_URL}colors/fetchByMicroSeasonId`,
   async (microSeasonId) => {
     const res = await fetch(`/colors/microseason/${microSeasonId}`);
     const text = await res.text();
