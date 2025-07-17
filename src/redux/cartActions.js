@@ -1,5 +1,7 @@
 import { clearCart, setCartItems } from "./Cartslice";
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, "");
+
 export const syncCartToBackend = () => async (dispatch, getState) => {
   const state = getState();
   const user = state.user.user;
@@ -11,7 +13,7 @@ export const syncCartToBackend = () => async (dispatch, getState) => {
     const token = localStorage.getItem("jwtToken");
 
     for (const item of cartItems) {
-      await fetch(`${import.meta.env.VITE_API_BASE_URL}cart-items`, {
+      await fetch(`${baseUrl}/cart-items`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,7 +27,7 @@ export const syncCartToBackend = () => async (dispatch, getState) => {
       });
     }
 
-    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}cart-items/me`, {
+     const res = await fetch(`${baseUrl}/cart-items/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -59,7 +61,7 @@ export const fetchUserCart = () => async (dispatch) => {
   if (!token) return;
 
   try {
-    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}cart-items/me`, {
+    const res = await fetch(`${baseUrl}/cart-items/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -86,9 +88,7 @@ export const fetchUserCart = () => async (dispatch) => {
 export const deleteCartItem = (cartItemId) => async (dispatch) => {
   const token = localStorage.getItem("jwtToken");
   try {
-    const res = await fetch(`${
-          import.meta.env.VITE_API_BASE_URL
-        }cart-items/${cartItemId}`, {
+    const res = await fetch(`${baseUrl}/cart-items/${cartItemId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

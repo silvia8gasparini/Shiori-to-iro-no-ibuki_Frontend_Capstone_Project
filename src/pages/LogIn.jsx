@@ -19,6 +19,7 @@ import CustomFooter from "../components/CustomFooter";
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, "");
   const [showToast, setShowToast] = useState(false);
   const [credentials, setCredentials] = useState({
     email: "",
@@ -36,27 +37,21 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}auth/login`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(credentials),
-        }
-      );
+      const response = await fetch(`${baseUrl}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
+      });
 
       if (response.ok) {
         const token = await response.text();
         localStorage.setItem("jwtToken", token);
 
-        const userResponse = await fetch(
-          `${import.meta.env.VITE_API_BASE_URL}user/me`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const userResponse = await fetch(`${baseUrl}/user/me`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (userResponse.ok) {
           const userData = await userResponse.json();
