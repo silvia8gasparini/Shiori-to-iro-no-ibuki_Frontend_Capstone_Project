@@ -40,7 +40,7 @@ export default function ReservationAdminPanel() {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}reservations/${id}`,
+        `${import.meta.env.VITE_API_BASE_URL}/reservations/${id}`,
         {
           method: "DELETE",
           headers: {
