@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Container, Row, Col, Spinner, Pagination } from "react-bootstrap";
-import BookCard from "../components/BookCard"; // Assicurati che il path sia corretto
+import BookCard from "../components/BookCard";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
 
@@ -50,7 +50,9 @@ const SearchResults = () => {
     <div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
       <CustomNavbar />
       <Container className="mt-5">
-        <h2 className="mb-4 text-center">Risultati per: “{query}”</h2>
+        <h2 className="results-title mb-4 text-center">
+          Risultati per: “{query}”
+        </h2>
 
         {loading ? (
           <div className="d-flex justify-content-center my-5">
@@ -68,7 +70,6 @@ const SearchResults = () => {
               ))}
             </Row>
 
-            {/* Paginazione */}
             {totalPages > 1 && (
               <div className="d-flex justify-content-center mt-4">
                 <Pagination>

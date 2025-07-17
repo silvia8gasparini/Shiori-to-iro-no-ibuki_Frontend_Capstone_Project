@@ -186,4 +186,13 @@ html, body {
 .responsive-icon {
   width: 25px;
 }
+
+.logo-mobile, .title1 {
+  margin-top: 0.5rem;
+}
+
+h2.results-title {
+  font-size: 1.9em;
+}
+
 }
