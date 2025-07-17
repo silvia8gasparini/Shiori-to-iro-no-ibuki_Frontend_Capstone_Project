@@ -28,7 +28,7 @@ export const fetchNextMicroSeasons = (count = 3) => async (dispatch) => {
   const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, "");
   try {
     dispatch(setLoading(true));
-    const res = await fetch(`${baseUrl}microseasons/next?count=${count}`);
+    const res = await fetch(`${baseUrl}/microseasons/next?count=${count}`);
     if (!res.ok) throw new Error("Errore nella richiesta");
     const data = await res.json();
     dispatch(setNextSeasons(data));
