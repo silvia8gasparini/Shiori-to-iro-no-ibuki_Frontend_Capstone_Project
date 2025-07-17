@@ -10,7 +10,9 @@ const PaymentSuccess = () => {
       try {
         const token = localStorage.getItem("jwtToken");
         const response = await fetch(
-          `http://localhost:8080/paypal/capture?orderId=${orderId}`,
+          `${
+            import.meta.env.VITE_API_BASE_URL
+          }/paypal/capture?orderId=${orderId}`,
           {
             method: "POST",
             headers: {

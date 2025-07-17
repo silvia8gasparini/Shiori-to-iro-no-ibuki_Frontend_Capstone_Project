@@ -24,7 +24,9 @@ const authFetch = (url, options = {}) => {
 export const fetchReservations = () => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
   try {
-    const res = await authFetch(`http://localhost:8080/reservations/me`);
+    const res = await authFetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/reservations/me`);
 
     if (!res.ok) {
       const errorText = await res.text();
@@ -70,7 +72,9 @@ export const createReservation = (slot, zoneId) => async (dispatch, getState) =>
 
   try {
     const res = await authFetch(
-      `http://localhost:8080/reservations?zoneId=${zoneId}`,
+      `${
+          import.meta.env.VITE_API_BASE_URL
+        }/reservations?zoneId=${zoneId}`,
       {
         method: "POST",
         body: JSON.stringify(payload),
@@ -96,7 +100,9 @@ export const removeReservation = (id) => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
 
   try {
-    const res = await fetch(`http://localhost:8080/reservations/${id}`, {
+    const res = await fetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/reservations/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -117,7 +123,9 @@ export const removeReservation = (id) => async (dispatch, getState) => {
 export const fetchFavorites = () => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
   try {
-    const res = await authFetch(`http://localhost:8080/favorites/me`);
+    const res = await authFetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/favorites/me`);
     if (!res.ok) throw new Error("Errore nel recupero dei preferiti");
     const data = await res.json();
     dispatch(setFavorites(data));
@@ -135,7 +143,9 @@ export const addFavorite = (book) => async (dispatch, getState) => {
   if (!user) return;
 
   try {
-    const res = await authFetch(`http://localhost:8080/favorites/add/${book.id}`, {
+    const res = await authFetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/favorites/add/${book.id}`, {
       method: "POST",
     });
     if (!res.ok) throw new Error("Errore nell'aggiunta ai preferiti");
@@ -154,7 +164,9 @@ export const removeFavorite = (bookId) => async (dispatch, getState) => {
   if (!user || !bookId) return;
 
   try {
-    const res = await authFetch(`http://localhost:8080/favorites/remove/${bookId}`, {
+    const res = await authFetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/favorites/remove/${bookId}`, {
       method: "DELETE",
     });
     if (!res.ok) throw new Error("Errore nella rimozione dai preferiti");
@@ -177,7 +189,9 @@ export const fetchCartItems = () => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
   if (!userId) return;
   try {
-    const res = await authFetch("http://localhost:8080/cart-items/me");
+    const res = await authFetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/cart-items/me`);
     if (!res.ok) throw new Error("Errore nel recupero del carrello");
     const data = await res.json();
 
@@ -216,7 +230,9 @@ export const fetchBorrows = () => async (dispatch, getState) => {
   if (!cardId) return;
 
   try {
-    const res = await authFetch(`http://localhost:8080/borrows/card/${cardId}`);
+    const res = await authFetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/borrows/card/${cardId}`);
 
     if (!res.ok) {
       const errorText = await res.text();
@@ -244,7 +260,9 @@ export const addBorrow = (borrowData) => async (dispatch, getState) => {
   if (!user) return;
 
   try {
-    const res = await authFetch(`http://localhost:8080/borrows`, {
+    const res = await authFetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/borrows`, {
       method: "POST",
       body: JSON.stringify(borrowData),
     });
@@ -267,7 +285,9 @@ export const removeBorrow = (borrowId) => async (dispatch, getState) => {
   if (!user || !borrowId) return;
 
   try {
-    const res = await authFetch(`http://localhost:8080/borrows/${borrowId}`, {
+    const res = await authFetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/borrows/${borrowId}`, {
       method: "DELETE",
     });
 

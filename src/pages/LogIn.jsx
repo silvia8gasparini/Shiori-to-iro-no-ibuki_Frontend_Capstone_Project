@@ -36,21 +36,27 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credentials),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(credentials),
+        }
+      );
 
       if (response.ok) {
         const token = await response.text();
         localStorage.setItem("jwtToken", token);
 
-        const userResponse = await fetch("http://localhost:8080/user/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const userResponse = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/user/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (userResponse.ok) {
           const userData = await userResponse.json();

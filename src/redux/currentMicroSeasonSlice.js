@@ -28,7 +28,9 @@ export const fetchCurrentMicroSeason = () => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     console.log("👉 Chiamo l'endpoint microseasons/current...");
-    const res = await fetch("http://localhost:8080/microseasons/current");
+    const res = await fetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/microseasons/current`);
 
     if (!res.ok) throw new Error("Errore nella richiesta");
 

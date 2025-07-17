@@ -44,11 +44,16 @@ const Tearoom = () => {
   useEffect(() => {
     if (zonaSelezionata) {
       const token = localStorage.getItem("jwtToken");
-      fetch(`http://localhost:8080/reservations/by-zone/${zonaSelezionata}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      fetch(
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/reservations/by-zone/${zonaSelezionata}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           setPrenotazioniZona(data);

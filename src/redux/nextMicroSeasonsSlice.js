@@ -27,7 +27,9 @@ export const { setNextSeasons, setLoading, setError } = nextMicroSeasonsSlice.ac
 export const fetchNextMicroSeasons = (count = 3) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    const res = await fetch(`http://localhost:8080/microseasons/next?count=${count}`);
+    const res = await fetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/microseasons/next?count=${count}`);
     if (!res.ok) throw new Error("Errore nella richiesta");
     const data = await res.json();
     dispatch(setNextSeasons(data));

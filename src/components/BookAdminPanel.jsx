@@ -4,7 +4,7 @@ import { Table, Button, Spinner, Form } from "react-bootstrap";
 export default function BookAdminPanel() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [editingBook, setEditingBook] = useState(null); // Nuovo stato
+  const [editingBook, setEditingBook] = useState(null);
 
   useEffect(() => {
     fetchBooks();
@@ -15,7 +15,7 @@ export default function BookAdminPanel() {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/books?page=0&size=1000",
+        `${import.meta.env.VITE_API_BASE_URL}/books?page=0&size=1000`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -26,7 +26,7 @@ export default function BookAdminPanel() {
       if (!response.ok) throw new Error("Errore nel caricamento dei libri");
 
       const data = await response.json();
-      setBooks(data.content || data); // supporta sia Page che lista
+      setBooks(data.content || data);
     } catch (err) {
       console.error("Errore nel fetch dei libri:", err);
     } finally {
@@ -38,11 +38,14 @@ export default function BookAdminPanel() {
     const token = localStorage.getItem("jwtToken");
 
     try {
-      const response = await fetch(`http://localhost:8080/books/${book.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/books/${book.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!response.ok) throw new Error("Errore fetch dettagli libro");
 
@@ -70,7 +73,7 @@ export default function BookAdminPanel() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/books/${editingBook.id}`,
+        `${import.meta.env.VITE_API_BASE_URL}/books/${editingBook.id}`,
         {
           method: "PUT",
           headers: {
@@ -100,12 +103,15 @@ export default function BookAdminPanel() {
     const token = localStorage.getItem("jwtToken");
     if (!window.confirm("Sei sicuro di voler eliminare questo libro?")) return;
     try {
-      const response = await fetch(`http://localhost:8080/books/${bookId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/books/${bookId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (!response.ok) throw new Error("Errore nell'eliminazione");
       setBooks((prev) => prev.filter((b) => b.id !== bookId));
     } catch (err) {

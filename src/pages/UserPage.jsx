@@ -186,7 +186,9 @@ const UserPage = () => {
                               onClick={() => {
                                 const token = localStorage.getItem("jwtToken");
                                 fetch(
-                                  `http://localhost:8080/cart-items/${item.id}`,
+                                  `${
+                                    import.meta.env.VITE_API_BASE_URL
+                                  }/cart-items/${item.id}`,
                                   {
                                     method: "DELETE",
                                     headers: {

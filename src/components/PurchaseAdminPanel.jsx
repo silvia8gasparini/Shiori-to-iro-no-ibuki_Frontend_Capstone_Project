@@ -14,7 +14,7 @@ export default function PurchaseAdminPanel() {
 
     try {
       const res = await fetch(
-        "http://localhost:8080/purchase?page=0&size=1000",
+        `${import.meta.env.VITE_API_BASE_URL}/purchase?page=0&size=1000`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -38,12 +38,15 @@ export default function PurchaseAdminPanel() {
     if (!window.confirm("Vuoi eliminare questo acquisto?")) return;
 
     try {
-      const res = await fetch(`http://localhost:8080/purchase/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/purchase/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!res.ok) throw new Error("Errore eliminazione acquisto");
 

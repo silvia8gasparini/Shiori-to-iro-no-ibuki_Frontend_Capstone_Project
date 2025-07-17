@@ -14,7 +14,7 @@ export default function ReservationAdminPanel() {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/reservations?page=0&size=1000",
+        "${process.env.REACT_APP_API_BASE_URL}/reservations?page=0&size=1000",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,12 +39,15 @@ export default function ReservationAdminPanel() {
     if (!window.confirm("Vuoi eliminare questa prenotazione?")) return;
 
     try {
-      const res = await fetch(`http://localhost:8080/reservations/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/reservations/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!res.ok) throw new Error("Errore eliminazione prenotazione");
       setReservations((prev) => prev.filter((r) => r.id !== id));

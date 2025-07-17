@@ -24,7 +24,9 @@ const Checkout = () => {
       try {
         const token = localStorage.getItem("jwtToken");
         const response = await fetch(
-          `http://localhost:8080/paypal/capture?orderId=${orderId}`,
+          `${
+            import.meta.env.VITE_API_BASE_URL
+          }/paypal/capture?orderId=${orderId}`,
           {
             method: "POST",
             headers: {
@@ -38,10 +40,6 @@ const Checkout = () => {
         const orderData = await response.json();
         console.log("Ordine catturato:", orderData);
         dispatch(clearCart());
-
-        // TODO: opzionale — svuotare anche il carrello nel backend
-        // await fetch("http://localhost:8080/cart/clear", { method: "POST", headers: { Authorization: `Bearer ${token}` } });
-
         setPaymentStatus("success");
       } catch (error) {
         console.error("Errore durante la cattura dell'ordine:", error);

@@ -86,7 +86,9 @@ export const fetchUserCart = () => async (dispatch) => {
 export const deleteCartItem = (cartItemId) => async (dispatch) => {
   const token = localStorage.getItem("jwtToken");
   try {
-    const res = await fetch(`http://localhost:8080/cart-items/${cartItemId}`, {
+    const res = await fetch(`${
+          import.meta.env.VITE_API_BASE_URL
+        }/cart-items/${cartItemId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

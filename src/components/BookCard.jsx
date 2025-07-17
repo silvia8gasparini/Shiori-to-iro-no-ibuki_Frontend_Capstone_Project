@@ -16,7 +16,7 @@ const BookCard = ({ book }) => {
     const userData = localStorage.getItem("userData");
 
     if (token && userData) {
-      fetch(`http://localhost:8080/cart-items/book/${book.id}`, {
+      fetch(`${import.meta.env.VITE_API_BASE_URL}/cart-items/book/${book.id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
