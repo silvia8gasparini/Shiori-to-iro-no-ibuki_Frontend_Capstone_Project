@@ -160,7 +160,7 @@ export default function Login() {
           </Toast.Header>
           <Toast.Body>
             <img
-              src="/img/neko-thor.png"
+              src="public/img/neko-thor.png"
               alt="fat-cat"
               style={{ width: "320px" }}
             />
