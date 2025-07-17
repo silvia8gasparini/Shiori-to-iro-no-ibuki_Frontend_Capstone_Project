@@ -54,7 +54,7 @@ export default function BookDetails() {
     const token = localStorage.getItem("jwtToken");
 
     if (token && userData) {
-      fetch(`${import.meta.env.VITE_API_BASE_URL}/cart-items/book/${book.id}`, {
+      fetch(`${import.meta.env.VITE_API_BASE_URL}cart-items/book/${book.id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

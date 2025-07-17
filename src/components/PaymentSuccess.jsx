@@ -12,7 +12,7 @@ const PaymentSuccess = () => {
         const response = await fetch(
           `${
             import.meta.env.VITE_API_BASE_URL
-          }/paypal/capture?orderId=${orderId}`,
+          }paypal/capture?orderId=${orderId}`,
           {
             method: "POST",
             headers: {
@@ -24,9 +24,7 @@ const PaymentSuccess = () => {
         if (!response.ok) throw new Error("Errore nella cattura dell'ordine");
 
         const orderData = await response.json();
-        console.log("✅ Ordine catturato:", orderData);
-
-        // qui puoi anche svuotare il carrello dal backend o mostrare una conferma
+        console.log("Ordine catturato:", orderData);
       } catch (error) {
         console.error("Errore durante la cattura dell'ordine:", error);
       }

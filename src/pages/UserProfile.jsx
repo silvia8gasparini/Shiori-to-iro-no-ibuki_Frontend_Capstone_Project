@@ -39,7 +39,7 @@ function UserProfile() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/user/${user.id}`,
+        `${import.meta.env.VITE_API_BASE_URL}user/${user.id}`,
         {
           method: "PUT",
           headers: {

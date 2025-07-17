@@ -14,7 +14,7 @@ export default function ReservationAdminPanel() {
 
     try {
       const response = await fetch(
-        "${process.env.REACT_APP_API_BASE_URL}/reservations?page=0&size=1000",
+        `${import.meta.env.VITE_API_BASE_URL}reservations?page=0&size=1000`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ export default function ReservationAdminPanel() {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/reservations/${id}`,
+        `${import.meta.env.VITE_API_BASE_URL}reservations/${id}`,
         {
           method: "DELETE",
           headers: {

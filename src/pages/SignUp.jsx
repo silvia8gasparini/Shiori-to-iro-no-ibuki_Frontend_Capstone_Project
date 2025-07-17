@@ -41,7 +41,7 @@ export default function SignUp() {
       };
 
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/auth/register`,
+        `${import.meta.env.VITE_API_BASE_URL}auth/register`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -29,7 +29,7 @@ export const fetchCurrentMicroSeason = () => async (dispatch) => {
     dispatch(setLoading(true));
     const res = await fetch(`${
           import.meta.env.VITE_API_BASE_URL
-        }/microseasons/current`);
+        }microseasons/current`);
 
     if (!res.ok) throw new Error("Errore nella richiesta");
 

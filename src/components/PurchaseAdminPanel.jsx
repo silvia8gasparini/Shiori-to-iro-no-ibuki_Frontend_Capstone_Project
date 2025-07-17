@@ -14,7 +14,7 @@ export default function PurchaseAdminPanel() {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/purchase?page=0&size=1000`,
+        `${import.meta.env.VITE_API_BASE_URL}purchase?page=0&size=1000`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ export default function PurchaseAdminPanel() {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/purchase/${id}`,
+        `${import.meta.env.VITE_API_BASE_URL}purchase/${id}`,
         {
           method: "DELETE",
           headers: {

@@ -37,7 +37,7 @@ export default function Login() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
+        `${import.meta.env.VITE_API_BASE_URL}auth/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -50,7 +50,7 @@ export default function Login() {
         localStorage.setItem("jwtToken", token);
 
         const userResponse = await fetch(
-          `${import.meta.env.VITE_API_BASE_URL}/user/me`,
+          `${import.meta.env.VITE_API_BASE_URL}user/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

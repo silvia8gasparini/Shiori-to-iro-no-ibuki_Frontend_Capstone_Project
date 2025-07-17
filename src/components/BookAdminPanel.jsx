@@ -15,7 +15,7 @@ export default function BookAdminPanel() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/books?page=0&size=1000`,
+        `${import.meta.env.VITE_API_BASE_URL}books?page=0&size=1000`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ export default function BookAdminPanel() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/books/${book.id}`,
+        `${import.meta.env.VITE_API_BASE_URL}books/${book.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ export default function BookAdminPanel() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/books/${editingBook.id}`,
+        `${import.meta.env.VITE_API_BASE_URL}books/${editingBook.id}`,
         {
           method: "PUT",
           headers: {
@@ -104,7 +104,7 @@ export default function BookAdminPanel() {
     if (!window.confirm("Sei sicuro di voler eliminare questo libro?")) return;
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/books/${bookId}`,
+        `${import.meta.env.VITE_API_BASE_URL}books/${bookId}`,
         {
           method: "DELETE",
           headers: {
