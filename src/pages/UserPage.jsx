@@ -46,253 +46,249 @@ const UserPage = () => {
     <div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
       <CustomNavbar />
       <Container className="py-5">
-        <header className="d-flex align-items-center justify-content-center gap-3 mb-5">
+        <header className="user-welcome d-flex align-items-center justify-content-center gap-3 mb-5 mx-3">
           {user && <h2>Benvenutə nel tuo spazio personale, {user.name}!</h2>}{" "}
           <img
             src="/public/img/navbar-icons/kitsune.png"
             alt="kitsune"
             width="50"
+            className="kitsune"
           />
         </header>
 
-        <div className="d-flex align-align-items-center justify-content-center">
-          <Row className="d-flex justify-content-center g-5">
-            {/* Carrello */}
-            <Col xs={12} md={4} lg={4}>
-              <Card className="user-card">
-                <Card.Img variant="top" src="/public/img/user/cart.png" />
-                <Card.Body>
-                  {cartItems.length === 0 ? (
-                    <p className="text-muted">Il carrello è vuoto</p>
-                  ) : (
-                    <>
-                      <ListGroup>
-                        {cartItems.map((item) => (
-                          <ListGroup.Item
-                            key={item.id}
-                            className="d-flex justify-content-between align-items-center text-start text-wrap"
-                          >
-                            <div
-                              style={{
-                                maxWidth: "180px",
-                                wordBreak: "break-word",
-                              }}
-                            >
-                              <span>
-                                <b>{item.title}</b> - {item.author}
-                                {item.quantity > 1 && ` ×${item.quantity}`}
-                              </span>
-                            </div>
-                            <div className="d-flex align-items-center gap-1">
-                              <span
-                                style={{
-                                  whiteSpace: "nowrap",
-                                  fontSize: "1rem",
-                                }}
-                              >
-                                {(item.price * item.quantity).toFixed(2)} €
-                              </span>
-                              <button
-                                onClick={() => {
-                                  const token =
-                                    localStorage.getItem("jwtToken");
-                                  fetch(
-                                    `http://localhost:8080/cart-items/${item.id}`,
-                                    {
-                                      method: "DELETE",
-                                      headers: {
-                                        Authorization: `Bearer ${token}`,
-                                      },
-                                    }
-                                  )
-                                    .then((res) => {
-                                      if (!res.ok)
-                                        throw new Error(
-                                          "Errore nella rimozione"
-                                        );
-                                      dispatch(fetchUserCart());
-                                    })
-                                    .catch((err) =>
-                                      console.error("Errore:", err)
-                                    );
-                                }}
-                                className="btn btn-sm p-0 border-0 bg-transparent d-flex align-items-center"
-                                title="Rimuovi dal carrello"
-                              >
-                                <img
-                                  src="/img/navbar-icons/bin.png"
-                                  alt="Rimuovi"
-                                  height="17"
-                                  className="ms-2"
-                                />
-                              </button>
-                            </div>
-                          </ListGroup.Item>
-                        ))}
-                      </ListGroup>
-                      <div className="total px-3 py-2">
-                        Totale:{" "}
-                        {cartItems
-                          .reduce(
-                            (sum, item) => sum + item.price * item.quantity,
-                            0
-                          )
-                          .toFixed(2)}{" "}
-                        €
-                        <Button
-                          variant="outline-dark"
-                          size="sm"
-                          className="w-100 mt-2"
-                          onClick={() => navigate("/checkout")}
-                        >
-                          Paga
-                        </Button>
-                      </div>
-                    </>
-                  )}
-                </Card.Body>
-              </Card>
-            </Col>
-
-            {/* Prenotazioni */}
-            <Col xs={12} md={4} lg={4}>
-              <Card className="user-card">
-                <Card.Img variant="top" src="/public/img/user/card.png" />
-                <Card.Body>
-                  {user?.digitalCard && (
-                    <p className="digital-card mb-3">
-                      Tessera digitale n°{" "}
-                      <strong>{user.digitalCard.cardNumber}</strong>
-                    </p>
-                  )}
-
-                  {/* Sezione Prenotazioni */}
-                  <p className="mb-2 mt-3 d-flex align-items-center justify-content-center gap-2">
-                    <img
-                      src="/img/tearoom/herbal-tea.png"
-                      alt="tea"
-                      height="25"
-                    />
-                    Prenotazioni
+        <Row className="justify-content-center">
+          {/* Prenotazioni */}
+          <Col xs={12} md={4} lg={4}>
+            <Card className="user-card">
+              <Card.Img variant="top" src="/public/img/user/card.png" />
+              <Card.Body>
+                {user?.digitalCard && (
+                  <p className="digital-card mb-3">
+                    Tessera digitale n°{" "}
+                    <strong>{user.digitalCard.cardNumber}</strong>
                   </p>
-                  {reservations.length === 0 ? (
-                    <p className="text-muted text-center">
-                      Nessuna prenotazione attiva
-                    </p>
-                  ) : (
-                    <ListGroup className="mb-3">
-                      {reservations.map((res) => (
-                        <ListGroup.Item key={`res-${res.id}`}>
-                          <strong>{res.tearoomZone?.name}</strong> – {res.date}{" "}
-                          ({res.timeSlot.toLowerCase()})
-                          <img
-                            src="/img/navbar-icons/bin.png"
-                            alt="Rimuovi"
-                            height="20"
-                            className="bin-icon ms-2"
-                            onClick={() => {
-                              setReservationToDelete(res.id);
-                              setShowConfirmToast(true);
-                            }}
-                          />
-                        </ListGroup.Item>
-                      ))}
-                    </ListGroup>
-                  )}
+                )}
 
-                  {/* Sezione Prestiti */}
-                  <p className="mb-2 mt-4 d-flex align-items-center justify-content-center gap-2">
-                    <img
-                      src="/img/books-icons/books.png"
-                      alt="books"
-                      height="25"
-                    />
-                    Prestiti
+                {/* Sezione Prenotazioni */}
+                <p className="mb-2 mt-3 d-flex align-items-center justify-content-center gap-2">
+                  <img
+                    src="/img/tearoom/herbal-tea.png"
+                    alt="tea"
+                    height="25"
+                  />
+                  Prenotazioni
+                </p>
+                {reservations.length === 0 ? (
+                  <p className="text-muted text-center">
+                    Nessuna prenotazione attiva
                   </p>
-                  {borrows.length === 0 ? (
-                    <p className="text-muted text-center">
-                      Nessun prestito attivo
-                    </p>
-                  ) : (
-                    <ListGroup>
-                      {borrows.map((b) => (
-                        <ListGroup.Item key={`borrow-${b.id}`}>
-                          <div className="d-flex justify-content-between align-items-start gap-4">
-                            <div>
-                              <strong>{b.bookTitle}</strong> –{" "}
-                              <span className="text-muted">
-                                Scadenza: {b.dueDate}
-                                {b.returned && (
-                                  <span className="text-success ms-2">
-                                    (restituito)
+                ) : (
+                  <ListGroup className="mb-3">
+                    {reservations.map((res) => (
+                      <ListGroup.Item key={`res-${res.id}`}>
+                        <strong>{res.tearoomZone?.name}</strong> – {res.date} (
+                        {res.timeSlot.toLowerCase()})
+                        <img
+                          src="/img/navbar-icons/bin.png"
+                          alt="Rimuovi"
+                          height="20"
+                          className="bin-icon ms-2"
+                          onClick={() => {
+                            setReservationToDelete(res.id);
+                            setShowConfirmToast(true);
+                          }}
+                        />
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                )}
+
+                {/* Sezione Prestiti */}
+                <p className="mb-2 mt-4 d-flex align-items-center justify-content-center gap-2">
+                  <img
+                    src="/img/books-icons/books.png"
+                    alt="books"
+                    height="25"
+                  />
+                  Prestiti
+                </p>
+                {borrows.length === 0 ? (
+                  <p className="text-muted text-center">
+                    Nessun prestito attivo
+                  </p>
+                ) : (
+                  <ListGroup>
+                    {borrows.map((b) => (
+                      <ListGroup.Item key={`borrow-${b.id}`}>
+                        <div className="d-flex justify-content-between align-items-start gap-4">
+                          <div>
+                            <strong>{b.bookTitle}</strong> –{" "}
+                            <span className="text-muted">
+                              Scadenza: {b.dueDate}
+                              {b.returned && (
+                                <span className="text-success ms-2">
+                                  (restituito)
+                                </span>
+                              )}
+                              {!b.returned &&
+                                new Date(b.dueDate) < new Date() && (
+                                  <span className="text-danger ms-2">
+                                    (in ritardo)
                                   </span>
                                 )}
-                                {!b.returned &&
-                                  new Date(b.dueDate) < new Date() && (
-                                    <span className="text-danger ms-2">
-                                      (in ritardo)
-                                    </span>
-                                  )}
-                              </span>
-                            </div>
+                            </span>
                           </div>
-                        </ListGroup.Item>
-                      ))}
-                    </ListGroup>
-                  )}
-                </Card.Body>
-              </Card>
-            </Col>
+                        </div>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
 
-            {/* Preferiti */}
-            <Col xs={12} md={4} lg={4}>
-              <Card className="user-card">
-                <Card.Img variant="top" src="/public/img/user/fav.png" />
-                <Card.Body>
-                  {favorites.length === 0 ? (
-                    <p className="text-muted">Nessun preferito</p>
-                  ) : (
+          {/* Carrello */}
+          <Col xs={12} md={4} lg={4}>
+            <Card className="user-card">
+              <Card.Img variant="top" src="/public/img/user/cart.png" />
+              <Card.Body>
+                {cartItems.length === 0 ? (
+                  <p className="text-muted">Il carrello è vuoto</p>
+                ) : (
+                  <>
                     <ListGroup>
-                      {favorites.map((book) => (
+                      {cartItems.map((item) => (
                         <ListGroup.Item
-                          key={book.bookId}
-                          className="d-flex justify-content-between align-items-center"
+                          key={item.id}
+                          className="d-flex justify-content-between align-items-center text-start text-wrap"
                         >
-                          <div className="d-flex align-items-center justify-content-between w-100">
-                            <div>
-                              <img
-                                src="/img/user-icons/heart.png"
-                                alt="Rimuovi"
-                                height="20"
-                                className="bin-icon me-2"
-                                onClick={() => {
-                                  console.log("CLICK SU:", book);
-                                  dispatch(removeFavorite(book.bookId));
-                                }}
-                              />
-                              <strong>{book.title}</strong>{" "}
-                              <span>- {book.author}</span>
+                          <div
+                            style={{
+                              maxWidth: "180px",
+                              wordBreak: "break-word",
+                            }}
+                          >
+                            <span>
+                              <b>{item.title}</b> - {item.author}
+                              {item.quantity > 1 && ` ×${item.quantity}`}
+                            </span>
+                          </div>
+                          <div className="d-flex align-items-center gap-1">
+                            <span
+                              style={{
+                                whiteSpace: "nowrap",
+                                fontSize: "1rem",
+                              }}
+                            >
+                              {(item.price * item.quantity).toFixed(2)} €
+                            </span>
+                            <button
+                              onClick={() => {
+                                const token = localStorage.getItem("jwtToken");
+                                fetch(
+                                  `http://localhost:8080/cart-items/${item.id}`,
+                                  {
+                                    method: "DELETE",
+                                    headers: {
+                                      Authorization: `Bearer ${token}`,
+                                    },
+                                  }
+                                )
+                                  .then((res) => {
+                                    if (!res.ok)
+                                      throw new Error("Errore nella rimozione");
+                                    dispatch(fetchUserCart());
+                                  })
+                                  .catch((err) =>
+                                    console.error("Errore:", err)
+                                  );
+                              }}
+                              className="btn btn-sm p-0 border-0 bg-transparent d-flex align-items-center"
+                              title="Rimuovi dal carrello"
+                            >
                               <img
                                 src="/img/navbar-icons/bin.png"
                                 alt="Rimuovi"
-                                height="20"
-                                className="bin-icon ms-2"
-                                onClick={() => {
-                                  console.log("CLICK SU:", book);
-                                  dispatch(removeFavorite(book.bookId));
-                                }}
+                                height="17"
+                                className="ms-2"
                               />
-                            </div>
+                            </button>
                           </div>
                         </ListGroup.Item>
                       ))}
                     </ListGroup>
-                  )}
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </div>
+                    <div className="total px-3 py-2">
+                      Totale:{" "}
+                      {cartItems
+                        .reduce(
+                          (sum, item) => sum + item.price * item.quantity,
+                          0
+                        )
+                        .toFixed(2)}{" "}
+                      €
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="w-100 mt-2"
+                        onClick={() => navigate("/checkout")}
+                      >
+                        Paga
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+
+          {/* Preferiti */}
+          <Col xs={12} md={4} lg={4}>
+            <Card className="user-card">
+              <Card.Img variant="top" src="/public/img/user/fav.png" />
+              <Card.Body>
+                {favorites.length === 0 ? (
+                  <p className="text-muted">Nessun preferito</p>
+                ) : (
+                  <ListGroup>
+                    {favorites.map((book) => (
+                      <ListGroup.Item
+                        key={book.bookId}
+                        className="d-flex justify-content-between align-items-center"
+                      >
+                        <div className="d-flex align-items-center justify-content-between w-100">
+                          <div>
+                            <img
+                              src="/img/user-icons/heart.png"
+                              alt="Rimuovi"
+                              height="20"
+                              className="bin-icon me-2"
+                              onClick={() => {
+                                console.log("CLICK SU:", book);
+                                dispatch(removeFavorite(book.bookId));
+                              }}
+                            />
+                            <strong>{book.title}</strong>{" "}
+                            <span>- {book.author}</span>
+                            <img
+                              src="/img/navbar-icons/bin.png"
+                              alt="Rimuovi"
+                              height="20"
+                              className="bin-icon ms-2"
+                              onClick={() => {
+                                console.log("CLICK SU:", book);
+                                dispatch(removeFavorite(book.bookId));
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
       </Container>
 
       <ToastContainer

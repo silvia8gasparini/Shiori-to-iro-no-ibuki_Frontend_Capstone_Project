@@ -83,7 +83,7 @@ const Tearoom = () => {
 
         <Row className="g-4 justify-content-center">
           {zone.map((zona) => (
-            <Col key={zona.id} md={6} lg={3}>
+            <Col key={zona.id} xs={12} md={6} lg={3}>
               <Card className="text-center shadow-sm h-100 fade-in">
                 <Card.Img variant="top" src={zona.imageUrl} />
                 <Card.Body>
@@ -110,7 +110,7 @@ const Tearoom = () => {
         </Row>
 
         <div className="d-flex justify-content-center mt-4 gap-3">
-          <h3 className="mb-4 text-center">Tutte le zone sono pet friendly!</h3>
+          <h3 className="mb-4 text-center">Tutte le aree sono pet friendly!</h3>
           <img src="/img/tearoom/pet.png" alt="pet" className="pet-icon" />
         </div>
 

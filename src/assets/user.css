@@ -43,6 +43,7 @@
 
 .card {
    background-color: rgb(245,242,241) !important;
+   margin: 0 auto;
 }
 
 .login-form input {
@@ -95,4 +96,30 @@
 
 .user-card p {
   font-size: 1.5rem;
+}
+
+
+@media (max-width: 850px) {  
+.user-welcome {
+    font-size: 0.8rem;
+  }
+
+.kitsune {
+  width: 40px;
+  margin-top: -8px;
+}
+
+}
+
+@media (max-width: 576px) {
+.user-welcome {
+  font-size: 0.7rem;
+}
+
+.kitsune {
+  width: 40px;
+  margin-top: -8px;
+  margin-right: 12px;
+}
+
 }
