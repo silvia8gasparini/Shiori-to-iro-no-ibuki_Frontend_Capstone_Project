@@ -49,7 +49,7 @@ const UserPage = () => {
         <header className="user-welcome d-flex align-items-center justify-content-center gap-3 mb-5 mx-3">
           {user && <h2>Benvenutə nel tuo spazio personale, {user.name}!</h2>}{" "}
           <img
-            src="/public/img/navbar-icons/kitsune.png"
+            src="/img/navbar-icons/kitsune.png"
             alt="kitsune"
             width="50"
             className="kitsune"
@@ -60,7 +60,7 @@ const UserPage = () => {
           {/* Prenotazioni */}
           <Col xs={12} md={4} lg={4}>
             <Card className="user-card">
-              <Card.Img variant="top" src="/public/img/user/card.png" />
+              <Card.Img variant="top" src="/img/user/card.png" />
               <Card.Body>
                 {user?.digitalCard && (
                   <p className="digital-card mb-3">
@@ -150,7 +150,7 @@ const UserPage = () => {
           {/* Carrello */}
           <Col xs={12} md={4} lg={4}>
             <Card className="user-card">
-              <Card.Img variant="top" src="/public/img/user/cart.png" />
+              <Card.Img variant="top" src="/img/user/cart.png" />
               <Card.Body>
                 {cartItems.length === 0 ? (
                   <p className="text-muted">Il carrello è vuoto</p>
@@ -246,7 +246,7 @@ const UserPage = () => {
           {/* Preferiti */}
           <Col xs={12} md={4} lg={4}>
             <Card className="user-card">
-              <Card.Img variant="top" src="/public/img/user/fav.png" />
+              <Card.Img variant="top" src="/img/user/fav.png" />
               <Card.Body>
                 {favorites.length === 0 ? (
                   <p className="text-muted">Nessun preferito</p>
@@ -312,7 +312,7 @@ const UserPage = () => {
           </Toast.Header>
           <Toast.Body>
             <img
-              src="/public/img/neko-thor2.png"
+              src="/img/neko-thor2.png"
               alt="fat-cat"
               style={{ width: "320px" }}
             />

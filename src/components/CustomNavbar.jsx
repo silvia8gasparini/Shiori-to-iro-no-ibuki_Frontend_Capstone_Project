@@ -234,7 +234,7 @@ const CustomNavbar = () => {
                         Ciao, {user.name}!
                       </span>
                       <img
-                        src="/public/img/navbar-icons/bamboo.png"
+                        src="/img/navbar-icons/bamboo.png"
                         alt="bamboo"
                         height="35"
                         style={{ filter: "grayscale(50%)" }}
@@ -296,7 +296,7 @@ const CustomNavbar = () => {
           </Toast.Header>
           <Toast.Body>
             <img
-              src="/public/img/neko-thor1.png"
+              src="/img/neko-thor1.png"
               alt="neko-thor"
               style={{ width: "320px" }}
             />

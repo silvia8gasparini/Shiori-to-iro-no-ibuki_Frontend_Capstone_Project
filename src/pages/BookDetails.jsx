@@ -164,7 +164,7 @@ export default function BookDetails() {
                   <div className="d-flex align-items-center justify-content-center gap-2">
                     Aggiunto al carrello!
                     <img
-                      src="/public/img/books-icons/add-to-cart.png"
+                      src="/img/books-icons/add-to-cart.png"
                       alt="check"
                       height="20"
                       style={{ width: "20px" }}
@@ -182,7 +182,7 @@ export default function BookDetails() {
                   <div className="d-flex align-items-center justify-content-center gap-2">
                     Libro preso in prestito!
                     <img
-                      src="/public/img/books-icons/borrow.png"
+                      src="/img/books-icons/borrow.png"
                       alt="borrow"
                       height="20"
                       style={{ width: "20px" }}

@@ -63,7 +63,7 @@ const BookCard = ({ book }) => {
             <div className="d-flex align-items-center justify-content-center gap-2">
               Aggiunto al carrello!
               <img
-                src="/public/img/books-icons/add-to-cart.png"
+                src="/img/books-icons/add-to-cart.png"
                 alt="check"
                 height="20"
                 style={{ marginTop: "0px", width: "20px" }}

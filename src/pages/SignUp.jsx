@@ -161,7 +161,7 @@ export default function SignUp() {
           </Toast.Header>
           <Toast.Body>
             <img
-              src="/public/img/neko-thor3.png"
+              src="/img/neko-thor3.png"
               alt="fat-cat"
               style={{ width: "320px" }}
             />
