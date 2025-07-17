@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, "");
+
 export const fetchBooksByMicroSeasonId = createAsyncThunk(
   "books/fetchByMicroSeasonId",
   async (microSeasonId) => {
-    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/books/microseason/${microSeasonId}`);
+    const res = await fetch(`${baseUrl}/books/microseason/${microSeasonId}`);
     if (!res.ok) throw new Error("Errore nel recupero dei libri");
     return await res.json();
   }
@@ -12,7 +14,7 @@ export const fetchBooksByMicroSeasonId = createAsyncThunk(
 export const fetchBookById = createAsyncThunk(
   "books/fetchBookById",
   async (bookId) => {
-    const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/books/${bookId}`);
+    const res = await fetch(`${baseUrl}/books/${bookId}`);
     if (!res.ok) throw new Error("Errore nel recupero del libro");
     return await res.json();
   }
