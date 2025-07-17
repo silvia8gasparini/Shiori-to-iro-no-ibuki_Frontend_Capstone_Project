@@ -1,3 +1,4 @@
+import React from "react";
 import { Container } from "react-bootstrap";
 import { Facebook, Instagram, TwitterX, Youtube } from "react-bootstrap-icons";
 
