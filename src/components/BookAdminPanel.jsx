@@ -15,7 +15,7 @@ export default function BookAdminPanel() {
 
     try {
       const response = await fetch(
-        `https://desperate-hillary-silviagasparini-906caa83.koyeb.app/books?page=0&size=1000`,
+        `${import.meta.env.VITE_API_BASE_URL}/books?page=0&size=1000`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
