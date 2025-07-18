@@ -165,7 +165,7 @@ const Welcome = () => {
         </Col>
 
         <Col xs={12} sm={4}>
-          <p className="paragraph">いらっしゃいませ！ Benvenutə! </p>
+          <p className="paragraph">いらっしゃいませ！Benvenutə! </p>
         </Col>
 
         <Col xs={12} sm={4}>
