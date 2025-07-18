@@ -5,7 +5,7 @@ const PayPalButton = ({ amount }) => {
     const token = localStorage.getItem("jwtToken");
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}paypal/create?amount=` + amount,
+        `${import.meta.env.VITE_API_BASE_URL}/paypal/create?amount=` + amount,
         {
           method: "POST",
           headers: {
