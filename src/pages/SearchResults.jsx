@@ -9,6 +9,7 @@ const SearchResults = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get("q") || "";
+  const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, "");
 
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ const SearchResults = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `/books/search?q=${encodeURIComponent(
+          `${baseUrl}/books/search?q=${encodeURIComponent(
             query
           )}&page=${currentPage}&size=${pageSize}`
         );
