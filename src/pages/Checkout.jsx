@@ -26,7 +26,7 @@ const Checkout = () => {
         const response = await fetch(
           `${
             import.meta.env.VITE_API_BASE_URL
-          }paypal/capture?orderId=${orderId}`,
+          }/paypal/capture?orderId=${orderId}`,
           {
             method: "POST",
             headers: {
