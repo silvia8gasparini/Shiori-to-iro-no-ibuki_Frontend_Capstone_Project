@@ -44,7 +44,6 @@ export default function Backoffice() {
           </button>
         </div>
 
-        {/* Area contenuto */}
         <div className="section-wrapper">
           {activeSection === "books" && <BookAdminPanel />}
           {activeSection === "reservations" && <ReservationAdminPanel />}

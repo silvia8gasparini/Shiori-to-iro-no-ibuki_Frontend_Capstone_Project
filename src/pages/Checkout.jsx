@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Alert,
+  Spinner,
+  ListGroup,
+} from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import PayPalButton from "../components/PayPalButton";
 import { Link, useSearchParams } from "react-router-dom";
+import PayPalButton from "../components/PayPalButton";
 import CustomNavbar from "../components/CustomNavbar";
-import { Container, Row, Col, Alert, Spinner } from "react-bootstrap";
 import { clearCart } from "../redux/Cartslice";
 import "../assets/paypal.css";
 
@@ -88,31 +95,44 @@ const Checkout = () => {
             )}
 
             {!orderId && cartItems.length > 0 && (
-              <>
-                <ul className="list-group mb-4 checkout-font">
+              <div>
+                <ListGroup className="mb-4 checkout-font">
+                  <ListGroup.Item>
+                    <Row className="fw-bold">
+                      <Col xs={8}>Articolo</Col>
+                      <Col xs={4} className="text-end">
+                        Prezzo
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+
                   {cartItems.map((item, index) => (
-                    <li
-                      key={index}
-                      className="list-group-item d-flex justify-content-between"
-                    >
-                      <div>
-                        <strong>{item.title}</strong> di {item.author}
-                      </div>
-                      <div className="checkout-font">
-                        {item.price.toFixed(2)} €
-                      </div>
-                    </li>
+                    <ListGroup.Item key={index}>
+                      <Row>
+                        <Col xs={8} className="text-start">
+                          <strong>{item.title}</strong> di {item.author}
+                        </Col>
+                        <Col xs={4} className="text-end">
+                          {item.price.toFixed(2)} €
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
                   ))}
-                  <li className="list-group-item d-flex justify-content-between">
-                    <strong>Totale</strong>
-                    <strong>{totalAmount} €</strong>
-                  </li>
-                </ul>
+
+                  <ListGroup.Item>
+                    <Row className="fw-bold">
+                      <Col xs={8}>Totale</Col>
+                      <Col xs={4} className="text-end">
+                        {totalAmount} €
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                </ListGroup>
 
                 <div className="text-center">
                   <PayPalButton amount={totalAmount} />
                 </div>
-              </>
+              </div>
             )}
           </Col>
         </Row>

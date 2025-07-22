@@ -47,7 +47,6 @@ const booksSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
-
        .addCase(fetchBookById.pending, (state) => {
         state.bookDetails.loading = true;
         state.bookDetails.error = null;

@@ -57,7 +57,6 @@ const UserPage = () => {
         </header>
 
         <Row className="justify-content-center">
-          {/* Prenotazioni */}
           <Col xs={12} md={4} lg={4}>
             <Card className="user-card">
               <Card.Img variant="top" src="/img/user/card.png" />
@@ -68,8 +67,6 @@ const UserPage = () => {
                     <strong>{user.digitalCard.cardNumber}</strong>
                   </p>
                 )}
-
-                {/* Sezione Prenotazioni */}
                 <p className="mb-2 mt-3 d-flex align-items-center justify-content-center gap-2">
                   <img
                     src="/img/tearoom/herbal-tea.png"
@@ -102,8 +99,6 @@ const UserPage = () => {
                     ))}
                   </ListGroup>
                 )}
-
-                {/* Sezione Prestiti */}
                 <p className="mb-2 mt-4 d-flex align-items-center justify-content-center gap-2">
                   <img
                     src="/img/books-icons/books.png"
@@ -146,8 +141,6 @@ const UserPage = () => {
               </Card.Body>
             </Card>
           </Col>
-
-          {/* Carrello */}
           <Col xs={12} md={4} lg={4}>
             <Card className="user-card">
               <Card.Img variant="top" src="/img/user/cart.png" />
@@ -242,8 +235,6 @@ const UserPage = () => {
               </Card.Body>
             </Card>
           </Col>
-
-          {/* Preferiti */}
           <Col xs={12} md={4} lg={4}>
             <Card className="user-card">
               <Card.Img variant="top" src="/img/user/fav.png" />

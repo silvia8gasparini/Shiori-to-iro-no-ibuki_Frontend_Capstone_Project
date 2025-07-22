@@ -9,7 +9,6 @@ import { setCartItems } from "./Cartslice";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, "");
 
-// Utility per fetch autenticato
 const authFetch = (url, options = {}) => {
   const token = localStorage.getItem("jwtToken");
   return fetch(`${baseUrl}${url.startsWith("/") ? "" : "/"}${url}`, {
@@ -22,7 +21,6 @@ const authFetch = (url, options = {}) => {
   });
 };
 
-// FETCH prenotazioni utente
 export const fetchReservations = () => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
   const token = localStorage.getItem("jwtToken");
@@ -55,7 +53,6 @@ export const fetchReservations = () => async (dispatch, getState) => {
   }
 };
 
-// CREA nuova prenotazione
 export const createReservation = (slot, zoneId) => async (dispatch, getState) => {
   const { user } = getState().user;
 
@@ -100,7 +97,6 @@ export const createReservation = (slot, zoneId) => async (dispatch, getState) =>
   }
 };
 
-// RIMUOVI prenotazione
 export const removeReservation = (id) => async (dispatch, getState) => {
   const token = localStorage.getItem("jwtToken");
   const userId = getState().user.user?.id;
@@ -123,7 +119,6 @@ export const removeReservation = (id) => async (dispatch, getState) => {
   }
 };
 
-// FETCH preferiti
 export const fetchFavorites = () => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
    const token = localStorage.getItem("jwtToken");
@@ -146,7 +141,6 @@ export const fetchFavorites = () => async (dispatch, getState) => {
   }
 };
 
-// AGGIUNGI preferito
 export const addFavorite = (book) => async (dispatch, getState) => {
   const { user, favorites } = getState().user;
   if (!user) return;
@@ -170,7 +164,6 @@ export const addFavorite = (book) => async (dispatch, getState) => {
   }
 };
 
-// RIMUOVI preferito
 export const removeFavorite = (bookId) => async (dispatch, getState) => {
   const { user, favorites } = getState().user;
   if (!user || !bookId) return;
@@ -198,7 +191,6 @@ export const removeFavorite = (bookId) => async (dispatch, getState) => {
   }
 };
 
-// FETCH carrello
 export const fetchCartItems = () => async (dispatch, getState) => {
   const userId = getState().user.user?.id;
   if (!userId) return;
@@ -237,7 +229,6 @@ export const fetchCartItems = () => async (dispatch, getState) => {
   }
 };
 
-// FETCH prestiti
 export const fetchBorrows = () => async (dispatch, getState) => {
   const user = getState().user.user;
   const userId = user?.id;
@@ -273,7 +264,6 @@ export const fetchBorrows = () => async (dispatch, getState) => {
   }
 };
 
-// AGGIUNGI prestito
 export const addBorrow = (borrowData) => async (dispatch, getState) => {
   const { user, borrows } = getState().user;
   if (!user) return;
@@ -296,7 +286,6 @@ export const addBorrow = (borrowData) => async (dispatch, getState) => {
   }
 };
 
-// RIMUOVI prestito
 export const removeBorrow = (borrowId) => async (dispatch, getState) => {
   const { user, borrows } = getState().user;
   if (!user || !borrowId) return;
@@ -321,7 +310,6 @@ export const removeBorrow = (borrowId) => async (dispatch, getState) => {
   }
 };
 
-// LOGOUT
 export const performLogout = () => (dispatch, getState) => {
   const userId = getState().user.user?.id;
   dispatch(logout());
