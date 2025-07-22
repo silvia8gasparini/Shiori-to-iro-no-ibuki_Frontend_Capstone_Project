@@ -1,12 +1,70 @@
-# React + Vite
+# Il respiro dei colori tra le pagine – 書織と色の息吹
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una web app full-stack che fonde un e-commerce librario con una tea-room, ispirata all’estetica giapponese dei colori e delle 72 micro-stagioni.  
+L’obiettivo è offrire un’esperienza narrativa e sensoriale in cui ogni utente può:
 
-Currently, two official plugins are available:
+- approfondire la storia e la cultura dei colori giapponesi;
+- acquistare o prendere in prestito libri tematici;
+- prenotare un posto in una tea-room;
+- registrarsi e gestire una tessera digitale personale per prestiti e prenotazioni.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Tecnologie utilizzate
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Front-End
+- React + Vite
+- Redux
+- React Router DOM
+- Bootstrap & React-Bootstrap
+- OpenWeatherMap API (meteo per città giapponesi)
+
+### Back-End
+- Spring Boot
+- Java 21
+- Spring Security + JWT
+- JPA / Hibernate
+- PostgreSQL
+- API REST personalizzate
+- Cloudinary (per gestione immagini)
+
+---
+
+## Funzionalità principali
+
+- Tema stagionale dinamico
+- Sistema acquisti/prestiti per libri a tema
+- Prenotazione tea-room a tema
+- Tessera digitale utente (per gestione personale)
+- Registrazione e login con JWT
+- Widget meteo geolocalizzato (città giapponesi)
+- Approfondimenti culturali sui colori stagionali giapponesi
+
+---
+
+## Link Repository Back-end
+[https://github.com/silvia8gasparini/Shiori-to-iro-no-ibuki_Backend_Capstone_Project.git]
+
+---
+
+## Deployment
+
+- [Frontend Deploy – Vercel](https://shiori-to-iro-no-ibuki-frontend-cap.vercel.app/)
+- [Backend Deploy – Koyreb](https://desperate-hillary-silviagasparini-906caa83.koyeb.app/)
+
+---
+
+## Autrice
+
+**Silvia Gasparini**  
+Full-Stack Developer in formazione presso [EPICODE](https://epicode.com)  
+Creatrice del concept e realizzazione completa di front-end e back-end  
+Appassionata di cultura giapponese, letteratura, design narrativo e sviluppo esperienziale  
+[LinkedIn](https://linkedin.com/in/silviagasparini8)
+[GitHub](https://github.com/silvia8gasparini)
+
+---
+
+> 名は嬰物の見事に散ることよ
+> “Ciliegi: un nome e ogni cosa sfiorisce nello splendore”  
+> — *Natsume Sōseki*
