@@ -181,7 +181,7 @@ const UserPage = () => {
                                 fetch(
                                   `${
                                     import.meta.env.VITE_API_BASE_URL
-                                  }cart-items/${item.id}`,
+                                  }/cart-items/${item.id}`,
                                   {
                                     method: "DELETE",
                                     headers: {
