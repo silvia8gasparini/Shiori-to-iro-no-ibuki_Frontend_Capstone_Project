@@ -63,7 +63,7 @@ const Welcome = () => {
 
   useEffect(() => {
     dispatch(fetchCurrentMicroSeason());
-    dispatch(fetchNextMicroSeasons(12));
+    dispatch(fetchNextMicroSeasons(72));
 
     const cities = [
       "Kyoto",
