@@ -1,15 +1,15 @@
 
-.welcome-section{
+.welcome-section {
   margin-top: 1em;
 }
 
-.paragraph{
+.paragraph {
   font-family: 'Yuji Syuku';
   font-size: 2em;
-  margin-top: 1.2em;
+  margin-top: 0.7em;
 }
 
-.weather{
+.weather {
   font-size: 1.3rem;
   padding: 0.4em 0.8em;
 }
@@ -26,6 +26,10 @@
 .season-title-jp {
   font-family: 'Klee One', serif;
   font-size: 1.5rem;
+}
+
+.welcome-icon {
+  height: 50px;
 }
 
 p {
@@ -69,6 +73,10 @@ p {
 
 p {
    font-size: 0.9rem;
+}
+
+.welcome-icon {
+  height: 35px;
 }
 
 }
