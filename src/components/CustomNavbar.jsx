@@ -65,7 +65,7 @@ const CustomNavbar = () => {
             alt="logo"
             className="logo-mobile me-2"
           />
-          <p className="title1 mb-0">Il respiro dei colori tra le pagine</p>
+          {/* <p className="title1 mb-0">Il respiro dei colori tra le pagine</p>  */}
         </div>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Row className="w-100 align-items-center text-center">
