@@ -1,11 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Amarante&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Reenie+Beanie&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Klee+One&display=swap');
 
 html, body {
   font-family: 'Caveat';
@@ -22,7 +17,7 @@ html, body {
 
 .custom-navbar {
   width: 100%;
-  font-family: 'Hina Mincho';
+  font-family: 'Caveat';
   font-size: 1.5em;
   background-color: rgb(245,242,241);
   position: relative;
@@ -100,9 +95,7 @@ html, body {
 .search-button {
   padding: 0.5rem 1.3rem !important;
   border-radius: 10px;
-  white-space: nowrap;
-  font-size: 0.6em;
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 
 .logo {
@@ -149,13 +142,17 @@ html, body {
   margin-right: 20px;
 }
 
-@media (max-width: 850px) {  
-.custom-navbar {
-  font-size: 1.4em;
+.hello-user .bamboo-icon {
+  margin-bottom: 5px;
 }
 
-.responsive-icon {
-  width: 22px;
+@media (max-width: 850px) {  
+.custom-navbar {
+  font-size: 1.1em;
+}
+
+.responsive-icon, .rescart {
+  width: 18px;
 }
 
 .title {
@@ -171,25 +168,17 @@ html, body {
 }
 
 .search-form {
-  max-width: 100%;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1rem; 
-  margin-top: 0.5rem; 
-  padding: 0.2rem 0.4rem;
+  flex-direction: row;
+  align-items: stretch;
+  width: 200px;
+
 }
 
-.search-input {
-  margin-left: 0.6rem; 
+.search-input, .search-button {
   width: 100%;
-  max-width: 90px;
-  font-size: 0.5em;
-}
-
-.search-button {
-  width: 80%;
   max-width: 80px;
+  font-size: 0.9em;
+  padding: 0.3rem 1rem !important;
 }
 
 }
@@ -199,12 +188,28 @@ html, body {
   width: 25px;
 }
 
+.rescart {
+width: 25px;
+}
+
 .logo-mobile, .title1 {
   margin-top: 0.5rem;
 }
 
 h2.results-title {
   font-size: 1.9em;
+}
+
+.search-form {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.search-input, .search-button {
+  width: 100%;
+  max-width: 100px;
+  font-size: 0.85em;
 }
 
 }

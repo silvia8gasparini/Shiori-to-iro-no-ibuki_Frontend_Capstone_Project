@@ -167,7 +167,6 @@ const Welcome = () => {
         <Col xs={12} sm={4}>
           <p className="welcomep">しおりと色の息吹</p>
           <p className="welcomep-it">Il respiro dei colori tra le pagine</p>
-          {/* <p className="paragraph">Benvenutə!</p> */}
         </Col>
 
         <Col xs={12} sm={4}>

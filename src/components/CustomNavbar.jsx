@@ -231,7 +231,7 @@ const CustomNavbar = () => {
                       src="/img/navbar-icons/bamboo.png"
                       alt="bamboo"
                       height="35"
-                      style={{ filter: "grayscale(50%)" }}
+                      className="bamboo-icon"
                     />
                   </div>
                 }
