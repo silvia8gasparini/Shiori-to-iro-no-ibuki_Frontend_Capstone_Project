@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Container, Row, Col, Table } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import CustomNavbar from "../components/CustomNavbar";
 import CustomFooter from "../components/CustomFooter";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -62,7 +62,7 @@ export default function ColorDetails() {
         </Row>
       </Container>
 
-      <Container className="mt-5 mb-5 text-start px-5">
+      <Container className="mt-5 mb-5">
         <div className="d-flex justify-content-center gap-3">
           <h3 className="details-title mb-4 text-center">Dettagli colore</h3>
           <img
@@ -72,44 +72,80 @@ export default function ColorDetails() {
           />
         </div>
 
-        <div className="color-rgb mb-4 fade-down-cascade fade-delay-1">
-          <div className="d-flex gap-3 text-center">
-            <strong>RGB</strong>
-            <img
-              src="/img/colors-icons/wheel.png"
-              alt="wheel"
-              className="details-icon"
-            />
-          </div>
-          <p className="color-p">{selectedColor.rgb}</p>
-        </div>
+        <Row className="mb-4">
+          <Col md={6}>
+            <Card
+              className="info-card fade-down-cascade fade-delay-1"
+              style={{
+                border: `3px solid ${selectedColor.rgb}`,
+                borderRadius: "15px",
+              }}
+            >
+              <Card.Body>
+                <div className="d-flex justify-content-center align-items-center gap-2 mb-2">
+                  <strong>RGB</strong>
+                  <img
+                    src="/img/colors-icons/wheel.png"
+                    alt="wheel"
+                    className="details-icon"
+                  />
+                </div>
+                <p className="color-p">{selectedColor.rgb}</p>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
 
-        <div className="description mb-4 fade-down-cascade fade-delay-2">
-          <div className="d-flex gap-3">
-            <strong>Descrizione</strong>
-            <img
-              src="/img/colors-icons/pencil.png"
-              alt="paper"
-              className="details-icon"
-            />
-          </div>
+        <Row className="mb-4 justify-content-end">
+          <Col md={6}>
+            <Card
+              className="info-card fade-down-cascade fade-delay-2"
+              style={{
+                border: `3px solid ${selectedColor.rgb}`,
+                borderRadius: "15px",
+              }}
+            >
+              <Card.Body className="text-center">
+                <div className="d-flex justify-content-center align-items-center gap-2 mb-2">
+                  <strong>Descrizione</strong>
+                  <img
+                    src="/img/colors-icons/pencil.png"
+                    alt="paper"
+                    className="details-icon"
+                  />
+                </div>
+                <p className="color-p">
+                  {selectedColor.description ||
+                    "Nessuna descrizione disponibile."}
+                </p>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
 
-          <p className="color-p">
-            {selectedColor.description || "Nessuna descrizione disponibile."}
-          </p>
-        </div>
-
-        <div className="story mb-3 fade-down-cascade fade-delay-3">
-          <div className="d-flex gap-3">
-            <strong>Un po' di storia</strong>
-            <img
-              src="/img/colors-icons/parchment.png"
-              alt="wheel"
-              className="details-icon"
-            />
-          </div>
-          <p className="color-p">{selectedColor.details || "—"}</p>
-        </div>
+        <Row className="mb-4">
+          <Col md={6}>
+            <Card
+              className="info-card fade-down-cascade fade-delay-3"
+              style={{
+                border: `3px solid ${selectedColor.rgb}`,
+                borderRadius: "15px",
+              }}
+            >
+              <Card.Body>
+                <div className="d-flex justify-content-center align-items-center gap-2 mb-2">
+                  <strong>Un po' di storia</strong>
+                  <img
+                    src="/img/colors-icons/parchment.png"
+                    alt="parchment"
+                    className="details-icon"
+                  />
+                </div>
+                <p className="color-p">{selectedColor.details || "—"}</p>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
       </Container>
 
       <CustomFooter />

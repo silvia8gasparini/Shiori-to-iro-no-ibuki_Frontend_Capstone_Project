@@ -3,15 +3,33 @@
   margin-top: 1em;
 }
 
-.paragraph {
+.welcomep{
   font-family: 'Yuji Syuku';
-  font-size: 2em;
-  margin-top: 0.7em;
+  font-size: 3.3em;
+  line-height: 1.5;
+  margin: 0;             
 }
+
+.welcomep-it{
+  font-family: 'Caveat';
+  font-size: 1.6em;
+  line-height: 2;
+  margin: 0;             
+}
+
+.paragraph {
+  font-family: 'Caveat';
+  font-size: 1.8em;
+  margin-top: 0.8em;
+} 
 
 .weather {
   font-size: 1.3rem;
   padding: 0.4em 0.8em;
+}
+
+.weather strong {
+   font-size: 1.6rem;
 }
 
 .weather-icon {
@@ -29,7 +47,7 @@
 }
 
 .welcome-icon {
-  height: 50px;
+  height: 45px;
 }
 
 p {

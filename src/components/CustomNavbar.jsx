@@ -66,9 +66,6 @@ const CustomNavbar = () => {
             alt="logo"
             className="logo-mobile me-2 flex-shrink-0"
           />
-          <span className="title1 mb-0 text-truncate">
-            Il respiro dei colori tra le pagine
-          </span>
         </Navbar.Brand>
         <Navbar.Brand
           as={Link}
@@ -76,7 +73,6 @@ const CustomNavbar = () => {
           className="d-none d-lg-flex flex-column align-items-center ms-3"
         >
           <img src="/img/OfficialLogo.png" alt="logo" className="logo" />
-          <span className="title1">Il respiro dei colori tra le pagine</span>
         </Navbar.Brand>
         <Navbar.Collapse id="custom-navbar">
           <Nav className="me-auto align-items-md-center gap-2">
@@ -149,7 +145,7 @@ const CustomNavbar = () => {
                     <img
                       src="/img/navbar-icons/shoppingcart.png"
                       alt="cart"
-                      className="responsive-icon"
+                      className="rescart"
                     />
                     {totalItems > 0 && (
                       <span className="cart-badge badge rounded-pill bg-danger">

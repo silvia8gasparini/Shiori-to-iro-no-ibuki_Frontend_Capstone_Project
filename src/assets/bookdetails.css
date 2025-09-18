@@ -5,7 +5,7 @@
 
 strong {
   font-family: 'Caveat', cursive, serif;
-  font-size: 1.3em;
+  font-size: 1.6em;
   font-weight: lighter;
 }
 
@@ -34,6 +34,18 @@ h3 {
 .fade-in {
   opacity: 0;
   animation: fadeIn 2.5s ease-in forwards;
+}
+
+.info-card {
+  background-color: #fafafa;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 15px;
+}
+
+.info-card .color-p {
+  font-family: 'Hina Mincho';
+  line-height: 1.6;
 }
 
 @keyframes fadeIn {

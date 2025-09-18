@@ -131,7 +131,7 @@ const Welcome = () => {
 
   return (
     <Container fluid className="welcome-section mt-4">
-      <Row className="text-center">
+      <Row className="text-center align-items-center">
         <Col xs={12} sm={4}>
           {loading && <p>Caricamento micro-stagione...</p>}
           {error && <p>Errore: {error}</p>}
@@ -165,12 +165,9 @@ const Welcome = () => {
         </Col>
 
         <Col xs={12} sm={4}>
-          <p className="paragraph">いらっしゃいませ！Benvenutə! </p>
-          <img
-            src="/img/navbar-icons/ginkgo.png"
-            alt="Ginkgo"
-            className="welcome-icon"
-          />
+          <p className="welcomep">しおりと色の息吹</p>
+          <p className="welcomep-it">Il respiro dei colori tra le pagine</p>
+          {/* <p className="paragraph">Benvenutə!</p> */}
         </Col>
 
         <Col xs={12} sm={4}>
