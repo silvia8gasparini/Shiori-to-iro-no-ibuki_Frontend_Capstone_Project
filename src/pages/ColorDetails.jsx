@@ -64,7 +64,7 @@ export default function ColorDetails() {
 
       <Container className="mt-5 mb-5">
         <div className="d-flex justify-content-center gap-3">
-          <h3 className="details-title mb-4 text-center">Dettagli colore</h3>
+          <h3 className="details-title mb-5 text-center">Dettagli colore</h3>
           <img
             src="/img/colors-icons/paint.png"
             alt="paint"

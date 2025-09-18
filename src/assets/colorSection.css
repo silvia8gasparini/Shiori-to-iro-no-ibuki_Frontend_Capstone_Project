@@ -94,6 +94,17 @@
   justify-content: end;
 }
 
+.info-card {
+  border-width: 2px !important;
+  border-style: solid;
+  border-radius: 15px;
+}
+
+.info-card .color-p {
+  font-family: 'Hina Mincho', serif;
+  line-height: 1.6;
+}
+
 @media (max-width: 850px) {
 .color-text-col .kanji {
   font-size: 2rem;

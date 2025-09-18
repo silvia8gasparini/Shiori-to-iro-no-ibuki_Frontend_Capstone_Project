@@ -36,18 +36,6 @@ h3 {
   animation: fadeIn 2.5s ease-in forwards;
 }
 
-.info-card {
-  background-color: #fafafa;
-  border-width: 3px;
-  border-style: solid;
-  border-radius: 15px;
-}
-
-.info-card .color-p {
-  font-family: 'Hina Mincho';
-  line-height: 1.6;
-}
-
 @keyframes fadeIn {
   to {
     opacity: 1;

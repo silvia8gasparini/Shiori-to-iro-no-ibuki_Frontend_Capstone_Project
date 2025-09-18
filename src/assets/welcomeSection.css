@@ -4,7 +4,7 @@
 }
 
 .welcomep{
-  font-family: 'Yuji Syuku';
+  font-family: 'Hina Mincho';
   font-size: 3.3em;
   line-height: 1.5;
   margin: 0;             
@@ -13,8 +13,7 @@
 .welcomep-it{
   font-family: 'Caveat';
   font-size: 1.6em;
-  line-height: 2;
-  margin: 0;             
+  line-height: 2;           
 }
 
 .paragraph {
@@ -39,11 +38,12 @@
 .season-title {
   font-size: 1.6rem;
   padding-top: 0.4em;
+  margin-bottom: 0.5em;
 }
 
 .season-title-jp {
-  font-family: 'Klee One', serif;
-  font-size: 1.5rem;
+  font-family: 'Hina Mincho';
+  font-size: 1.8rem;
 }
 
 .welcome-icon {
@@ -80,7 +80,7 @@ p {
 } 
 
 .season-title-jp {
-  font-size: 1rem;
+  font-size: 1.4rem;
 }
 
 .season-button {
