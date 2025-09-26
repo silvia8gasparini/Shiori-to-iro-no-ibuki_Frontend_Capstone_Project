@@ -123,18 +123,14 @@
   overflow: hidden;
 }
 
+.theme-text {
+  font-size: 1.5rem;
 }
 
 .details-title {
   font-size: 2em;
 }
 
-.color-rgb strong, .description strong, .story strong {
-  font-size: 1em;
-}
-
-.theme-text {
-  font-size: 1.9rem;
 }
 
 @media (max-width: 576px) {

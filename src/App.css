@@ -202,7 +202,6 @@ h2.results-title {
 
 .search-form {
   flex-direction: column;
-  align-items: stretch;
   gap: 0.5rem;
 }
 

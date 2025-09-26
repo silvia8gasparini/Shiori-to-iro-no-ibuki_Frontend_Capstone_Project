@@ -116,25 +116,27 @@ const CustomNavbar = () => {
             </Nav.Link>
           </Nav>
 
-          <Form
-            className="d-flex my-3 my-md-0 me-4 search-form"
-            onSubmit={handleSearch}
-          >
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2 search-input"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Button
-              variant="outline-dark"
-              type="submit"
-              className="search-button"
+          <Nav className="d-flex flex-column align-items-center">
+            <Form
+              className="d-flex justify-content-center align-items-center my-md-0 me-md-4 search-form"
+              onSubmit={handleSearch}
             >
-              Search
-            </Button>
-          </Form>
+              <Form.Control
+                type="search"
+                placeholder="Cerca"
+                className="me-md-2 search-input"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Button
+                variant="outline-dark"
+                type="submit"
+                className="search-button"
+              >
+                Cerca
+              </Button>
+            </Form>
+          </Nav>
 
           <Nav className="align-items-center gap-1 me-4">
             <NavDropdown
