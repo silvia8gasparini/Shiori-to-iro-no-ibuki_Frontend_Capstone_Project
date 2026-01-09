@@ -99,7 +99,7 @@ html, body {
 }
 
 .logo {
-  height: 95px;
+  height: 90px;
   border-radius: 50%;
 }
 
@@ -171,7 +171,6 @@ html, body {
   flex-direction: row;
   align-items: stretch;
   width: 200px;
-
 }
 
 .search-input, .search-button {
