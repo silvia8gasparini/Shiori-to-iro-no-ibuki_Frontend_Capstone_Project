@@ -116,15 +116,15 @@ export default function BookDetails() {
       <CustomNavbar />
       <Container className="book-details my-5">
         <div className="d-flex justify-content-center gap-3">
-          <h3 className="details-title mb-5 text-center">Dettagli libro</h3>
+          <h4 className="details-title mb-5 text-center">Dettagli libro</h4>
           <img
             src="/img/books-icons/open-book.png"
             alt="open-book"
             className="book-icon"
           />
         </div>
-        <Row className="align-items-center">
-          <Col md={5} className="text-start mb-4">
+        <Row>
+          <Col md={5} className="align-items-start mb-4">
             <img
               src={book.imageUrl}
               alt={book.title}

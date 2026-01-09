@@ -5,7 +5,7 @@ import { fetchCurrentMicroSeason } from "../redux/currentMicroSeasonSlice";
 import { fetchNextMicroSeasons } from "../redux/nextMicroSeasonsSlice";
 import { fetchColorByMicroSeasonId } from "../redux/selectedColorSlice";
 import { fetchBooksByMicroSeasonId } from "../redux/booksSlice";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
 import "../assets/welcomeSection.css";
 
 function getRandomCities(array, count = 2) {
@@ -133,7 +133,14 @@ const Welcome = () => {
     <Container fluid className="welcome-section mt-4">
       <Row className="text-center align-items-center">
         <Col xs={12} sm={4}>
-          {loading && <p>Caricamento micro-stagione...</p>}
+          {loading && (
+            <>
+              <p>Caricamento micro-stagione</p>
+              <p>
+                <Spinner animation="border" variant="dark" />
+              </p>
+            </>
+          )}
           {error && <p>Errore: {error}</p>}
           {selectedSeason && (
             <>

@@ -27,7 +27,7 @@ const BookSection = () => {
   const handleBuy = (bookId) => navigate(`/purchase/${bookId}`);
   const handleDetails = (bookId) => navigate(`/books/${bookId}`);
 
-  if (loading) return <Spinner animation="border" variant="secondary" />;
+  if (loading) return <Spinner animation="border" variant="dark" />;
   if (error) return <Alert variant="danger">{error}</Alert>;
   if (!booksForSeason || booksForSeason.length === 0)
     return <p>Nessun libro disponibile.</p>;
