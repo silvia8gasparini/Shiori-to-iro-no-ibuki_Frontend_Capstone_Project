@@ -24,7 +24,7 @@ export default function ColorDetails() {
       <div className="d-flex flex-column" style={{ minHeight: "100vh" }}>
         <CustomNavbar />
         <Container className="flex-grow-1 text-center mt-5">
-          <p>Colore non disponibile.</p>
+          <p>Colore non disponibile</p>
         </Container>
         <CustomFooter />
       </div>
@@ -83,7 +83,7 @@ export default function ColorDetails() {
             >
               <Card.Body>
                 <div className="d-flex justify-content-center align-items-center gap-2 mb-2">
-                  <strong>RGB</strong>
+                  <strong className="fs-4">RGB</strong>
                   <img
                     src="/img/colors-icons/wheel.png"
                     alt="wheel"
@@ -107,7 +107,7 @@ export default function ColorDetails() {
             >
               <Card.Body className="text-center">
                 <div className="d-flex justify-content-center align-items-center gap-2 mb-2">
-                  <strong>Descrizione</strong>
+                  <strong className="fs-4">Descrizione</strong>
                   <img
                     src="/img/colors-icons/pencil.png"
                     alt="paper"
@@ -134,7 +134,7 @@ export default function ColorDetails() {
             >
               <Card.Body>
                 <div className="d-flex justify-content-center align-items-center gap-2 mb-2">
-                  <strong>Un po' di storia</strong>
+                  <strong className="fs-4">Un po' di storia</strong>
                   <img
                     src="/img/colors-icons/parchment.png"
                     alt="parchment"
