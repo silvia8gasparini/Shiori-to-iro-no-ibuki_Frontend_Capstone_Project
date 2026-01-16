@@ -59,7 +59,7 @@ const CustomNavbar = () => {
         <Navbar.Brand
           as={Link}
           to="/"
-          className="d-flex align-items-center d-lg-none m-0 mobile-brand flex-nowrap"
+          className="d-flex align-items-center d-lg-none mobile-brand flex-nowrap"
         >
           <img
             src="/img/OfficialLogo.png"
