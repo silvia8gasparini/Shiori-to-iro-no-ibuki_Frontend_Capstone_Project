@@ -31,7 +31,9 @@
 }
 
 .form-label {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
+  font-family: "Hina Mincho", serif;
+  font-weight: bold;
 }
 
 .custom-form input,
