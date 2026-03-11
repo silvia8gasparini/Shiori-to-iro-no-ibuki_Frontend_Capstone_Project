@@ -1,60 +1,105 @@
-# Il respiro dei colori tra le pagine – 書織と色の息吹
+# しおりと色の息吹 — Il respiro dei colori tra le pagine
+### *The Breath of Colors Between the Pages*
 
-Una web app full-stack che fonde un e-commerce librario con una tea-room, ispirata all’estetica giapponese dei colori e delle 72 micro-stagioni.  
-L’obiettivo è offrire un’esperienza narrativa e sensoriale in cui ogni utente può:
-
-- approfondire la storia e la cultura dei colori giapponesi;
-- acquistare o prendere in prestito libri tematici;
-- prenotare un posto in una tea-room;
-- registrarsi e gestire una tessera digitale personale per prestiti e prenotazioni.
+> 名は嬰物の見事に散ることよ  
+> *"Ciliegi: un nome e ogni cosa sfiorisce nello splendore"*  
+> *"Cherry blossoms: a name, and all things scatter in their glory"*  
+> — Natsume Sōseki
 
 ---
 
-## Tecnologie utilizzate
+## 🇮🇹 Italiano
 
-### Front-End
+Una web app full-stack che fonde un e-commerce librario con una tea-room virtuale, ispirata all'estetica giapponese e alle 72 micro-stagioni tradizionali.
+
+Ogni micro-stagione porta con sé un colore, una storia e una selezione di libri: l'interfaccia si aggiorna automaticamente al cambio stagionale, creando un'esperienza narrativa e visiva sempre diversa.
+
+### Funzionalità principali
+
+- **Tema dinamico stagionale** — colori, libri e contenuti cambiano automaticamente in base alle 72 micro-stagioni del calendario giapponese
+- **E-commerce librario** — acquisto e prestito di libri tematici con gestione carrello completa
+- **Prenotazione tea-room** — sistema di prenotazione per aree tematiche (tutte pet friendly 🐾)
+- **Autenticazione sicura** — registrazione, login e gestione profilo con JWT
+- **Tessera digitale utente** — per gestire prestiti attivi e prenotazioni personali
+- **Widget meteo** — condizioni meteo in tempo reale per città giapponesi tramite OpenWeatherMap API
+- **Approfondimenti culturali** — storia e significato dei colori tradizionali giapponesi
+
+### Tecnologie
+
+**Front-End**
 - React + Vite
 - Redux
 - React Router DOM
 - Bootstrap & React-Bootstrap
-- OpenWeatherMap API (meteo per città giapponesi)
+- OpenWeatherMap API
 
-### Back-End
-- Spring Boot
-- Java 21
+**Back-End**
+- Java 21 + Spring Boot
 - Spring Security + JWT
 - JPA / Hibernate
 - PostgreSQL
 - API REST personalizzate
-- Cloudinary (per gestione immagini)
+- Cloudinary
+
+### Repository e Deploy
+
+- 🔗 [Frontend – GitHub](https://github.com/silvia8gasparini/Shiori-to-iro-no-ibuki_Backend_Capstone_Project.git)
+- 🚀 [Frontend – Live su Vercel](https://shiori-to-iro-no-ibuki-frontend-cap.vercel.app/)
+- ⚙️ [Backend – Live su Koyeb](https://desperate-hillary-silviagasparini-906caa83.koyeb.app/)
 
 ---
 
-## Funzionalità principali
+## 🇬🇧 English
 
-- Tema stagionale dinamico
-- Sistema acquisti/prestiti per libri a tema
-- Prenotazione tea-room a tema
-- Tessera digitale utente (per gestione personale)
-- Registrazione e login con JWT
-- Widget meteo geolocalizzato (città giapponesi)
-- Approfondimenti culturali sui colori stagionali giapponesi
+A full-stack web app blending a literary e-commerce with a virtual tea-room, inspired by Japanese aesthetics and the traditional 72 micro-seasons.
+
+Each micro-season carries its own color, story, and curated book selection. The interface updates automatically with each seasonal transition, creating a unique narrative and visual experience throughout the year.
+
+### Key Features
+
+- **Dynamic seasonal theme** — colors, books, and content update automatically based on the 72 micro-seasons of the Japanese calendar
+- **Literary e-commerce** — purchase or borrow themed books with full cart management
+- **Tea-room booking** — reservation system for themed areas (all pet friendly 🐾)
+- **Secure authentication** — registration, login, and profile management via JWT
+- **Digital membership card** — personal dashboard to manage active loans and reservations
+- **Weather widget** — real-time weather for Japanese cities via OpenWeatherMap API
+- **Cultural insights** — history and meaning of traditional Japanese colors
+
+### Tech Stack
+
+**Front-End**
+- React + Vite
+- Redux
+- React Router DOM
+- Bootstrap & React-Bootstrap
+- OpenWeatherMap API
+
+**Back-End**
+- Java 21 + Spring Boot
+- Spring Security + JWT
+- JPA / Hibernate
+- PostgreSQL
+- Custom REST APIs
+- Cloudinary
+
+### Repositories & Deployment
+
+- 🔗 [Frontend – GitHub](https://github.com/silvia8gasparini/Shiori-to-iro-no-ibuki_Backend_Capstone_Project.git)
+- 🚀 [Frontend – Live on Vercel](https://shiori-to-iro-no-ibuki-frontend-cap.vercel.app/)
+- ⚙️ [Backend – Live on Koyeb](https://desperate-hillary-silviagasparini-906caa83.koyeb.app/)
 
 ---
 
-## Link Repository Back-end
-[https://github.com/silvia8gasparini/Shiori-to-iro-no-ibuki_Backend_Capstone_Project.git]
+## Autrice / Author
 
----
+**Silvia Gasparini** — Full-Stack Developer  
+Concept, design e sviluppo completo di front-end e back-end.  
+*Concept, design, and full front-end & back-end development.*
 
-## Deployment
+Appassionata di cultura giapponese, letteratura, design narrativo e sviluppo web esperienziale.  
+*Passionate about Japanese culture, literature, narrative design, and experiential web development.*
 
-- [Frontend Deploy – Vercel](https://shiori-to-iro-no-ibuki-frontend-cap.vercel.app/)
-- [Backend Deploy – Koyreb](https://desperate-hillary-silviagasparini-906caa83.koyeb.app/)
-
----
-
-## Autrice
+[LinkedIn](https://linkedin.com/in/silviagasparini8) · [GitHub](https://github.com/silvia8gasparini)
 
 **Silvia Gasparini**  
 Full-Stack Developer in formazione presso [EPICODE](https://epicode.com)  
