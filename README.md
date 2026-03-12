@@ -41,6 +41,10 @@ Ogni micro-stagione porta con sé un colore, una storia e una selezione di libri
 - API REST personalizzate
 - Cloudinary
 
+### Note sul deploy
+ 
+Il backend è ospitato su Koyeb con piano gratuito. Al primo caricamento potrebbe essere necessario attendere fino a 60 secondi per il risveglio del server (cold start). Se compare un errore CORS, è sufficiente ricaricare la pagina 🍵
+
 ### Repository e Deploy
 
 - 🔗 [Frontend – GitHub](https://github.com/silvia8gasparini/Shiori-to-iro-no-ibuki_Backend_Capstone_Project.git)
@@ -81,6 +85,10 @@ Each micro-season carries its own color, story, and curated book selection. The 
 - PostgreSQL
 - Custom REST APIs
 - Cloudinary
+
+### Deployment Notes
+ 
+The backend is hosted on Koyeb's free tier. On first load, please allow up to 60 seconds for the server to wake up (cold start). If a CORS error appears, simply refresh the page 🍵
 
 ### Repositories & Deployment
 

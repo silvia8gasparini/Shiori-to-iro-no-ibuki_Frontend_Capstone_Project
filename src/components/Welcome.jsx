@@ -19,10 +19,10 @@ const Welcome = () => {
   const dispatch = useDispatch();
 
   const { microSeason: currentMicroSeason } = useSelector(
-    (state) => state.currentMicroSeason
+    (state) => state.currentMicroSeason,
   );
   const { nextSeasons, loading, error } = useSelector(
-    (state) => state.nextMicroSeasons
+    (state) => state.nextMicroSeasons,
   );
 
   const allSeasons = currentMicroSeason
@@ -94,13 +94,13 @@ const Welcome = () => {
       selectedCities.map((city) =>
         fetch(
           `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
-            city
-          )}&appid=${apiKey}&units=metric`
+            city,
+          )}&appid=${apiKey}&units=metric`,
         ).then((res) => {
           if (!res.ok) throw new Error(`Errore per ${city}`);
           return res.json();
-        })
-      )
+        }),
+      ),
     )
       .then((data) => {
         const formatted = data.map((d) => ({
@@ -135,9 +135,12 @@ const Welcome = () => {
         <Col xs={12} sm={4}>
           {loading && (
             <>
-              <p>Caricamento micro-stagione</p>
+              <p>Un momento... la micro-stagione si sta svegliando...</p>
               <p>
                 <Spinner animation="border" variant="dark" />
+              </p>
+              <p style={{ fontSize: "0.85rem", color: "#888" }}>
+                Il server potrebbe impiegare fino a 60 secondi al primo avvio 🍵
               </p>
             </>
           )}
@@ -152,7 +155,7 @@ const Welcome = () => {
                   {
                     day: "numeric",
                     month: "long",
-                  }
+                  },
                 )}{" "}
                 →{" "}
                 {new Date(selectedSeason.endDate).toLocaleDateString("it-IT", {
