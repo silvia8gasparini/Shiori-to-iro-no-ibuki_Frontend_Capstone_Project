@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
-  Container,
-  Form,
   Button,
-  Row,
   Col,
+  Container,
   Card,
+  Form,
+  Row,
+  Spinner,
   Toast,
   ToastContainer,
 } from "react-bootstrap";
@@ -21,6 +22,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, "");
   const [showToast, setShowToast] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -35,6 +37,7 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const response = await fetch(`${baseUrl}/auth/login`, {
@@ -64,11 +67,10 @@ export default function Login() {
           }
 
           dispatch(syncCartToBackend());
-
           setShowToast(true);
           setTimeout(() => navigate("/"), 2500);
         } else {
-          alert("Errore nel recupero del profilo utente.");
+          alert("Errore nel recupero del profilo utente");
         }
       } else {
         const error = await response.text();
@@ -76,6 +78,8 @@ export default function Login() {
       }
     } catch (err) {
       alert("Errore di connessione: " + err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -126,7 +130,19 @@ export default function Login() {
                       type="submit"
                       variant="outline-dark"
                     >
-                      Accedi
+                      {isLoading ? (
+                        <>
+                          <Spinner
+                            animation="border"
+                            size="sm"
+                            className="me-2"
+                            style={{ borderWidth: "2px" }}
+                          />
+                          Accesso in corso...
+                        </>
+                      ) : (
+                        "Accedi"
+                      )}
                     </Button>
                   </div>
                 </Form>

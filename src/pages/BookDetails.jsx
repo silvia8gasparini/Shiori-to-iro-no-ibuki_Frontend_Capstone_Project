@@ -16,7 +16,6 @@ export default function BookDetails() {
   const dispatch = useDispatch();
   const [showCartMessage, setShowCartMessage] = useState(false);
   const [showBorrowMessage, setShowBorrowMessage] = useState(false);
-  const [addedToFavorites, setAddedToFavorites] = useState(false);
   const [justBorrowed, setJustBorrowed] = useState(false);
 
   const bookDetails = useSelector((state) => state.books.bookDetails);
@@ -32,8 +31,8 @@ export default function BookDetails() {
   }, [dispatch, id]);
 
   const isFavorite =
-    (book && favorites.some((fav) => fav.bookId === book.id)) ||
-    addedToFavorites;
+    book &&
+    favorites.some((fav) => fav.bookId === book.id || fav.id === book.id);
 
   const isCurrentlyBorrowed =
     justBorrowed ||
@@ -45,7 +44,6 @@ export default function BookDetails() {
     if (!book || isFavorite) return;
 
     dispatch(addFavorite(book));
-    setAddedToFavorites(true);
   };
 
   const handleBuyClick = () => {

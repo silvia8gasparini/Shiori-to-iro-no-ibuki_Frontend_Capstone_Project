@@ -20,7 +20,7 @@ export default function BookAdminPanel() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (!response.ok) throw new Error("Errore nel caricamento dei libri");
@@ -44,7 +44,7 @@ export default function BookAdminPanel() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (!response.ok) throw new Error("Errore fetch dettagli libro");
@@ -81,7 +81,7 @@ export default function BookAdminPanel() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(completeBook),
-        }
+        },
       );
 
       const responseText = await response.text();
@@ -91,7 +91,7 @@ export default function BookAdminPanel() {
       if (!response.ok) throw new Error("Errore salvataggio modifica");
 
       setBooks((prevBooks) =>
-        prevBooks.map((b) => (b.id === editingBook.id ? completeBook : b))
+        prevBooks.map((b) => (b.id === editingBook.id ? completeBook : b)),
       );
       setEditingBook(null);
     } catch (err) {
@@ -110,7 +110,7 @@ export default function BookAdminPanel() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       if (!response.ok) throw new Error("Errore nell'eliminazione");
       setBooks((prev) => prev.filter((b) => b.id !== bookId));
@@ -119,7 +119,7 @@ export default function BookAdminPanel() {
     }
   };
 
-  if (loading) return <Spinner animation="border" variant="primary" />;
+  if (loading) return <Spinner animation="border" variant="dark" />;
 
   return (
     <div>
@@ -256,7 +256,7 @@ export default function BookAdminPanel() {
                   </Button>
                 </td>
               </tr>
-            )
+            ),
           )}
         </tbody>
       </Table>

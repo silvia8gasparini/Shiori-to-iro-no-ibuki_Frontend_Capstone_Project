@@ -40,6 +40,7 @@ const Tearoom = () => {
   const [prenotazioniZona, setPrenotazioniZona] = useState([]);
   const [prenotazione, setPrenotazione] = useState(null);
   const [showConferma, setShowConferma] = useState(false);
+  const [showLoginWarning, setShowLoginWarning] = useState(false);
 
   useEffect(() => {
     if (zonaSelezionata) {
@@ -52,17 +53,28 @@ const Tearoom = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       )
         .then((res) => res.json())
         .then((data) => {
           setPrenotazioniZona(data);
         })
         .catch((err) =>
-          console.error("Errore nel caricamento prenotazioni:", err)
+          console.error("Errore nel caricamento prenotazioni:", err),
         );
     }
   }, [zonaSelezionata]);
+
+  const handleSeleziona = (zonaId) => {
+    const token = localStorage.getItem("jwtToken");
+    if (!token) {
+      setShowLoginWarning(true);
+      setZonaSelezionata(null);
+    } else {
+      setShowLoginWarning(false);
+      setZonaSelezionata(zonaId);
+    }
+  };
 
   const handlePrenotazione = (slot) => {
     setPrenotazione({ zona: zonaSelezionata, ...slot });
@@ -104,7 +116,7 @@ const Tearoom = () => {
                     className="my-2"
                     variant="outline-dark"
                     style={{ padding: "10px 24px", fontSize: "1.4rem" }}
-                    onClick={() => setZonaSelezionata(zona.id)}
+                    onClick={() => handleSeleziona(zona.id)}
                   >
                     Seleziona
                   </Button>
@@ -118,6 +130,12 @@ const Tearoom = () => {
           <h3 className="mb-4 text-center">Tutte le aree sono pet friendly!</h3>
           <img src="/img/tearoom/pet.png" alt="pet" className="pet-icon" />
         </div>
+
+        {showLoginWarning && (
+          <div className="alert alert-warning text-center mt-4 fs-5">
+            Registrati o fai login per prenotare
+          </div>
+        )}
 
         {zonaSelezionata && (
           <>

@@ -19,7 +19,7 @@ export default function PurchaseAdminPanel() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (!res.ok) throw new Error("Errore nel caricamento acquisti");
@@ -45,7 +45,7 @@ export default function PurchaseAdminPanel() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (!res.ok) throw new Error("Errore eliminazione acquisto");
@@ -56,7 +56,7 @@ export default function PurchaseAdminPanel() {
     }
   };
 
-  if (loading) return <Spinner animation="border" variant="primary" />;
+  if (loading) return <Spinner animation="border" variant="dark" />;
 
   return (
     <div>

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Container,
-  Form,
   Button,
-  Row,
   Col,
+  Container,
   Card,
+  Form,
+  Row,
+  Spinner,
   Toast,
   ToastContainer,
 } from "react-bootstrap";
@@ -17,6 +18,7 @@ import "../assets/user.css";
 export default function SignUp() {
   const navigate = useNavigate();
   const [showToast, setShowToast] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -34,6 +36,7 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     try {
       const userData = {
@@ -46,7 +49,7 @@ export default function SignUp() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userData),
-        }
+        },
       );
 
       if (response.ok) {
@@ -58,6 +61,8 @@ export default function SignUp() {
       }
     } catch (err) {
       alert("Errore durante la registrazione: " + err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -132,7 +137,19 @@ export default function SignUp() {
                       variant="outline-dark"
                       type="submit"
                     >
-                      Registrati
+                      {isLoading ? (
+                        <>
+                          <Spinner
+                            animation="border"
+                            size="sm"
+                            className="me-2"
+                            style={{ borderWidth: "2px" }}
+                          />
+                          Registrazione in corso...
+                        </>
+                      ) : (
+                        "Registrati"
+                      )}
                     </Button>
                   </div>
                 </Form>

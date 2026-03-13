@@ -19,7 +19,7 @@ export default function ReservationAdminPanel() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (!response.ok)
@@ -46,7 +46,7 @@ export default function ReservationAdminPanel() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (!res.ok) throw new Error("Errore eliminazione prenotazione");
@@ -56,7 +56,7 @@ export default function ReservationAdminPanel() {
     }
   };
 
-  if (loading) return <Spinner animation="border" variant="secondary" />;
+  if (loading) return <Spinner animation="border" variant="dark" />;
 
   return (
     <div>
