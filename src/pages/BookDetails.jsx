@@ -209,22 +209,24 @@ export default function BookDetails() {
                   </Button>
                 )}
 
-                <Button
-                  key={isFavorite ? "fav-yes" : "fav-no"}
-                  variant={isFavorite ? "success" : "outline-danger"}
-                  onClick={handleFavoriteClick}
-                  disabled={isFavorite}
-                >
-                  {isFavorite ? (
-                    <>
-                      <HeartFill className="me-1" /> Aggiunto ai preferiti
-                    </>
-                  ) : (
-                    <>
-                      <Heart className="me-1" /> Aggiungi ai preferiti
-                    </>
-                  )}
-                </Button>
+                {userData && (
+                  <Button
+                    key={isFavorite ? "fav-yes" : "fav-no"}
+                    variant={isFavorite ? "success" : "outline-danger"}
+                    onClick={handleFavoriteClick}
+                    disabled={isFavorite}
+                  >
+                    {isFavorite ? (
+                      <>
+                        <HeartFill className="me-1" /> Aggiunto ai preferiti
+                      </>
+                    ) : (
+                      <>
+                        <Heart className="me-1" /> Aggiungi ai preferiti
+                      </>
+                    )}
+                  </Button>
+                )}
               </div>
             </div>
           </Col>

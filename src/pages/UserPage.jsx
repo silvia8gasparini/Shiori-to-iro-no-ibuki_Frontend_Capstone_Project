@@ -187,7 +187,7 @@ const UserPage = () => {
                                     headers: {
                                       Authorization: `Bearer ${token}`,
                                     },
-                                  }
+                                  },
                                 )
                                   .then((res) => {
                                     if (!res.ok)
@@ -195,7 +195,7 @@ const UserPage = () => {
                                     dispatch(fetchUserCart());
                                   })
                                   .catch((err) =>
-                                    console.error("Errore:", err)
+                                    console.error("Errore:", err),
                                   );
                               }}
                               className="btn btn-sm p-0 border-0 bg-transparent d-flex align-items-center"
@@ -217,7 +217,7 @@ const UserPage = () => {
                       {cartItems
                         .reduce(
                           (sum, item) => sum + item.price * item.quantity,
-                          0
+                          0,
                         )
                         .toFixed(2)}{" "}
                       €
@@ -302,11 +302,7 @@ const UserPage = () => {
             </strong>
           </Toast.Header>
           <Toast.Body>
-            <img
-              src="/img/neko-thor2.png"
-              alt="fat-cat"
-              style={{ width: "320px" }}
-            />
+            <img src="/img/ibuki3.png" alt="ibuki" style={{ width: "320px" }} />
             <Button
               variant="outline-danger"
               className="me-4 mt-3 fs-5"

@@ -35,6 +35,13 @@ export default function Login() {
     }));
   };
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return "Ohayō gozaimasu!";
+    if (hour >= 12 && hour < 18) return "Konnichiwa!";
+    return "Konbanwa!";
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -166,15 +173,11 @@ export default function Login() {
         >
           <Toast.Header closeButton={false}>
             <div className="text-dark text-center fw-bold mx-2 fs-4">
-              Konnichiwa!
+              {getGreeting()}
             </div>
           </Toast.Header>
           <Toast.Body>
-            <img
-              src="/img/neko-thor.png"
-              alt="fat-cat"
-              style={{ width: "320px" }}
-            />
+            <img src="/img/ibuki1.png" alt="ibuki" style={{ width: "320px" }} />
           </Toast.Body>
         </Toast>
       </ToastContainer>

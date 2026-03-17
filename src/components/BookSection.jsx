@@ -11,11 +11,11 @@ const BookSection = () => {
   const navigate = useNavigate();
 
   const { booksForSeason, loading, error } = useSelector(
-    (state) => state.books
+    (state) => state.books,
   );
 
   const microSeasonId = useSelector(
-    (state) => state.selectedColor.selectedColor?.microSeason?.id
+    (state) => state.selectedColor.selectedColor?.microSeason?.id,
   );
 
   useEffect(() => {

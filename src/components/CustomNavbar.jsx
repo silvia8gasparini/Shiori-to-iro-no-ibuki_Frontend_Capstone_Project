@@ -33,7 +33,7 @@ const CustomNavbar = () => {
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
-    0
+    0,
   );
 
   const handleSearch = (e) => {
@@ -290,11 +290,7 @@ const CustomNavbar = () => {
             <div className="text-center fw-bold mx-2 fs-3">Sayōnara!</div>
           </Toast.Header>
           <Toast.Body>
-            <img
-              src="/img/neko-thor1.png"
-              alt="neko-thor"
-              style={{ width: "320px" }}
-            />
+            <img src="/img/ibuki2.png" alt="ibuki" style={{ width: "320px" }} />
           </Toast.Body>
         </Toast>
       </ToastContainer>

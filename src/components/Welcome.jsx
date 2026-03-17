@@ -137,10 +137,14 @@ const Welcome = () => {
             <>
               <p>Un momento... la micro-stagione si sta svegliando...</p>
               <p>
-                <Spinner animation="border" variant="dark" />
+                <Spinner
+                  animation="border"
+                  variant="dark"
+                  style={{ borderWidth: "3px" }}
+                />
               </p>
-              <p style={{ fontSize: "0.95rem", color: "#888" }}>
-                Il server potrebbe impiegare fino a 60 secondi al primo avvio 🍵
+              <p style={{ fontSize: "1.2rem", color: "#888" }}>
+                Il server potrebbe impiegare fino a 60 secondi al primo avvio
               </p>
             </>
           )}
