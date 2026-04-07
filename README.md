@@ -49,7 +49,7 @@ Il backend è ospitato su Render con piano gratuito. Al primo caricamento potreb
 
 - 🔗 [Frontend – GitHub](https://github.com/silvia8gasparini/Shiori-to-iro-no-ibuki_Frontend_Capstone_Project)
 - ⚙️ [Backend – GitHub](https://github.com/silvia8gasparini/Shiori-to-iro-no-ibuki_Backend_Capstone_Project)
-- 🚀 [Frontend – Live su Vercel](https://shiori-to-iro-no-ibuki-frontend-cap.vercel.app/)
+- 🚀 [Live su Vercel](https://shiori-to-iro-no-ibuki-frontend-cap.vercel.app/)
 
 ---
 
@@ -94,7 +94,7 @@ The backend is hosted on Render's free tier. On first load, please allow up to 6
 
 - 🔗 [Frontend – GitHub](https://github.com/silvia8gasparini/Shiori-to-iro-no-ibuki_Frontend_Capstone_Project)
 - ⚙️ [Backend – GitHub](https://github.com/silvia8gasparini/Shiori-to-iro-no-ibuki_Backend_Capstone_Project)
-- 🚀 [Frontend – Live su Vercel](https://shiori-to-iro-no-ibuki-frontend-cap.vercel.app/)
+- 🚀 [Live su Vercel](https://shiori-to-iro-no-ibuki-frontend-cap.vercel.app/)
 
 ---
 
