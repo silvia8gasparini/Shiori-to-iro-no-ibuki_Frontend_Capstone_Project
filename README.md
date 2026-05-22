@@ -100,7 +100,7 @@ The backend is hosted on Render's free tier. On first load, please allow up to 6
 
 ## Autrice / Author
 
-**Silvia Gasparini** — Front-end Developer  
+**Silvia Gasparini** — Full-Stack Developer  
 Concept, design e sviluppo completo di front-end e back-end.  
 *Concept, design and full front-end & back-end development.*
 
